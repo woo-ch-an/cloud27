@@ -35,7 +35,7 @@ public class ComapreExam {
 		boolean isAdult = icustomerAge >= 19;
 		boolean isPayable = icustomerAge % 3 == 0 || icustomerWallet >= 2000;
 		
-		System.out.println(isAdult && isPayable); // <isAdult &= isPayable; 빠른연산 가능	
+		System.out.println(isAdult && isPayable); // <isAdult &= isPayable; 빠른연산 가능	;
 		
 
 		

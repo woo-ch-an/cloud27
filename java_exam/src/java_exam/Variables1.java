@@ -38,11 +38,11 @@ public class Variables1 {
 			System.out.println(ex);
 		}
 		
-		final long lprice = 1000;
-		long lbuildPrice = 10_000_000_000L;
-		float fration = 5.111f;
-		double dreturn = 5.222233333334444444444455555555;
-		int inumber = (int)1L;
+//		final long lprice = 1000;
+//		long lbuildPrice = 10_000_000_000L;
+//		float fration = 5.111f;
+//		double dreturn = 5.222233333334444444444455555555;
+//		int inumber = (int)1L;
 
 		System.out.println("3+7의 결과는 " + 3 + 7); // 묵시적 형변환 3, 7이 문자열로 취급됨
 		System.out.println(1000000L + 3.6f);
