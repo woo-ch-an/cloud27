@@ -1,7 +1,18 @@
 package exam;
 
 public class FlowControlExam {
-
+	public static int getFlightFare(int age) { 
+		 
+		if(age >= 19) 
+		{
+			return 300000;
+		}
+		else
+		{
+			return 100000;
+		}
+	}
+	
 	public static void main(String[] args) {
 		int ikorScore = 90;
 		int iengScore = 88;
@@ -33,7 +44,7 @@ public class FlowControlExam {
 		
 		System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 		
-		int imoney = 1_000_000;
+		int imoney = 2_000_000;
 		
 		int ifather = 40; 
 		int imother = 36;
@@ -41,39 +52,15 @@ public class FlowControlExam {
 		
 		int[] iary_family = {ifather, imoney, idaughter};
 		
+
+		// 비행요금 계산
+		imoney -= getFlightFare(ifather);
+		imoney -= getFlightFare(imother);
+		imoney -= getFlightFare(idaughter);
 		
-		int iadultOneWayFlightFare = 300_000;
-		int ikidOneWayFlightFare = 120_000;
-		
-		if(ifather >= 19) {
-			imoney -= iadultOneWayFlightFare;
-		}
-		else {
-			imoney -= ikidOneWayFlightFare;
-		}
-		
-		if(imother >= 19) {
-			imoney -= iadultOneWayFlightFare;	
-		}
-		else {
-			imoney -= ikidOneWayFlightFare;			
-		}
-		
-		if(idaughter >= 19) {
-			imoney -= iadultOneWayFlightFare;	
-		}
-		else {
-			imoney -= ikidOneWayFlightFare;
-		}
-		
-		imoney = 200000;
+		 
 		for (int i = 0; i<iary_family.length; i++) {
-			if (iary_family[i] >= 19) {
-				imoney -= iadultOneWayFlightFare;
-			}
-			else {
-				imoney -= ikidOneWayFlightFare;
-			}
+			imoney -= getFlightFare(iary_family[i]);
 		}
 		
 		if(imoney >= 0) {

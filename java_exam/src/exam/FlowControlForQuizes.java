@@ -32,8 +32,6 @@ public class FlowControlForQuizes {
 	}
 	
 	public static void Qppt3() {
-		int isum = 0;
-		
 		for (int i = 1; i <= 100; i++) {
 			if(i % 3 == 0 && i % 5 == 0 && i % 6 == 0 ) { 
 				 System.out.println("3. 1~100까지 3, 5, 6의 배수 : " + i);

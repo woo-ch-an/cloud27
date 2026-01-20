@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class UpDownGame {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		double drandomNumber = Math.random();
