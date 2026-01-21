@@ -29,15 +29,12 @@ public class ScoreCalculator {
 		}
 		else if(average >= 80) {
 			return strrtValue ="B";
-			
 		}
 		else if(average >= 70) {
 			return strrtValue ="C";
-					
 		}
 		else if(average >= 60) {
 			return strrtValue ="D";
-			
 		}
 		else {
 			return strrtValue ="F";
