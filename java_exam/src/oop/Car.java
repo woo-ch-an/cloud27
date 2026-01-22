@@ -24,6 +24,12 @@ public class Car {
 	 * </pre>
 	 */
 	int ispeed;
+	String name; //자동차 모델명
+
+	public Car(String name) {
+		this.name = name;
+		System.out.println("Instense created : " + name);
+	}
 	
 	// 인스턴스 메소드
 	
@@ -31,8 +37,8 @@ public class Car {
 	 * <pre>
 	 * 현재 엔진의 상태에 따라 시동을 켜거나 끈다
 	 * 시동이 걸리면 isEngineStart의 값이 true, 꺼지면 false
-	 * 시동이 꺼지면 speed의 값은 0이된다
-	 * 시동이 켜지면  speed 의 값은 10이 된다
+	 * 시동이 꺼지면 speed 의 값은 0이된다
+	 * 시동이 켜지면 speed 의 값은 10이 된다
 	 * </pre>
 	 */
 	public void pressEngineStartButton() {

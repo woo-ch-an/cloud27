@@ -19,6 +19,13 @@ public class Student {
 
 	 * @return 학점
 	 */
+	
+	public Student(int mijava, int mipython, int micpp, int micsharp) {
+		this.mijava =mijava;
+		this.mipython = mipython; 
+		this.micpp = micpp;
+		this.micsharp = micsharp;
+	}
 	public String getABCDE() {
 		String strrtValue = "";
 		Double dcoureseCredit = getCourseCredit();

@@ -17,14 +17,21 @@ public class Consumer {
 	int mitradeCounter;
 	int miitemWeight;
 	
+	public Consumer (int miitemWeight, int miwalletAccount, int mijangbaguni, int miitemPrice) {
+		this.miitemWeight = miitemWeight; // 상품 무게
+		this.miwalletAccount = miwalletAccount; // 구매자 지갑 사정
+		this.mijangbaguni = mijangbaguni; // 장바구니 무게 한도   
+		this.miitemPrice = miitemPrice; // 상품 가격
+	}
+	
 	// 돈이 있고 장바구니 무게 초과가 되지 않았으면 구매 가능
 	public void buyItem(int iitemCount) {
 		if (miwalletAccount < miitemPrice * iitemCount)
 		{
-			System.out.println(" 돈이 부족합니다 ");
+			System.err.println(" 돈이 부족합니다 ");
 		}
 		else if(mijangbaguni < iitemCount * miitemWeight) {
-			System.out.println(" 더 이상 장바구니를 들 수 없습니다 ");
+			System.err.println(" 더 이상 장바구니를 들 수 없습니다 ");
 		}
 		else {
 			reFreshPoket(iitemCount);			

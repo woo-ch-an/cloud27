@@ -22,22 +22,21 @@ public class ScoreCalculator {
 	
 	public static String calcGrade(double average) {
 		// 등급 구하기
-		String strrtValue; 
 		
 		if(average >= 90) {
-			return strrtValue ="A";
+			return "A";
 		}
 		else if(average >= 80) {
-			return strrtValue ="B";
+			return "B";
 		}
 		else if(average >= 70) {
-			return strrtValue ="C";
+			return "C";
 		}
 		else if(average >= 60) {
-			return strrtValue ="D";
+			return "D";
 		}
 		else {
-			return strrtValue ="F";
+			return "F";
 		}
 	}
 	

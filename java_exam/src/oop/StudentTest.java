@@ -2,12 +2,7 @@ package oop;
 
 public class StudentTest {
 	public static void main(String[] args) {
-		Student student = new Student();
-		student.mijava =100;
-		student.mipython = 100; 
-		student.micpp = 100;
-		student.micsharp = 21;
-		
+		Student student = new Student(100, 100, 100, 21);		
 		
 		System.err.println("합계 : " + student.getSumAllScores() );
 		System.err.println("평균 : " + student.getAverage());

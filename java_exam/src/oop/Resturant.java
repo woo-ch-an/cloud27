@@ -1,7 +1,4 @@
 package oop;
-
-import java.util.MissingFormatArgumentException;
-
 /**
  * <pre>
  * 키오스크의 입장에서 식당을 바라보기

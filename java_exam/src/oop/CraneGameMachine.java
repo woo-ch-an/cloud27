@@ -21,6 +21,11 @@ public class CraneGameMachine {
 	 *   공통 : 코인 -1
 	 * @return 1=success ,2=fail
 	 */
+	
+	public CraneGameMachine(int midolls) {
+		this.midolls = midolls;
+	}
+	
 	public int doGame() {
 		int iresult;
 		
