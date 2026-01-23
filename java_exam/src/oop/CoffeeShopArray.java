@@ -21,7 +21,7 @@ public class CoffeeShopArray {
 	 */
 	public int orderCoffee(int menu, int quantity) {
 		if(menu < 0 || menu >= this.drinks.length) {
-			System.err.println("This Menu is doesn't exist");
+			System.err.println ("This Menu is doesn't exist"); 
 			return 0;
 		}
 		
