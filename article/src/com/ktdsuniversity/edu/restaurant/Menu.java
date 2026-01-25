@@ -1,8 +1,7 @@
 package com.ktdsuniversity.edu.restaurant;
 
 public class Menu {
-	
-	// 음식별 가중치는 ?
+
 	private String menuName;
 	private float fillHunger;
 	private float fillAlchol;
