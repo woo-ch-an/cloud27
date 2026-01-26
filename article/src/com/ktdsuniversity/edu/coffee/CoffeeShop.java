@@ -10,11 +10,42 @@ public class CoffeeShop {
 	 */
 	private Coffee ice;
 	
+	/** 
+	 * 생성자 오버로딩
+	 */
+	public CoffeeShop() {
+		//this.hot = new Coffee("ESPRESSO", 4500, 200); 
+		//this.ice = new Coffee("ICEDTEA", 4000, 50);
+		
+		this(new Coffee("ESPRESSO", 4500, 200), new Coffee("ICEDTEA", 4000, 50));		
+	}
+	
 	public CoffeeShop(Coffee hot, Coffee ice) {
 		this.hot = hot;
 		this.ice = ice;
 	}
 	
+	/**
+	 * order 1 of first menu 
+	 */
+	public int orderCoffee() {
+		int price;
+		price = this.orderCoffee(1);
+
+		return price;
+	}
+	
+	/**
+	 * order 1  Coffee
+	 * @param menu 
+	 * @return
+	 */
+	public int orderCoffee(int menu) {
+		int price;
+		price = this.orderCoffee(menu, 1);
+	
+		return price;
+	}
 	/**
 	 * 커피숍에서 커피를 판매한다
 	 * @param menu 메뉴들의 번호 , 1:hot 2:ice
@@ -22,6 +53,7 @@ public class CoffeeShop {
 	 * @return 주문 가격
 	 */
 	public int orderCoffee(int menu, int quantity) {
+		
 		String name;
 		int price = 0;
 		int stock;

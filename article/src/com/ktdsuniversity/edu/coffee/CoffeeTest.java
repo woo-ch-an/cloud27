@@ -7,14 +7,18 @@ public class CoffeeTest {
 		Coffee hotCoffee = new Coffee("Armericano HOT", 4500, 200); 
 		Coffee iceCoffee = new Coffee("IcedTea", 4000, 50);
 		
-		CoffeeShop starbucks = new CoffeeShop(hotCoffee, iceCoffee);
+		String str1 = "asd";
+		String str2 = "dsa";
 		
+		// CoffeeShop starbucks = new CoffeeShop(hotCoffee, iceCoffee);
+		CoffeeShop starbucks = new CoffeeShop();
+
 		int price;
 		
-		price = starbucks.orderCoffee(1, 30);
+		price = starbucks.orderCoffee();
 		System.out.println("price : " + price);
 		
-		price = starbucks.orderCoffee(2, 400);
+		price = starbucks.orderCoffee(2);
 		System.out.println("price : " + price);
 		
 		price = starbucks.orderCoffee(3, 500);

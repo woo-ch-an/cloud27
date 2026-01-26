@@ -51,6 +51,7 @@ public class Restaurant {
 		float hunger = guest.getHunger();
 		int price = 0; 
 		
+		
 		if(hunger >= this.fillHunger ) {
 			// 식당 요구치보다 배부르면 나감
 			System.out.println("식사 실패 - 배부름");
