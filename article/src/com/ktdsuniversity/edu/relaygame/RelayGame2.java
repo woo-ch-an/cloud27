@@ -26,6 +26,7 @@ public class RelayGame2 {
 			System.out.println("다음 단어를 입력해주세요 ");
 			this.nextWord = this.keyboard.nextLine().trim();
 			lastLetter = this.nextWord;
+			
 			if(firstLetter.startsWith(lastLetter.substring(0, lastLetter.length()-1))) {
 				if(this.nextWord.length() > 2) {
 					this.startWord = this.nextWord;

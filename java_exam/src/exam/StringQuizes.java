@@ -13,23 +13,22 @@ public class StringQuizes {
 		s15[3] = "DDD";
 		
 		
-		System.out.println("1. \t" + q1.q27866("shiftpsh", 6));
-		System.out.println("2. \t" + q1.q2743("pulljima"));
-		System.out.println("3. \t" + q1.q11720(11,"10987654321"));
-		System.out.println("4. \t" + q1.q11654('a'));
-		System.out.println("5. \t" + q1.q11654('z'));
-		System.out.println("6. \t" + q1.q10809("baekjoon"));
-		System.out.println("7. \t" + q1.q1152(" he last character is a blank "));
-		System.out.println("8. \t" + q1.q2908(839, 237));
-		System.out.println("8. \t" + q1.q181842("tbt","tbbttb"));
-		System.out.println("9. \t" + q1.q181843("banana","wxyz"));
-		System.out.println("10. \t" + q1.q181845(1234));
-		System.out.println("11. \t" + q1.q181848("1234"));
-		System.out.println("12. \t" + q1.q181847("854020"));
-		System.out.println("13. \t" + q1.q181849("1000000"));
-		System.out.println("14. \t" + q1.q181876("aaa"));
-		System.out.println("15. \t" + q1.q181878("aaAA", "aaaaa"));
-		System.out.println("16. 배열출력 ======"  );
+		System.out.println("1.q27866 \t" + q1.q27866("shiftpsh", 6));
+		System.out.println("2.q2743 \t" + q1.q2743("pulljima"));
+		System.out.println("3.q11720 \t" + q1.q11720(11,"10987654321"));
+		System.out.println("4.q11654 \t" + q1.q11654('a'));
+		System.out.println("5.q10809 \t" + q1.q10809("baekjoon"));
+		System.out.println("6.q1152 \t" + q1.q1152(" he last character is a blank "));
+		System.out.println("7.q2908 \t" + q1.q2908(839, 237));
+		System.out.println("8.q181842 \t" + q1.q181842("tbt","tbbttb"));
+		System.out.println("9.q181843 \t" + q1.q181843("banana","wxyz"));
+		System.out.println("10.q181845 \t" + q1.q181845(1234));
+		System.out.println("11.q181848 \t" + q1.q181848("1234"));
+		System.out.println("12.q181847 \t" + q1.q181847("854020"));
+		System.out.println("13.q181849 \t" + q1.q181849("1000000"));
+		System.out.println("14.q181876 \t" + q1.q181876("aaa"));
+		System.out.println("15.q181878 \t" + q1.q181878("aaAA", "aaaaa"));
+		System.out.println("16.q181875 배열출력 ======"  );
 		for (int i =0; i<s15.length; i++) {
 			System.out.println("\t" +q1.q181875(s15)[i]);	
 		}		
@@ -136,6 +135,7 @@ public class StringQuizes {
 	}
 	
 	public int q2908(int a, int b) {
+		// 처음에 풀어본거
 		String stra = a + ""; 
 		String strb = b + "";
 		String sa="";
@@ -157,6 +157,4 @@ public class StringQuizes {
 			return bb;
 		}
 	}
-	
-	
 }
