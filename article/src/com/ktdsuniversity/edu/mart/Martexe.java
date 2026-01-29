@@ -16,14 +16,18 @@ public class Martexe {
 		CustomerInfo cs3 = new CustomerInfo("백작", "VVIP", 10f, 20000f, 2000);
 
 		RegularMart rm = new RegularMart("돈키", m1, m2, m3, m4);
-		ConvenienceStore cs = new ConvenienceStore("GS25", m2, m3, m5, m7);
-		BigMall bm = new BigMall("태평백화점", m6, m1, m3, m2);
+		RegularMart cs = new ConvenienceStore("GS25", m2, m3, m5, m7);
+		RegularMart bm = new BigMall("태평백화점", m6, m1, m3, m2);
 
 		// cs1 고객이 1번 메뉴 3개 구매 
 		rm.sellItems(cs1, 1, 3);
-		// cs2 고객이 2번 메뉴 3개 구매
-		cs.usingPointSellItem(cs2, 2, 3);
-		// cs3 고객이 2번 메뉴 4개 포인트를 사용해서 구매
-		bm.usingScoreSellItem(cs3, 2, 4, -1);
+		if(cs instanceof ConvenienceStore as) {
+			// cs2 고객이 2번 메뉴 3개 구매
+			as.usingPointSellItem(cs2, 2, 3);
+		}
+		if (bm instanceof BigMall ac) {
+			// cs3 고객이 2번 메뉴 4개 포인트를 사용해서 구매
+			ac.usingScoreSellItem(cs3, 2, 4, -1);
+		}
 	}
 }

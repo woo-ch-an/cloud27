@@ -1,11 +1,11 @@
 package com.ktdsuniversity.edu.mart;
 
 public class Merchandise {
-	
-	private String name; //상품명
+
+	private String name; // 상품명
 	private int stock; // 재고
 	private int price; // 가격
-	
+
 	public Merchandise(String name, int stock, int price) {
 		this.name = name;
 		this.stock = stock;
@@ -36,5 +36,4 @@ public class Merchandise {
 		this.price = price;
 	}
 
-	
 }

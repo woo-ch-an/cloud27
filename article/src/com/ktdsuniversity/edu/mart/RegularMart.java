@@ -74,7 +74,7 @@ public class RegularMart {
 
 		return price;
 	}
-	
+
 	// 백화점 결제용 가격 가중치 적용버전
 	public int sellItems(CustomerInfo customer, int productNumber, int quantity, float priceWight) {
 		float price;
@@ -82,14 +82,14 @@ public class RegularMart {
 		if (!checkOrder(productNumber, quantity)) {
 			return 0;
 		}
-		
+
 		// 재고 확인
 		if (this.products[productNumber].getStock() < quantity) {
 			// quantity 확인
 			quantity = checkStock(productNumber, quantity);
 		}
-		
-		price = products[productNumber].getPrice() * quantity * priceWight; 
+
+		price = products[productNumber].getPrice() * quantity * priceWight;
 		// 돈 확인
 		if (customer.getMoney() < price) {
 			// quantity check
@@ -97,27 +97,27 @@ public class RegularMart {
 		}
 
 		price = products[productNumber].getPrice() * quantity * priceWight;
-		
+
 		printInfo(productNumber, quantity, price);
 		// 진짜 판매
 		// 1. 재고 감소
 		// 2. 거스름돈 계산
 		// 3. 리턴 charge;
-		
+
 		// 재고 감소
 		// 거스름돈 계산
 		// 한번에
 		if (checkCharge(customer, productNumber, quantity, price)) {
 			return 0;
 		}
-		
-		return (int)price;
+
+		return (int) price;
 	}
 
 	public boolean checkCharge(CustomerInfo customer, int productNumber, int quantity, float price) {
 
 		this.products[productNumber].setStock(this.products[productNumber].getStock() - quantity);
-		customer.setMoney(customer.getMoney() - (int)price);
+		customer.setMoney(customer.getMoney() - (int) price);
 		System.out.println("구매 성공 -- 거스름돈 : " + customer.getMoney());
 
 		return false;
@@ -162,8 +162,7 @@ public class RegularMart {
 	}
 
 	public void printInfo(int productNumber, int quantity, float price) {
-		System.out.println("원하시는 제품은 " + this.products[productNumber].getName() + " " 
-				+ quantity + " 개 입니다. 가격은 "
+		System.out.println("원하시는 제품은 " + this.products[productNumber].getName() + " " + quantity + " 개 입니다. 가격은 "
 				+ price + "원 입니다");
 	}
 
