@@ -6,12 +6,20 @@ public class Menu {
 	private float fillHunger;
 	private float fillAlchol;
 	private int price;
+	private int stock;
 	
-	public Menu(String menuName, float fillHunger, float fillAlchol, int price) {
+	public Menu(String menuName, float fillHunger, float fillAlchol, int price, int stock) {
 		this.menuName = menuName;
 		this.fillAlchol = fillAlchol;
 		this.fillHunger = fillHunger;
 		this.price = price;
+		this.stock = stock;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	public int getPrice() {
 		return this.price;
