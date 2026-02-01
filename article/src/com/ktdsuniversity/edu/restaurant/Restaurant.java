@@ -60,37 +60,57 @@ public class Restaurant {
 		if(hunger >= this.fillHunger ) {
 			// 식당 요구치보다 배부르면 나감
 			// 기존 코드 System.out.println("식사 실패 - 배부름"); \n return false;
-			throw new FullException("식사 실패 - 배부름");
+
+//			try { 내부처리 때 사용
+				throw new FullException("식사 실패 - 배부름");
+//			} catch (FullException fe) {
+//				System.out.println(fe.getMessage());
+//			}
 		}
-		if(drunken >= this.fillAlchol){
+		if (drunken >= this.fillAlchol) {
 			// 식당 요구치보다 취함
-			// 기존 코드  System.out.println("식사 실패 - 취함 "); \n return false;
+			// 기존 코드 System.out.println("식사 실패 - 취함 "); \n return false;
+//			try { 내부처리 때 사용
 			throw new DrunkenException("식사 실패 - 배부름");
-			
+			// } catch (DrunkenException de) {
+//				System.out.println(de.getMessage());
+//			}
+
 		}
-		
+
 		// 메뉴 정하기 && 재고 있는지 보기
 		if (guest.getDrunken() > 0) // 좀 취했으면 음료수 시킴
 		{
 			// 재고 확인
 			if (this.drinkMenus[guest.getGuestsMenu()].getStock() <= 0) {
+				// try{ 내부처리 때 사용
 				throw new SoldOutException("식사 실패 - 품절됨");
+//			} catch (SoldOutException soe) {
+//				System.out.println(soe.getMessage());
+//			}
 			}
 			price = this.drinkMenus[guest.getGuestsMenu()].getPrice();
 		} else { // 아니면 밥먹음
 			// 재고 확인
 			if (this.foodMenus[guest.getGuestsMenu()].getStock() <= 0) {
+//			try { 내부처리 때 사용
 				throw new SoldOutException("식사 실패 - 품절됨");
+//			} catch (SoldOutException soe) {
+//				System.out.println(soe.getMessage());
+//			}
 			}
 			price = this.foodMenus[guest.getGuestsMenu()].getPrice();
 		}
- 
-		
-		if(price > guest.getPayAccount()) {
-			// 기존 코드 System.out.println("식사 실패 - 돈 없음"); \n	return true;
+
+		if (price > guest.getPayAccount()) {
+			// 기존 코드 System.out.println("식사 실패 - 돈 없음"); \n return true;
+//			try { 내부처리 때 사용
 			throw new NotEnoughMoneyException("식사 실패 - 돈 없음");
+//		} catch (NotEnoughMoneyException neme) {
+//			System.out.println(neme.getMessage());
+//		}
 		}
-		
+
 		// 자격 있음
 		// 재고관리
 		if (guest.getDrunken() > 0) {
