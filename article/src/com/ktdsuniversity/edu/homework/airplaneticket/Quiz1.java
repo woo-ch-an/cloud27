@@ -23,6 +23,7 @@ public class Quiz1 {
 	// Map은 좌석 예약, List는 비행기 편으로
 
 	// 존재하는 비행기 편 저장할 값 근데 List를 사용한
+	// TODO 멤버변수 사용하는곳에 this 붙이기
 	private List<Integer> airPlaneList = new ArrayList<>();
 
 	// 비행기 좌석 관련 Map
@@ -41,10 +42,12 @@ public class Quiz1 {
 		// String inputValue = sc.next();
 
 		// 비행기 설정하기
-		ques.setAirPlanes();
+		// 입력받고 실행으로 이동
+		// ques.setAirPlanes();
 
 		// 비행기 티켓 설정하기
-		ques.setAirPlanesTicket();
+		// 입력받고 실행으로 이동
+		// ques.setAirPlanesTicket();
 
 		// 예약좌석 프린팅
 		// TODO 작동되면 지워야댐
@@ -68,6 +71,9 @@ public class Quiz1 {
 				continue;
 			}
 
+			// 입력받은 비행기 번호로 새로운 비행기 생성
+			ques.inputAirPlanes(inputPlaneNumber);
+
 			// 존재하는 항공기인지 확인
 			if (!(ques.checkPlane(inputPlaneNumber))) {
 				// TODO 포맷 맞춰서 출력
@@ -82,10 +88,8 @@ public class Quiz1 {
 				System.out.println(ifsoe.getMessage());
 				continue;
 			}
-			
-			ques.selectSeat(inputPlaneNumber);
-	
 
+			ques.selectSeat(inputPlaneNumber);
 		}
 
 	}
@@ -112,13 +116,14 @@ public class Quiz1 {
 				continue;
 			}
 
+			if (inputSeat <= 0 || inputSeat > 10) {
+				System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+				continue;
+			}
+
 			tickets = airPlaneTicket.get(planeNumber);
 
 			if (tickets != null) {
-
-				System.out
-						.println(" inputSeat : " + inputSeat + " isbooked" + tickets.get(inputSeat - 1).getIsbooked());
-
 				if (tickets.get(inputSeat - 1).getIsbooked()) {
 					// 이미 예약되어있는 좌석일 때 ;
 					System.out.println(inputSeat + " 번 좌석은 이미 예약된 좌석입니다. 다른 좌석을 입력하세요 ");
@@ -139,8 +144,7 @@ public class Quiz1 {
 					} else if (inputValue.toLowerCase().equals("q")) {
 						System.out.println("나가기를 선택하셨습니다 처음부터 다시 선택해주세요. ");
 						break;
-					}
-					else {
+					} else {
 						System.out.println("잘못된 입력입니다. 다시 입력해주세요. 나가기를 원한다면 q를 입력해 주세요.");
 						continue;
 					}
@@ -155,16 +159,15 @@ public class Quiz1 {
 		List<Tickets> tickets = null;
 
 		tickets = airPlaneTicket.get(planeNumber);
-		
+
 		if (flightSoldOutCheck(planeNumber)) {
 			for (int i = 1; i < 11; i++) {
-				System.out.print(tickets.get(i - 1).toPrintString());				
+				System.out.print(tickets.get(i - 1).toPrintString());
 			}
 			System.out.println();
 			throw new IsFlightSoldOutException("예약 가능한 좌석이 없습니다. 다른 비행기 편을 이용해주세요. \n");
 		}
 		System.out.println(planeNumber + "편의 좌석현황 입니다  ( 예약 가능 : □ , 예약 됨 : ■");
-		
 
 		if (tickets != null) {
 			for (Tickets j : tickets) {
@@ -213,6 +216,58 @@ public class Quiz1 {
 				// 80%로 들어옴
 				airPlaneList.add(i);
 			}
+		}
+	}
+
+	// 입력받고 비행기 만들기
+	public void inputAirPlanes(int inputPlaneNumber) {
+		int persent = (int) (Math.random() * 100);
+
+		if (this.airPlaneTicket.containsKey(inputPlaneNumber)) {
+			// 이미 존재하는 비행기 항목이면 새로 만들 필요 없이 return
+			return;
+		}
+		// 80%확률로 결정
+		if (persent < 80) {
+			// 비행기 편 만들고 좌석 세팅
+			this.airPlaneList.add(inputPlaneNumber);
+			inputAirPlaneTicket(inputPlaneNumber);
+		}
+
+	}
+
+	// 전과달리 한번만 세팅하면 됨
+	public void inputAirPlaneTicket(int inputPlaneNumber) {
+		boolean isbooked = false;
+		List<Tickets> tickets = null;
+
+		airPlaneTicket.put(inputPlaneNumber, new ArrayList<>());
+		tickets = airPlaneTicket.get(inputPlaneNumber);
+
+		// 특수조건 : 매진된 비행기용
+		if (inputPlaneNumber % 3 == 0) {
+			// 비행기 편명이 3의 배수일 때 매진된 비행기를 출력한다
+			for (int j = 1; j < 11; j++) {
+				// 만석 세팅
+				isbooked = true;
+
+				tickets.add(new Tickets(j, isbooked));
+			}
+			return;
+		}
+
+		// 1번 좌석부터 10번 좌석까지
+		for (int j = 1; j < 11; j++) {
+			// 랜덤으로 예약 유무 결정
+			if ((int) (Math.round(Math.random())) > 0) {
+				// 1이면 예약됨 (50%)
+				isbooked = true;
+			} else {
+				// 0이면 예약안됨 (50%)
+				isbooked = false;
+			}
+
+			tickets.add(new Tickets(j, isbooked));
 		}
 	}
 
