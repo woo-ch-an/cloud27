@@ -35,7 +35,6 @@ public class Quiz1 {
 		Quiz1 ques = new Quiz1();
 		String inputValue = "";
 		int inputPlaneNumber = 0;
-		int inputSeat = 0;
 
 		// 입력받는용
 		Scanner sc = new Scanner(System.in);
@@ -54,7 +53,8 @@ public class Quiz1 {
 		// 반복(1) 지점
 		while (true) {
 			System.out.println("비행기 편의 이름을 입력하면, 좌석 현황을 볼 수 있습니다.");
-			System.out.println("비행기 편의 이름을 입력하세요 : ");
+			System.out.print("비행기 편의 이름을 입력하세요 : ");
+			System.out.println();
 			inputValue = sc.next();
 
 			try {
@@ -62,6 +62,7 @@ public class Quiz1 {
 				inputPlaneNumber = Integer.parseInt(inputValue);
 
 			} catch (Exception ex) {
+				// TODO 이거 이름뭐더라
 				// 터짐 방지
 				System.out.println("잘못된 입력입니다. ");
 				continue;
@@ -75,23 +76,23 @@ public class Quiz1 {
 			}
 
 			// 해당 좌석 예약 화면
-			ques.printPlaneTickets(inputPlaneNumber);
-
-			if (!(ques.selectSeat(inputPlaneNumber))) {
-				// 예약 불가능한 상황
-				System.out.println();
+			try {
+				ques.printPlaneTickets(inputPlaneNumber);
+			} catch (IsFlightSoldOutException ifsoe) {
+				System.out.println(ifsoe.getMessage());
+				continue;
 			}
+			
+			ques.selectSeat(inputPlaneNumber);
+	
 
 		}
 
 	}
 
-	public boolean selectSeat(int planeNumber) {
+	public void selectSeat(int planeNumber) {
 		int inputSeat = 0;
-		boolean debug =false;
-		boolean canRev = false;
 		String inputValue = "";
-		Tickets tick = null;
 		List<Tickets> tickets = null;
 		Scanner sc = new Scanner(System.in);
 
@@ -114,64 +115,80 @@ public class Quiz1 {
 			tickets = airPlaneTicket.get(planeNumber);
 
 			if (tickets != null) {
-				debug = tickets.get(inputSeat-1).getIsbooked();
-				
-				System.out.println(debug);
-				System.out.println(  " inputSeat : " + inputSeat + " isbooked" + tickets.get(inputSeat-1).getIsbooked() );
-				
-				
-				if (tickets.get(inputSeat-1).getIsbooked()) {
+
+				System.out
+						.println(" inputSeat : " + inputSeat + " isbooked" + tickets.get(inputSeat - 1).getIsbooked());
+
+				if (tickets.get(inputSeat - 1).getIsbooked()) {
 					// 이미 예약되어있는 좌석일 때 ;
-					System.out.println(inputSeat +  " 번 좌석은 이미 예약된 좌석입니다. 다른 좌석을 입력하세요 ");
-					canRev = false;
+					System.out.println(inputSeat + " 번 좌석은 이미 예약된 좌석입니다. 다른 좌석을 입력하세요 ");
 				} else {
 					// 예약가능한 좌석일 때 ;
 					System.out.print(inputSeat + " 번 좌석을 예약하시겠습니까 ?  (Y/N) : ");
 					inputValue = sc.next();
-					if(inputValue.toLowerCase().equals("y")) {
+					if (inputValue.toLowerCase().equals("y")) {
 						// 예약 처리
-						tickets.get(inputSeat-1).setIsbooked(true);
+						tickets.get(inputSeat - 1).setIsbooked(true);
 						System.out.println(inputSeat + " 번 좌석이 예약되었습니다. ");
 						System.out.println();
-						
-					}else if(inputValue.toLowerCase().equals("n")){
-						// 예약 안함 
+
+					} else if (inputValue.toLowerCase().equals("n")) {
+						// 예약 안함
 						System.out.println(" 취소를 선택하셨습니다. 다시 선택해주세요 ");
 						continue;
+					} else if (inputValue.toLowerCase().equals("q")) {
+						System.out.println("나가기를 선택하셨습니다 처음부터 다시 선택해주세요. ");
+						break;
 					}
 					else {
-						System.out.println("잘못된 입력입니다. 다시 입력해주세요. ");
+						System.out.println("잘못된 입력입니다. 다시 입력해주세요. 나가기를 원한다면 q를 입력해 주세요.");
 						continue;
 					}
-							
-					canRev = true;
+
 					break;
 				}
 			}
 		}
-
-		return canRev;
 	}
 
 	public void printPlaneTickets(int planeNumber) {
-		System.out.println(planeNumber + "편의 좌석현황 입니다  ( 예약 가능 : □ , 예약 됨 : ■");
 		List<Tickets> tickets = null;
-		Tickets tick = null;
 
 		tickets = airPlaneTicket.get(planeNumber);
+		
+		if (flightSoldOutCheck(planeNumber)) {
+			for (int i = 1; i < 11; i++) {
+				System.out.print(tickets.get(i - 1).toPrintString());				
+			}
+			System.out.println();
+			throw new IsFlightSoldOutException("예약 가능한 좌석이 없습니다. 다른 비행기 편을 이용해주세요. \n");
+		}
+		System.out.println(planeNumber + "편의 좌석현황 입니다  ( 예약 가능 : □ , 예약 됨 : ■");
+		
 
 		if (tickets != null) {
 			for (Tickets j : tickets) {
 				System.out.print(j.toPrintString());
 			}
 			System.out.println();
-			for(int i=1; i<11; i++){
-				System.out.print(tickets.get(i-1).toString() );
-				
-			}
 		}
 		System.out.println();
+	}
 
+	public boolean flightSoldOutCheck(int planeNumber) {
+		// 매진 체크
+		List<Tickets> tickets = null;
+		tickets = airPlaneTicket.get(planeNumber);
+
+		if (tickets != null) {
+			for (Tickets j : tickets) {
+				if (!(j.getIsbooked())) {
+					// 하나라도 false(빈자리가 있다면)면 빈자리가 아니니까 return false;
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	public boolean checkPlane(int planeNumber) {
@@ -185,6 +202,7 @@ public class Quiz1 {
 	}
 
 	// 존재하는 비행기편을 만든다
+	// 아 입력받고 바로 결정할걸 왜그랬지
 	public void setAirPlanes() {
 		// 100개만 만들어서 테스트
 		// 80%의 확률로 비행기편을 만들지 말지 결정한다
@@ -208,6 +226,18 @@ public class Quiz1 {
 			// i 는 Key값
 			airPlaneTicket.put(i, new ArrayList<>());
 			tickets = airPlaneTicket.get(i);
+
+			// 특수조건 : 매진된 비행기용
+			if (i % 3 == 0) {
+				// 비행기 편명이 3의 배수일 때 매진된 비행기를 출력한다
+				for (int j = 1; j < 11; j++) {
+					// 만석 세팅
+					isbooked = true;
+
+					tickets.add(new Tickets(j, isbooked));
+				}
+				continue;
+			}
 
 			// 1번 좌석부터 10번 좌석까지
 			for (int j = 1; j < 11; j++) {

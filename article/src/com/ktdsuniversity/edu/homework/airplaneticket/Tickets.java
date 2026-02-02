@@ -34,11 +34,11 @@ public class Tickets {
 		String strValue=""; 
 		if(isbooked) {
 			// 예약된 좌석일 때 
-			strValue = seatNumber + ". : ■ \t";
+			strValue = " | " + seatNumber + ". : ■  ";
 		}
 		else {
 			// 빈 좌석일 때
-			strValue = seatNumber + ". : □ \t";
+			strValue = " | " + seatNumber + ". : □  ";
 		}
 		
 		return strValue;
