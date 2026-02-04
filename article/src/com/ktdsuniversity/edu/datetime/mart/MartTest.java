@@ -12,11 +12,8 @@ public class MartTest {
 		item.add(new Item("F", "2026-02-08"));
 		item.add(new Item("G", "2026-02-09"));
 		
-		
 		for (int i=0; i < 7; i++) {
 			item.sell(i);
 		}
-		
-
 	}
 }

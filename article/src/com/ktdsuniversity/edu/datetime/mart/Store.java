@@ -36,7 +36,7 @@ public class Store {
 			System.out.println("판매하지 않습니다. ");
 		} else if (expiredDate == 0) {
 			System.out.println("오늘까지 드세요");
-		} else if (expiredDate > 0 && expiredDate < 3) {
+		} else if (expiredDate > 0 && expiredDate <= 3) {
 			System.out.println("가능한 빠른 시일 내 드세요");
 		}
 
