@@ -2,11 +2,11 @@ package com.ktdsuniversity.edu.homework.airplaneticket;
 
 public class Tickets {
 	private int seatNumber;
-	private boolean isbooked;
+	private Book  isbook;
 	
-	public Tickets(int seatNumber, boolean isbooked) {
+	public Tickets(int seatNumber, Book isbook) {
 		 this.seatNumber = seatNumber;
-		 this.isbooked = isbooked;
+		 this.isbook = isbook;
 	}
 
 	public int getSeatNumber() {
@@ -16,23 +16,23 @@ public class Tickets {
 	public void setSeatNumber(int seatNumber) {
 		this.seatNumber = seatNumber;
 	}
-
-	public boolean getIsbooked() {
-		return isbooked;
+	
+	public Book getIsbook() {
+		return isbook;
 	}
-
-	public void setIsbooked(boolean isbooked) {
-		this.isbooked = isbooked;
+	
+	public void setIsbook(Book isbook) {
+		this.isbook = isbook;
 	}
 
 	@Override
 	public String toString() {
-		return "Tickets [seatNumber=" + seatNumber + ", isbooked=" + isbooked + "]";
+		return "Tickets [seatNumber=" + seatNumber + ", isbooked=" + Book.ISBOOKED + "]";
 	}
 	
 	public String toPrintString() {
 		String strValue=""; 
-		if(isbooked) {
+		if(isbook == Book.ISBOOKED) {
 			// 예약된 좌석일 때 
 			strValue = " | " + seatNumber + ". : ■  ";
 		}

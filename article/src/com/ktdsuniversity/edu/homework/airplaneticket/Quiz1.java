@@ -124,7 +124,7 @@ public class Quiz1 {
 			tickets = airPlaneTicket.get(planeNumber);
 
 			if (tickets != null) {
-				if (tickets.get(inputSeat - 1).getIsbooked()) {
+				if (tickets.get(inputSeat - 1).getIsbook() == Book.ISBOOKED) {
 					// 이미 예약되어있는 좌석일 때 ;
 					System.out.println(inputSeat + " 번 좌석은 이미 예약된 좌석입니다. 다른 좌석을 입력하세요 ");
 				} else {
@@ -133,7 +133,7 @@ public class Quiz1 {
 					inputValue = sc.next();
 					if (inputValue.toLowerCase().equals("y")) {
 						// 예약 처리
-						tickets.get(inputSeat - 1).setIsbooked(true);
+						tickets.get(inputSeat - 1).setIsbook(Book.ISBOOKED);
 						System.out.println(inputSeat + " 번 좌석이 예약되었습니다. ");
 						System.out.println();
 
@@ -185,7 +185,7 @@ public class Quiz1 {
 
 		if (tickets != null) {
 			for (Tickets j : tickets) {
-				if (!(j.getIsbooked())) {
+				if (!(j.getIsbook() == Book.ISBOOKED)) {
 					// 하나라도 false(빈자리가 있다면)면 빈자리가 아니니까 return false;
 					return false;
 				}
@@ -238,7 +238,7 @@ public class Quiz1 {
 
 	// 전과달리 한번만 세팅하면 됨
 	public void inputAirPlaneTicket(int inputPlaneNumber) {
-		boolean isbooked = false;
+		Book isbooked = null;
 		List<Tickets> tickets = null;
 
 		airPlaneTicket.put(inputPlaneNumber, new ArrayList<>());
@@ -249,9 +249,7 @@ public class Quiz1 {
 			// 비행기 편명이 3의 배수일 때 매진된 비행기를 출력한다
 			for (int j = 1; j < 11; j++) {
 				// 만석 세팅
-				isbooked = true;
-
-				tickets.add(new Tickets(j, isbooked));
+				tickets.add(new Tickets(j, Book.ISBOOKED));
 			}
 			return;
 		}
@@ -261,10 +259,10 @@ public class Quiz1 {
 			// 랜덤으로 예약 유무 결정
 			if ((int) (Math.round(Math.random())) > 0) {
 				// 1이면 예약됨 (50%)
-				isbooked = true;
+				isbooked = Book.ISBOOKED;
 			} else {
 				// 0이면 예약안됨 (50%)
-				isbooked = false;
+				isbooked = Book.AVAILLAVBLE;
 			}
 
 			tickets.add(new Tickets(j, isbooked));
@@ -274,7 +272,7 @@ public class Quiz1 {
 	// 비행기의 좌석 프리셋 설정
 	// 해시맵인 airPlaneTicket 에 airPlaneList를 Key값, 좌석현황인 Tickets를 Value로 설정한다
 	public void setAirPlanesTicket() {
-		boolean isbooked = false;
+		Book isbooked = null;
 		List<Tickets> tickets = null;
 
 		for (int i : airPlaneList) {
@@ -287,9 +285,7 @@ public class Quiz1 {
 				// 비행기 편명이 3의 배수일 때 매진된 비행기를 출력한다
 				for (int j = 1; j < 11; j++) {
 					// 만석 세팅
-					isbooked = true;
-
-					tickets.add(new Tickets(j, isbooked));
+					tickets.add(new Tickets(j, Book.ISBOOKED));
 				}
 				continue;
 			}
@@ -299,10 +295,10 @@ public class Quiz1 {
 				// 랜덤으로 예약 유무 결정
 				if ((int) (Math.round(Math.random())) > 0) {
 					// 1이면 예약됨 (50%)
-					isbooked = true;
+					isbooked = Book.ISBOOKED;
 				} else {
 					// 0이면 예약안됨 (50%)
-					isbooked = false;
+					isbooked = Book.AVAILLAVBLE;
 				}
 
 				tickets.add(new Tickets(j, isbooked));
