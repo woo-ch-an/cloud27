@@ -1,4 +1,4 @@
--- 1. 모든 사원의 모든 정보를 조회한다.
+-- 1. 모든 사원의 모든 정보를 조회한다. 결과 수 : 107
 SELECT EMPLOYEE_ID 
      , FIRST_NAME 
      , LAST_NAME 
@@ -12,7 +12,7 @@ SELECT EMPLOYEE_ID
      , DEPARTMENT_ID
   FROM EMPLOYEES
   ;
--- 2. 부서가 없는 사원의 모든 정보를 조회한다.
+-- 2. 부서가 없는 사원의 모든 정보를 조회한다. 결과 수 : 1
 SELECT EMPLOYEE_ID 
      , FIRST_NAME 
      , LAST_NAME 
@@ -27,7 +27,7 @@ SELECT EMPLOYEE_ID
   FROM EMPLOYEES
  WHERE DEPARTMENT_ID IS NULL 
   ;
--- 3. 직무가 없는 사원의 모든 정보를 조회한다.
+-- 3. 직무가 없는 사원의 모든 정보를 조회한다. 결과 수 :  0
 SELECT EMPLOYEE_ID 
      , FIRST_NAME 
      , LAST_NAME 
@@ -42,7 +42,7 @@ SELECT EMPLOYEE_ID
   FROM EMPLOYEES
  WHERE JOB_ID IS NULL 
   ;
--- 4. 부서와 직무가 모두 있는 사원의 모든 정보를 조회한다.
+-- 4. 부서와 직무가 모두 있는 사원의 모든 정보를 조회한다. 결과 수 :  106 
 SELECT EMPLOYEE_ID 
      , FIRST_NAME 
      , LAST_NAME 
@@ -58,7 +58,7 @@ SELECT EMPLOYEE_ID
  WHERE DEPARTMENT_ID IS NOT NULL 
    AND JOB_ID IS NOT NULL
   ;
--- 5. 부서장이 없는 모든 부서의 모든 정보를 조회한다.
+-- 5. 부서장이 없는 모든 부서의 모든 정보를 조회한다. 결과 수 : 16
 SELECT DEPARTMENT_ID
      , DEPARTMENT_NAME
      , MANAGER_ID
@@ -66,7 +66,7 @@ SELECT DEPARTMENT_ID
   FROM DEPARTMENTS
   WHERE MANAGER_ID IS NULL 
 ;
--- 6. 부서장이 있는 모든 부서의 모든 정보를 조회한다.
+-- 6. 부서장이 있는 모든 부서의 모든 정보를 조회한다. 결과 수 : 11
 SELECT DEPARTMENT_ID
      , DEPARTMENT_NAME
      , MANAGER_ID
@@ -74,16 +74,16 @@ SELECT DEPARTMENT_ID
   FROM DEPARTMENTS
   WHERE MANAGER_ID IS NOT NULL 
 ;
--- 7. 사원의 이름만 조회한다.
+-- 7. 사원의 이름만 조회한다. 결과 수 : 107
 SELECT EMPLOYEE_ID
  FROM EMPLOYEES
 ;
--- 8. 모든 지역의 모든 정보를 조회한다.
+-- 8. 모든 지역의 모든 정보를 조회한다. 결과 수 : 4
 SELECT REGION_ID
      , REGION_NAME
   FROM REGIONS
 ;
--- 9. 지역이 없는 모든 부서의 정보를 조회한다.
+-- 9. 지역이 없는 모든 부서의 정보를 조회한다. 결과 수 : 0
 SELECT DEPARTMENT_ID
      , DEPARTMENT_NAME
      , MANAGER_ID
