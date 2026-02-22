@@ -159,164 +159,182 @@ SELECT DEPARTMENT_ID
 
 
 ---- 추가 문제
--- 1. 부서아이디별 사원의 평균연봉을 조회한다. 12
-SELECT AVG(SALARY) AS DEPT_AVG_SALARY
+
+-- 1. (12건) 부서아이디별 사원의 평균연봉을 조회한다.
+SELECT AVG(SALARY) 
   FROM EMPLOYEES
- GROUP BY DEPARTMENT_ID 
+ GROUP BY DEPARTMENT_ID
 ;
--- 2. 직무아이디별 사원의 최고연봉을 조회한다. 19
-SELECT MAX_SALARY 
-  FROM JOBS
-;
--- 3. 인센티브를 안받는 사원의 모든 정보를 조회한다. 35
-SELECT EMPLOYEE_ID
-	 , FIRST_NAME
-	 , LAST_NAME
-	 , EMAIL
-	 , PHONE_NUMBER
-	 , HIRE_DATE
-	 , JOB_ID
-	 , SALARY
-	 , COMMISSION_PCT
-	 , MANAGER_ID
-	 , DEPARTMENT_ID
+
+-- 2. (19건) 직무아이디별 사원의 최고연봉을 조회한다.
+SELECT MAX(SALARY)
   FROM EMPLOYEES
- WHERE COMMISSION_PCT IS NOT NULL
+ GROUP BY JOB_ID 
 ;
--- 4. 인센티브를 받는 사원의 부서아이디를 중복없이 조회한다. 1
+
+-- 3. (72건) 인센티브를 안받는 사원의 모든 정보를 조회한다.
+SELECT EMPLOYEE_ID 
+     , FIRST_NAME 
+     , LAST_NAME 
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY 
+     , COMMISSION_PCT 
+     , MANAGER_ID 
+     , DEPARTMENT_ID
+  FROM EMPLOYEES
+ WHERE COMMISSION_PCT IS NULL
+ ;
+
+-- 4. (2건) 인센티브를 받는 사원의 부서아이디를 중복없이 조회한다.
 SELECT DISTINCT DEPARTMENT_ID 
   FROM EMPLOYEES
- WHERE DEPARTMENT_ID IS NOT NULL
-   AND COMMISSION_PCT IS NOT NULL
-;
--- 5. 인센티브를 받는 사원의 직무아이디를 중복없이 조회한다. 2
+ WHERE COMMISSION_PCT IS NOT NULL
+ ;
+
+-- 5. (2건) 인센티브를 받는 사원의 직무아이디를 중복없이 조회한다.
 SELECT DISTINCT JOB_ID 
   FROM EMPLOYEES
- WHERE DEPARTMENT_ID IS NOT NULL
-   AND COMMISSION_PCT IS NOT NULL
-;
--- 6. 사원이 있는 부서의 지역아이디를 조회한다. 11
-SELECT LOCATION_ID 
+ WHERE COMMISSION_PCT IS NOT NULL
+ ;
+
+-- 6. (7건) 사원이 있는 부서의 지역아이디를 조회한다.
+SELECT DISTINCT LOCATION_ID
   FROM DEPARTMENTS
- WHERE DEPARTMENT_ID IN (SELECT DISTINCT DEPARTMENT_ID 
- 						  FROM EMPLOYEES
- 						 WHERE EMPLOYEE_ID IS NOT NULL)
+ WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID 
+ 						   FROM EMPLOYEES
+ 						  WHERE EMPLOYEE_ID IS NOT NULL
+ )
 ;
--- 7. Seattle에 존재하는 부서번호를 조회한다. 21
+
+-- 7. (21건) Seattle에 존재하는 부서번호를 조회한다.
 SELECT DEPARTMENT_ID
   FROM DEPARTMENTS
- WHERE LOCATION_ID = (SELECT LOCATION_ID
- 						FROM LOCATIONS
- 					   WHERE CITY = 'Seattle')
-;
--- 8. 사원이 한명도 없는 도시를 조회한다. 16
-SELECT CITY
-  FROM LOCATIONS
- WHERE LOCATION_ID NOT IN (SELECT LOCATION_ID 
- 							 FROM DEPARTMENTS
- 					   		WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID 
- 					   								  FROM EMPLOYEES))
-;
--- 9. 사원이 한명이라도 있는 도시를 조회한다. 7
-SELECT CITY
-  FROM LOCATIONS
  WHERE LOCATION_ID IN (SELECT LOCATION_ID 
- 						 FROM DEPARTMENTS
- 					   	WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID 
- 					   							  FROM EMPLOYEES))
+ 						 FROM LOCATIONS
+ 						WHERE CITY = 'Seattle')
 ;
--- 10. 모든 사원의 정보를 연봉으로 오름차순 정렬하여 조회한다. 107
-SELECT EMPLOYEE_ID
-	 , FIRST_NAME
-	 , LAST_NAME
-	 , EMAIL
-	 , PHONE_NUMBER
-	 , HIRE_DATE
-	 , JOB_ID
-	 , SALARY
-	 , COMMISSION_PCT
-	 , MANAGER_ID
-	 , DEPARTMENT_ID
+-- 8. (16건) 사원이 한명도 없는 도시를 조회한다.
+SELECT CITY
+  FROM LOCATIONS
+ WHERE LOCATION_ID NOT IN (SELECT LOCATION_ID
+    					 FROM DEPARTMENTS
+    					WHERE DEPARTMENT_ID IN ( SELECT DEPARTMENT_ID 
+    											   FROM EMPLOYEES 
+    											)
+    				)
+ ;
+
+-- 9. (7건) 사원이 한명이라도 있는 도시를 조회한다.
+SELECT CITY
+  FROM LOCATIONS
+ WHERE LOCATION_ID IN (SELECT LOCATION_ID
+    					 FROM DEPARTMENTS
+    					WHERE DEPARTMENT_ID IN ( SELECT DEPARTMENT_ID 
+    											   FROM EMPLOYEES 
+    											)
+    				)
+ ;
+
+-- 10. (107건) 모든 사원의 정보를 연봉으로 오름차순 정렬하여 조회한다.
+SELECT EMPLOYEE_ID 
+     , FIRST_NAME 
+     , LAST_NAME 
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY 
+     , COMMISSION_PCT 
+     , MANAGER_ID 
+     , DEPARTMENT_ID
   FROM EMPLOYEES
- ORDER BY SALARY
+ ORDER BY SALARY ASC
 ;
--- 11. 모든 사원의 사원번호, 이름, 성, 연봉, 인센티브를 포함한 연봉 정보를 조회한다. 107
+
+
+-- 11. (107건) 모든 사원의 사원번호, 이름, 성, 연봉, 인센티브를 포함한 연봉 정보를 조회한다.
 SELECT EMPLOYEE_ID
-	 , FIRST_NAME
-	 , LAST_NAME
-	 , SALARY
-	 , CASE WHEN COMMISSION_PCT IS NULL THEN SALARY
-	   ELSE ((SALARY * COMMISSION_PCT) + SALARY) END AS "인센티브 연봉"
+     , FIRST_NAME
+     , LAST_NAME
+     , SALARY
+     , COMMISSION_PCT
   FROM EMPLOYEES
 ;
--- 12. 2003년에 입사한 사원은 몇 명인지 조회한다. 1
+
+-- 12. (6건) 2003년에 입사한 사원은 몇 명인지 조회한다.
 SELECT COUNT(EMPLOYEE_ID)
   FROM EMPLOYEES
- WHERE HIRE_DATE BETWEEN TO_DATE('20030101', 'YYYY-MM-DD') AND TO_DATE('20031231', 'YYYY-MM-DD')
+ WHERE TO_CHAR(HIRE_DATE, 'YYYY') = '2003'
 ;
--- 13. 113번 사원의 상사의 모든 정보를 조회한다. 1
-SELECT EMPLOYEE_ID
-	 , FIRST_NAME
-	 , LAST_NAME
-	 , EMAIL
-	 , PHONE_NUMBER
-	 , HIRE_DATE
-	 , JOB_ID
-	 , SALARY
-	 , COMMISSION_PCT
-	 , MANAGER_ID
-	 , DEPARTMENT_ID
-  FROM EMPLOYEES
- WHERE EMPLOYEE_ID = (SELECT MANAGER_ID 
- 						FROM EMPLOYEES
- 					   WHERE EMPLOYEE_ID = 113)
-;
--- 14. 모든 부서의 부서장의 모든 사원 정보를 조회한다. 11
-SELECT EMPLOYEE_ID
-	 , FIRST_NAME
-	 , LAST_NAME
-	 , EMAIL
-	 , PHONE_NUMBER
-	 , HIRE_DATE
-	 , JOB_ID
-	 , SALARY
-	 , COMMISSION_PCT
-	 , MANAGER_ID
-	 , DEPARTMENT_ID
+
+-- 13. (1건) 113번 사원의 상사의 모든 정보를 조회한다.
+SELECT EMPLOYEE_ID 
+     , FIRST_NAME 
+     , LAST_NAME 
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY 
+     , COMMISSION_PCT 
+     , MANAGER_ID 
+     , DEPARTMENT_ID
   FROM EMPLOYEES
  WHERE EMPLOYEE_ID IN (SELECT MANAGER_ID
- 						FROM DEPARTMENTS)
+                         FROM EMPLOYEES
+                        WHERE EMPLOYEE_ID = '133')
 ;
--- 15. 사원의 이름이 7자리인 사원의 모든 정보를 조회한다. 23
-SELECT EMPLOYEE_ID
-	 , FIRST_NAME
-	 , LAST_NAME
-	 , EMAIL
-	 , PHONE_NUMBER
-	 , HIRE_DATE
-	 , JOB_ID
-	 , SALARY
-	 , COMMISSION_PCT
-	 , MANAGER_ID
-	 , DEPARTMENT_ID
-  FROM EMPLOYEES 
+
+-- 14. (11건) 모든 부서의 부서장의 모든 사원 정보를 조회한다.
+SELECT EMPLOYEE_ID 
+     , FIRST_NAME 
+     , LAST_NAME 
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY 
+     , COMMISSION_PCT 
+     , MANAGER_ID 
+     , DEPARTMENT_ID
+  FROM EMPLOYEES
+ WHERE EMPLOYEE_ID IN (SELECT MANAGER_ID
+                         FROM DEPARTMENTS )
+
+-- 15. (23건) 사원의 이름이 7자리인 사원의 모든 정보를 조회한다.
+ SELECT EMPLOYEE_ID 
+     , FIRST_NAME 
+     , LAST_NAME 
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY 
+     , COMMISSION_PCT 
+     , MANAGER_ID 
+     , DEPARTMENT_ID
+  FROM EMPLOYEES
  WHERE FIRST_NAME LIKE '_______'
-;
--- 16. 사원의 이메일이 6자리인 사원의 모든 정보를 조회한다. 25
-SELECT EMPLOYEE_ID
-	 , FIRST_NAME
-	 , LAST_NAME
-	 , EMAIL
-	 , PHONE_NUMBER
-	 , HIRE_DATE
-	 , JOB_ID
-	 , SALARY
-	 , COMMISSION_PCT
-	 , MANAGER_ID
-	 , DEPARTMENT_ID
-  FROM EMPLOYEES 
+ ;
+                         
+-- 16. (25건) 사원의 이메일이 6자리인 사원의 모든 정보를 조회한다.
+SELECT EMPLOYEE_ID 
+     , FIRST_NAME 
+     , LAST_NAME 
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY 
+     , COMMISSION_PCT 
+     , MANAGER_ID 
+     , DEPARTMENT_ID
+  FROM EMPLOYEES
  WHERE EMAIL LIKE '______'
-;
+ ;
 
 -- 1. 현재 시간을 조회한다.
 SELECT SYSDATE 
@@ -1044,10 +1062,60 @@ SELECT EMPLOYEE_ID
 WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
 						  FROM EMPLOYEES
 						 WHERE SALARY > (SELECT AVG(SALARY) 
-						 				   FROM EMPLOYEES))
-  AND DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
+						 				   FROM EMPLOYEES)
+ 						 AND DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
+											    FROM EMPLOYEES
+											   WHERE FIRST_NAME LIKE '%u%')	)
+;
+
+SELECT EMPLOYEE_ID
+     , FIRST_NAME
+     , LAST_NAME
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY
+     , COMMISSION_PCT
+     , MANAGER_ID
+     , DEPARTMENT_ID
+  FROM EMPLOYEES
+ WHERE DEPARTMENT_ID IN (SELECT DISTINCT DEPARTMENT_ID
+                           FROM EMPLOYEES
+                          WHERE SALARY > (SELECT AVG(SALARY)
+                                            FROM EMPLOYEES))
+   AND FIRST_NAME LIKE '%u%'                           
+;    
+
+SELECT EMPLOYEE_ID 
+     , FIRST_NAME 
+     , LAST_NAME 
+     , EMAIL
+     , PHONE_NUMBER
+     , HIRE_DATE
+     , JOB_ID
+     , SALARY 
+     , COMMISSION_PCT 
+     , MANAGER_ID 
+     , DEPARTMENT_ID
+ FROM EMPLOYEES
+WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
 						  FROM EMPLOYEES
-						 WHERE FIRST_NAME LIKE '%u%')	
+						 WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
+											    FROM EMPLOYEES
+											   WHERE FIRST_NAME LIKE '%u%')	)
+  AND SALARY > (SELECT AVG(SALARY)
+  	              FROM EMPLOYEES)
+										
+;
+SELECT AVG(SALARY)
+ FROM EMPLOYEES;
+
+
+SELECT DEPARTMENT_ID
+     , FIRST_NAME
+  FROM EMPLOYEES
+ WHERE FIRST_NAME LIKE '%u%'
 ;
 -- 회사월급 많이받는 사람이 근무중인 부서
 SELECT DEPARTMENT_ID
