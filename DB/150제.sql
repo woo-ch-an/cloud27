@@ -1,3 +1,57 @@
+-- 260225 과제 목록
+
+-- 1. 지역별 부서의 수를 조회한다. (부서가 없으면 부서의 수는 0으로 조회한다.)
+ SELECT L.CITY 
+      , COUNT(D.DEPARTMENT_ID)
+   FROM LOCATIONS L
+   LEFT OUTER JOIN DEPARTMENTS D
+     ON L.LOCATION_ID = D.LOCATION_ID 
+  GROUP BY L.CITY 
+  ORDER BY L.CITY ASC
+;
+-- 2. 지역별 사원의 평균월급을 조회한다. (사원이 없으면 평균월급은 0으로 조회한다.)
+ SELECT L.CITY 
+      , NVL(AVG(SALARY), 0)
+   FROM LOCATIONS L
+   LEFT OUTER JOIN DEPARTMENTS D
+     ON L.LOCATION_ID = D.LOCATION_ID 
+   LEFT OUTER JOIN EMPLOYEES E
+     ON E.DEPARTMENT_ID  = D.DEPARTMENT_ID 
+  GROUP BY L.CITY 
+  ORDER BY L.CITY ASC
+;
+-- 3. 도시명 별 사원의 수를 도시명으로 오름차순 정렬하여 조회한다.(사원이 없으면 사원의 수는 0으로 조회한다.)
+ SELECT L.CITY 
+      , COUNT(E.EMPLOYEE_ID)
+   FROM LOCATIONS L
+   LEFT OUTER JOIN DEPARTMENTS D
+     ON L.LOCATION_ID = D.LOCATION_ID 
+   LEFT OUTER JOIN EMPLOYEES E
+     ON E.DEPARTMENT_ID  = D.DEPARTMENT_ID 
+  GROUP BY L.CITY 
+  ORDER BY L.CITY ASC
+ ;
+  
+-- 4. 모든 사원들의 현재 직무명과 과거의 직무명을 조회한다. 만약 직무가 한번도 변경되지 않았다면, 과거의 직무명은 '없음' 으로 조회한다.
+SELECT E.FIRST_NAME || ' 현재 직무명 : ' ||J.JOB_TITLE || ' 과거 직무명 : ' || (SELECT JOB_TITLE
+  																			    FROM JOBS PJT
+  																			   WHERE PJT.JOB_ID = JH.JOB_ID)
+  FROM EMPLOYEES E
+ INNER JOIN JOB_HISTORY JH
+    ON E.EMPLOYEE_ID = JH.EMPLOYEE_ID
+ INNER JOIN JOBS J
+    ON E.JOB_ID = J.JOB_ID 
+ UNION ALL
+SELECT EMP.FIRST_NAME || '현재 직무명 : ' || JO.JOB_TITLE  || ' 과거 직무명 : ' || ' 없음 '
+  FROM EMPLOYEES EMP
+ INNER JOIN JOBS JO
+    ON JO.JOB_ID = EMP.JOB_ID 
+ WHERE EMP.EMPLOYEE_ID NOT IN ( SELECT JHIS.EMPLOYEE_ID 
+                                  FROM JOB_HISTORY JHIS)
+;
+
+
+
 -- 260224 과제 목록
 -- 1. 100번 사원의 모든 부하직원을 계층조회한다.
  SELECT EMPLOYEE_ID 
