@@ -2,7 +2,22 @@ package com.ktdsuniversity.edu.board.dao.query;
 
 public class BoardQuery {
 	
-	public static String MakeSelect() {
+	public static String MakeSelectAll() {
+		StringBuffer query = new StringBuffer();
+		
+		query.append("SELECT ID                                                                       ");
+	    query.append(" , TITLE                                                                        ");
+	    query.append(" , CONTENT                                                                      ");
+	    query.append(" , VIEW_COUNT                                                                   ");
+	    query.append(" , TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') AS WRITE_DATE                   ");
+	    query.append(" , TO_CHAR(LATEST_MODIFY_DATE, 'YYYY-MM-DD HH24:MI:SS') AS LATEST_MODIFY_DATE   ");
+	    query.append("FROM BOARD.BOARD                                                                ");
+		 
+		return query.toString();
+	}
+	
+	
+	public static String MakeSelectOne() {
 		StringBuffer query = new StringBuffer();
 		
 		query.append("SELECT ID                                                                       ");

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ktdsuniversity.edu.board.dao.query.BoardQuery;
 import com.ktdsuniversity.edu.board.db.helper.DataAccessHelper;
@@ -14,94 +16,88 @@ import com.ktdsuniversity.edu.board.vo.BoardVO;
  * Dao : Data Access Object java에서 DB로 데이터 생성 수정 삭제 조회 등을 위한 클래스
  */
 public class BoardDao {
-	public BoardVO readArticle(String articleID) {
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
-		BoardVO returnVO = new BoardVO();
-		
-		// UPDATE -> 조회수 + 1
-		try {
-			dah.preparedStatement(BoardQuery.MakeUpdateViewCount(), (pstmt) -> {
-				pstmt.setString(1, articleID);
-			});
-			dah.executeQuery(SQLType.UPDATE, null);
-			
-			// SELECT -> 가져오깅
-			dah.preparedStatement(BoardQuery.MakeSelect(),(pstmt) -> {
-				pstmt.setString(1, articleID);
-			});
-			dah.executeQuery(SQLType.SELECT, (rs) -> {
-				returnVO.setId(rs.getString("ID"));
-				returnVO.setTitle(rs.getString("TITLE"));
-				returnVO.setContent(rs.getString("CONTENT"));
-				returnVO.setViewCount(rs.getInt("VIEW_COUNT"));
-				returnVO.setWriteDate(rs.getString("WRITE_DATE"));
-				returnVO.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));
-			});
-			
-			dah.commit();
 
-		} catch (RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		} finally {
-			dah.close();
-		}
-		
+	public DataAccessHelper dah;
+
+	public BoardDao(DataAccessHelper dah) {
+		this.dah = dah;
+	}
+
+	public List<BoardVO> readAllArticle() {
+		List<BoardVO> returnVO = new ArrayList<>();
+		BoardVO vo = new BoardVO();
+
+		// UPDATE -> 조회수 + 1
+		// SELECT -> 가져오깅
+		this.dah.preparedStatement(BoardQuery.MakeSelectAll(), null);
+		this.dah.executeQuery(SQLType.SELECT, (rs) -> {
+			vo.setId(rs.getString("ID"));
+			vo.setTitle(rs.getString("TITLE"));
+			vo.setContent(rs.getString("CONTENT"));
+			vo.setViewCount(rs.getInt("VIEW_COUNT"));
+			vo.setWriteDate(rs.getString("WRITE_DATE"));
+			vo.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));
+			returnVO.add(vo);
+		});
+
 		return returnVO;
 	}
-	
+
+	public void updateViewCount(String articleID) {
+		// UPDATE -> 조회수 + 1
+		this.dah.preparedStatement(BoardQuery.MakeUpdateViewCount(), (pstmt) -> {
+			pstmt.setString(1, articleID);
+		});
+		this.dah.executeQuery(SQLType.UPDATE, null);
+	}
+
+	public BoardVO readArticle(String articleID) {
+		BoardVO returnVO = new BoardVO();
+
+		// SELECT -> 가져오깅
+		this.dah.preparedStatement(BoardQuery.MakeSelectOne(), (pstmt) -> {
+			pstmt.setString(1, articleID);
+		});
+		this.dah.executeQuery(SQLType.SELECT, (rs) -> {
+			returnVO.setId(rs.getString("ID"));
+			returnVO.setTitle(rs.getString("TITLE"));
+			returnVO.setContent(rs.getString("CONTENT"));
+			returnVO.setViewCount(rs.getInt("VIEW_COUNT"));
+			returnVO.setWriteDate(rs.getString("WRITE_DATE"));
+			returnVO.setLatestModifyDate(rs.getString("LATEST_MODIFY_DATE"));
+		});
+
+		return returnVO;
+	}
+
 	public void deleteArticle(String deleteID) {
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
 
-		try {
-			dah.preparedStatement(BoardQuery.MakeDeleteQuery(), (pstmt) -> {
-				pstmt.setString(1, deleteID);
-			});
-			dah.executeQuery(SQLType.DELETE, null);
-			dah.commit();
-		} catch (RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		} finally {
-			dah.close();
-		}
+		this.dah.preparedStatement(BoardQuery.MakeDeleteQuery(), (pstmt) -> {
+			pstmt.setString(1, deleteID);
+		});
+		this.dah.executeQuery(SQLType.DELETE, null);
+
 	}
-	
+
 	public void modifyArticle(BoardVO modifyArticle) {
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
 
-		try {
-			dah.preparedStatement(BoardQuery.MakeUpdateQuery(), (pstmt) -> {
-				pstmt.setString(1,  modifyArticle.getTitle());
-				pstmt.setString(2,  modifyArticle.getContent());
-				pstmt.setString(3,  modifyArticle.getId());
-			});
-			dah.executeQuery(SQLType.UPDATE, null);
-			dah.commit();
-		} catch (RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		} finally {
-			dah.close();
-		}
+		this.dah.preparedStatement(BoardQuery.MakeUpdateQuery(), (pstmt) -> {
+			pstmt.setString(1, modifyArticle.getTitle());
+			pstmt.setString(2, modifyArticle.getContent());
+			pstmt.setString(3, modifyArticle.getId());
+		});
+		this.dah.executeQuery(SQLType.UPDATE, null);
+
 	}
-		 
-	public void createNewArticle2(BoardVO newArticle) {
-		DataAccessHelper dah = new DataAccessHelper("localhost", 1521, "XE", "BOARD", "BOARD");
 
-		try {
-			dah.preparedStatement(BoardQuery.MakeInsertQuery(), (pstmt) -> {
-				pstmt.setString(1,  newArticle.getTitle());
-				pstmt.setString(2,  newArticle.getContent());
-			});
-			dah.executeQuery(SQLType.INSERT, null);
-			dah.commit();
-		} catch (RuntimeException re) {
-			dah.rollback();
-			System.out.println(re.getMessage());
-		} finally {
-			dah.close();
-		}
+	public void createNewArticle2(BoardVO newArticle) {
+
+		this.dah.preparedStatement(BoardQuery.MakeInsertQuery(), (pstmt) -> {
+			pstmt.setString(1, newArticle.getTitle());
+			pstmt.setString(2, newArticle.getContent());
+		});
+		this.dah.executeQuery(SQLType.INSERT, null);
+
 	}
 
 	public int createNewArticle(BoardVO newArticle) {
