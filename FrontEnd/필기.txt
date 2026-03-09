@@ -1,0 +1,128 @@
+태그 Element, Node라고도 표현 (위치에 따라)
+
+HTML은 다양한 형태의 데이터를 표현하기 위해 태그를 미리 정의해 두었다
+(사용자 추가 불가능 )
+
+태그 <tag> = OpenTag
+     </tag> = CloseTag
+태그 안에 다른 태그를 넣을 수 있다
+
+태그 종류는 무지하게 많기 때문에 
+w3school 에서 확인하기 빨간줄 = html5 에 없음 (4까지 지원)
+p.13 예시
+부모태그 : 태그명이 사용 될 수 있는 태그범위
+title은 반드시 head안에서 사용 될 수 있다
+
+form -> 안에 있는 값을 BackEnd에게 전송할 때 사용
+시멘틱 웹 태그  -> <header, aside, footer 덩덩 >  의미대로 사용할거 아니면 의미 없음
+-> 보통 퍼블리셔라는 사람들이 규약을 뿌릴 때 정리됨
+
+속성 
+ 태그에게 줄 수 있는 별도의 값
+ tabindex -> tab으로 선택되는 순번 정하기
+ 속성중에서는 class를 가장 많이 사용함 
+
+이벤트
+ tag 속성 이벤트명 = JavaScript 코드이름 
+  -> 이벤트가 발생하면 JavaScript를 실행할 수 있도록 함
+ onkeydown, onclick 만 알면 나머지는 쓰다보면 외워진다
+
+HTML 끝
+ 웹 페이지를 구성하는 방식 
+ 어떤 영역에서 뭘 보여줄지만 정한 꾸며지지 않은 건조한 상태
+ 가끔 인터넷 반만 터지면 볼 수 있음 
+
+CSS Cascading Style Sheets
+어렵다.
+ 부모태그와 자식 태그의 스타일을 동일하게 적용된다 (Cascading, 계단식인 이유)
+HTML 을 꾸밀 수 있따
+ 
+ㅎㅇㅎㅇ 2026 03 09 
+
+ID Selector
+#태그명 {} 
+-> 태그명 id =>> div id= 태그 로 구분 
+#header ,,, <div id = header> 
+
+Class selectors
+.header--logo ,,, <p class = "header--logo"> 
+
+Element Selectors 
+P{}
+div {}
+-> p , div 태그 전체
+
+Universial Selector
+* {} -> 걍 다
+
+아마 Class 를 가장 많이 사용하게 될 것
+
+웹 사이트 전체 레이아웃을 적용하는 External Style 
+한 페이지의 레이아웃만 적용하는 Internal Style
+한 태그의 레이아웃만 적용하는 Inline Style
+
+External -> HTML 안에 <style> 태그로 사용 
+Internal <h1 style = "color:blue"> ~ --> 태그 추적이 어렵기 떄문에 피해야 한다
+
+** color 설정에서 RGB뒤에 2byte 더 추가 가능한데 이는 투명도를 뜻함 
+color : #44554488 <-- R 44, G 55, B 44, 투명도 88
+
+css 임포트 하는 방법
+<link rel="stylesheet" type="text/css" href="상대위치">
+
+스타일별 우선순위 
+1. Inline  Style
+2. Internal Style
+3. External Style
+< 작성 순서에 따라도 우선순위가 나뉘어진다
+
+Cascading, Spectificity
+같은 태그에 여러개의 스타일을 정의할 수 있다 -> Cascading
+스타일 충돌이 일어날 경우 명시도에 따라 처리된다 -> Spectificity
+ㄴ 순서가 존재한다
+
+동일한 selector를 여러번 사용 할 경우, css가 작성된 순서대로 브라우저가 표시한다
+
+Inline으로 css작성시 명시도의 우선순위는 의미 없이 Inline으로작성된 css가 먼저 인식된다 
+스타일은 복잡하게 되면 페이지가 느리게 동작함
+
+Box Model Styling
+p.54 
+* 박스 크기는 Border 까지고 Margin은 박스 외부의 넓이로 다른 측정값을가진다
+Border Box를 연습해봅시다
+
+* color 지정할 때 ff00ff -> 이런거 간단하게 f0f 로도 축약해서 사용이가능함
+
+Margin Collapsing -> 중첩된 마진에 대해서는 중첩을 시켜 큰 마진으로 덮어씌운다
+-> 외용 나도몰라 개미친년아
+
+폭과 넓이  Width & Height
+-> 기준은 항상 부모 Element의 영역안에서만 가능하다
+ **** 크기는 항상 부모의 영향을 받는다 
+
+ Top & Bot 과 Rig & Lef 의 값이 쌍으로 같으면 20 10 20 10 -> 20 10; 으로 축약 가능
+
+ * 어떤 box는 아래로 정렬되고 어떤 box는 우측으로 정렬됨
+ 외용 ? -> Display값이 그래요
+ 아래로 떨어지는 얘들 -> display:block; 이라는게 있었다 
+ 옆으로 가는 얘들 -> 없었다
+ 
+ block 뜻 : Width가 남든 어쩌든 걍 한 칸 먹음 (남은 부분은 Margin)
+ block에 아무것도 안주면 inline Display가 먹음(옆으로 가는 얘들)
+
+ Inline Display 
+ 부모 Element가 자식 Content의 길이보다 클 경우 -> 한 줄에 표시 가능
+ 안되면 마지막 content부터 아래로 떨어짐
+ Element 가 컨텐츠 영역만큼 의 크기를 가진다
+* Width와 Height는 부여 불가능 
+줘봤자 브라우저에서 쓸모없는데숑 이 출력됨 
+-> img는 예외 (inline Element Tag지만 실제 동작은 inline block Element처럼 동작)
+
+1000px 을 500px 500px 딱 나눈다면 둘 다 표시되는게 아님(공백 추가)
+1001px이면 된다-> 드래그 해보면 뭔가 있음 
+
+
+
+
+** Quiz ~
+block, inline, inline Blcok의 차이

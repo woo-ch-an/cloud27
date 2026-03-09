@@ -1,0 +1,21 @@
+.content-box {
+  /*box-sizing: content-box; <-- default */
+  /* 박스 넓이 지정 */
+  width: 500px;
+  background-color: yellow;
+
+  padding: 5px 12px 7px 3px;
+  border: 10px solid black;
+  /*box modle의 크기와 관계 전혀 x , 서로 이격시켜놓는 용도*/
+  margin: 10px 20px 30px 40px;
+}
+.border-box {
+  /*박스 크기 기준을 border 로 지정한다*/
+
+  box-sizing: border-box;
+  width: 500px;
+  background-color: deepskyblue;
+  padding: 5px 12px 7px 3px;
+  border: 10px solid black;
+  margin: 10px 20px 30px 40px;
+}

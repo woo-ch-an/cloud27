@@ -1,0 +1,50 @@
+h1 {
+  font-size: 80px;
+  text-align: center;
+  margin: 20px 0px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.wrap-box {
+  display: inline-block;
+  width: 470px;
+  vertical-align: top;
+  text-align: justify;
+  margin: 0 10px;
+}
+
+.summary {
+  font-style: italic;
+  text-align: center;
+}
+.thin {
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  margin: 8px 0;
+}
+
+.line {
+  height: 3px;
+  background: linear-gradient(0.25turn, #fff, #333, #fff);
+  margin: 16px 0;
+}
+
+.bolder {
+  font-weight: 800;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.wrapper {
+  width: 1000px;
+  margin: 0 auto;
+}

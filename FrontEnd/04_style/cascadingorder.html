@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CascadingOrder 실습</title>
+    <!-- External Style : 우선순위 -> 3(가장낮다) -->
+    <link rel="stylesheet" type="text/css" href="./external.css" />
+    <!-- Internal Style : 우선순위 -> 2(가운데) -->
+    <style type="text/css">
+      #header {
+        background-color: magenta;
+        color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header" style="background-color: black">
+      header 영역
+      <p class="header--logo">로고 영역</p>
+    </div>
+
+    <div id="main-container">
+      Main-Container 영역
+      <p class="main-container--content">Main-Conatiner의 Content</p>
+    </div>
+
+    <div id="footer">
+      footer영역
+      <ul class="footer-links">
+        <li class="footer-links--link">링크 1</li>
+        <li class="footer-links--link">링크 2</li>
+        <li class="footer-links--link">링크 3</li>
+      </ul>
+    </div>
+  </body>
+</html>
