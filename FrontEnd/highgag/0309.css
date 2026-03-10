@@ -1,0 +1,57 @@
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+body {
+  border: 1px solid black;
+}
+.top {
+  background-color: #fed50a;
+  height: 60px;
+  /* border: #ff5722; */
+  border-bottom: 1px solid #ff5722;
+  width: 100%;
+}
+.middle {
+  background-color: aliceblue;
+  height: 60px;
+  border: 1px solid;
+  border-bottom: 1px solid rgb(116, 116, 116);
+}
+
+.content {
+  padding: 20px 20px;
+  height: 70px;
+  border: 1px solid;
+  background-color: aliceblue;
+  color: black;
+  font-size: 25px;
+}
+
+html {
+  margin: 0px;
+  padding: 0px;
+}
+
+.spanred {
+  color: red;
+}
+
+.spanone {
+  color: red;
+  font-size: 18px;
+  margin-right: 30px;
+}
+.spantwo {
+  color: rgb(150, 150, 150);
+  font-size: 18px;
+  margin-right: 30px;
+}
+.spanthree {
+  color: rgb(150, 150, 150);
+  font-size: 18px;
+  margin-right: 30px;
+}

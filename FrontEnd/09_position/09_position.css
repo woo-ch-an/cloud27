@@ -1,0 +1,52 @@
+img {
+  vertical-align: bottom;
+}
+
+div {
+  border: 1px solid red;
+  padding: 16px;
+}
+.absoulte {
+  background-color: yellow;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.fixed {
+  position: fixed;
+  top: 20px;
+  left: 50px;
+}
+.relative {
+  position: relative;
+  background-color: aqua;
+  /* top: 50px;
+  left: 50px; */
+  bottom: -100px;
+  right: 50px;
+}
+
+.sticky {
+  top: 0;
+  position: sticky;
+  background-color: yellow;
+}
+
+.background {
+  position: relative;
+}
+.subject {
+  position: absolute;
+  /* offset 기준이 두 가지.                         [offset 기준]
+   1. position이 할당되지 않은 부모 태그 내부 ==>  View port
+   2. position이 relative 로 할당된 부모 태그 내부 ==> 부모태그 
+  */
+  background-color: #0005;
+  font-size: 30px;
+  font-weight: 900;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  color: white;
+}

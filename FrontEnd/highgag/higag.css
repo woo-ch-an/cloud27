@@ -1,0 +1,35 @@
+body {
+  background-color: darkgrey;
+  margin: 0;
+}
+
+.firstline {
+  border: 1px, solid, black;
+  background-color: gold;
+  height: 50px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.secondline {
+  border: 1px, solid, black;
+  background-color: gainsboro;
+  height: 50px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.contentline {
+  border: 1px, thick, black;
+  background-color: whitesmoke;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.text-align-center {
+}
+.wrapper {
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+}
