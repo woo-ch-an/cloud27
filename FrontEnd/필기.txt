@@ -122,7 +122,64 @@ Margin Collapsing -> 중첩된 마진에 대해서는 중첩을 시켜 큰 마�
 1001px이면 된다-> 드래그 해보면 뭔가 있음 
 
 
+260310 ㅎㅇㅎㅇ
+코드리뷰 -> 태그사용에 있어서 태그들은 명확히 구분된 역할을 수행해야한다
+p 태그 -> 단락구분용
 
+Verticla -> list 사용
+
+
+event 로 넘어가기
+a:hover, a:active 둘 다 설정시 둘 다 적용 가능함
+근데 active가 먼저 나오면 뒤의 hover만 적용되어 
+** 우선순위때문 
+
+(복습용)
+1. Inline  Style
+2. Internal Style
+3. External Style
+< 작성 순서에 따라도 우선순위가 나뉘어진다
+
+의사 요소 
+backdrop, after, before 를 가장 많이 사용하게 된다
+대화창 + 단락 앞에 문자추가 + 뒤에 추가 등등
+
+important -> 레벨 격상시켜줌 
+근데 important 또한 중복 시 
+기존의 우선순위로 사용된다
+
+float 사용시 display-block 해제됨
+옛날에 float를 이용해서 아이콘 등을 배치했다
+(지금 -> 아님)
+ㄴ 순서대로 배치되기 떄문에 순서에 유의 
+
+outline -> border  아님  !! 
+
+Absoult의 기준 -> Viewport
+Relative 의 기준 -> 나 
+정확하겐 off set기준
+* Relative의  부모 Element는 기존의 모습을 유지한다 
+
+offset 기준이 두 가지.                         [offset 기준]
+   1. position이 할당되지 않은 부모 태그 내부 ==>  View port
+   2. position이 relative 로 할당된 부모 태그 내부 ==> 부모태그 
+
+
+ㅎㅇㅎㅇ 0311 
+w3school 홈페이지 분석 & 설계
+마지막 여백은 유동적으로 움직이는 것을 보니 Margin으로 사용 
+좌측은 스크롤이 별도로 존재하며 마지막 footer부분에게 먹힘
+맨 위 List 들로 float 좌 우 로 놓은 듯 하다.
+(이름을 네비게이터라고 부른다 )
+
+HTML + CSS 의 실력 향상 방법 : clone
+clone 이란 ? (지금 하는거)
+* {
+  box-sizing: border-box;
+} << 모든 박스 사이즈를 맞춰놓음으로 작업하기 편리하게 함 
 
 ** Quiz ~
 block, inline, inline Blcok의 차이
+box Absoult, Static 의 차이
+
+
