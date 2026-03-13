@@ -48,6 +48,7 @@ img {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 9999;
 }
 
 .main-top-navigator {
@@ -162,6 +163,7 @@ img {
   width: 200px;
   overflow: auto;
   height: 100%;
+  z-index: 9999;
 }
 .fixed-side-area > h1 {
   margin: 20px 0px 0px 0px;

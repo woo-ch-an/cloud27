@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #555555;
+  margin: 0;
+}
+body > div > div {
+  height: 2.5rem;
+}
+.bodycontent {
+  margin: 0 20% 0 20%;
+  width: 60%;
+}
+.header {
+  border: 1px solid #f3bf0c;
+  width: 100%;
+  background-color: #fed50a;
+}
+
+.notice_board {
+  width: 100%;
+  border: 1px solid #cccccc;
+  background-color: #f7f7f7;
+}
+
+.content {
+  background-color: white;
+  width: 100%;
+}
+
+.content_title {
+  font-size: 1rem;
+}
+.viewcount {
+  color: red;
+}
+.content_type {
+  color: coral;
+}
+/* 줄긋기 */
+.line {
+  width: 1px;
+  height: 0.8rem;
+  background: #1111;
+  margin: 0 0.25rem;
+  display: inline-block;
+}
+
+.mail {
+  width: 70px;
+  height: 70px;
+  background-image: url("./naver_sprite.png"), url("./naver_sprite.png");
+  background-repeat: no-repeat, no-repeat;
+  background-size:
+    786px 780px,
+    786px 780px;
+  /* background-position: -264px -242px; */
+  background-position:
+    -352px -373px,
+    -269px -250px;
+}
+.logo {
+  position: absolute;
+  margin-left: 1rem;
+  width: 5rem;
+  height: 2.3rem;
+  background-image: url("./common.webp");
+  background-repeat: no-repeat;
+  background-size: 8rem, 7rem;
+  background-position: 0rem 0rem;
+}
+.header-wraper {
+  width: 100%;
+  position: relative;
+}
+
+.menus {
+  position: absolute;
+  width: 10rem;
+  right: 0;
+  text-align: right;
+}
+
+.menus > div {
+  display: inline-block;
+  vertical-align: center;
+}
+
+.boxicon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url("./boximg.png");
+  background-repeat: no-repeat;
+  background-size: 1.6rem, 1.6rem;
+  background-position: -0.01rem 0rem;
+}
+.my-pages {
+  width: 2rem;
+  height: 1.5rem;
+  background-image: url("./common.webp");
+  background-repeat: no-repeat;
+  background-size: 7rem, 5.6rem;
+  background-position: 0rem -2.05rem;
+}
+
+.edit {
+  width: 2rem;
+  height: 1.5rem;
+  background-image: url("./common.webp");
+  background-repeat: no-repeat;
+  background-size: 7rem, 5.6rem;
+  background-position: -2.1rem -2.05rem;
+}

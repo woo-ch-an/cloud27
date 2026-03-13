@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+.container {
+  font-size: 0px;
+}
+
+.item-a {
+  display: inline-block;
+  width: 50%;
+  border: 1px solid black;
+  font-size: 3rem;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.item-b {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  min-height: 6.25rem;
+  max-height: 12.5rem;
+  overflow: auto;
+  border: 0.016rem solid black;
+  font-size: 2rem;
+}

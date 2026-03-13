@@ -1,0 +1,35 @@
+.icon {
+  display: inline-block;
+}
+.mail {
+  width: 70px;
+  height: 70px;
+  background-image: url("./naver_sprite.png"), url("./naver_sprite.png");
+  background-repeat: no-repeat, no-repeat;
+  background-size:
+    786px 780px,
+    786px 780px;
+  /* background-position: -264px -242px; */
+  background-position:
+    -352px -373px,
+    -269px -250px;
+}
+.input-form {
+  padding: 10px;
+}
+
+.input-form > div > input {
+  padding: 10px;
+  margin-right: 5px;
+}
+
+.background {
+  width: 1000px;
+  height: 800px;
+  border: 1px solid #000;
+  background-image: url("./naver_sprite.png");
+  background-repeat: no-repeat;
+  background-size: 920px 912px;
+  background-position: 0px 0px;
+  /* h: 880px, w: 886px */
+}

@@ -1,0 +1,45 @@
+body {
+  background-color: white;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.header > div {
+  /* position: relative; */
+  display: inline-block;
+  vertical-align: top;
+}
+
+.logo {
+  /* position: absolute; */
+  width: 5%;
+  height: 1.5rem;
+  background-image: url("./mdn_logo.png");
+  background-repeat: no-repeat;
+  background-size: 4.4rem 1.5rem;
+  background-position: 0;
+}
+.header-menus {
+  /* position: absolute; */
+  width: 89%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0;
+}
+.header-menus > ul > li {
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.header-icons {
+  /* position: absolute; */
+  width: 5%;
+  height: 1.8rem;
+  background-image: url("./icons.png");
+  background-repeat: no-repeat;
+  background-size: 4rem 1.8rem;
+  background-position: 0;
+  right: 0;
+}

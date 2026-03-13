@@ -1,0 +1,10 @@
+.flex > li {
+  /* 아이템 최소 크기 지정 : 메인 축에 따라 가로 혹은 높이*/
+  flex-basis: 100px;
+  flex-shrink: 1;
+}
+
+.vertical {
+  flex-direction: column;
+  height: auto;
+}

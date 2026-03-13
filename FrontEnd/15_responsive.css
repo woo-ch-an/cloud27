@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  color: #333;
+  background-color: aliceblue;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 87.5rem;
+  margin: 0 auto;
+  font-size: 0;
+}
+
+.wrapper > .aside,
+.wrapper > .content,
+.wrapper > .help {
+  font-size: 1rem;
+  display: inline-block;
+  padding: 0.625rem;
+  vertical-align: top;
+}
+.wrapper > .aside,
+.wrapper > .help {
+  width: 12%;
+  background-color: #f7cbca;
+  height: 100%;
+}
+
+.wrapper > .content {
+  width: 76%;
+}
+.wrapper > .content > .tip {
+  background-color: #f5df4d;
+  font-size: 0.8rem;
+  border-left: 0.1875rem solid #ff7062;
+  padding: 0.5rem;
+  color: #333;
+  border-radius: 0.4375rem;
+}
+.wrapper > .aside {
+  min-width: 6rem;
+}
+.v-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.v-list > li {
+  padding: 0.625rem;
+}
+
+.box {
+  width: 5rem;
+  height: 5rem;
+  display: inline-block;
+  background-color: antiquewhite;
+  border-radius: 50%;
+}
+
+.ad {
+  height: 18.75rem;
+  background-color: #91a8d1;
+  margin-bottom: 0.625rem;
+}
+
+/* 
+태블릿용 스타일
+화면을 보고 있는 기기의 너비가 1280px 이하일 경우의 스타일 */
+@media (max-width: 800px) {
+  .wrapper {
+  }
+  .wrapper > .help {
+    display: block;
+    font-size: 0rem;
+
+    width: 100%;
+  }
+  .wrapper > .help > .ad {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    font-size: 1rem;
+    height: auto;
+    margin: 0;
+
+    & > p {
+      margin: 0;
+    }
+  }
+}
+
+/* 핸드폰 기준 화면크기 */
+@media (max-width: 440px) {
+  .wrapper {
+  }
+  .wrapper > .aside,
+  .wrapper > .content,
+  .wrapper > .help {
+    width: 100%;
+    display: block;
+  }
+
+  .wrapper > .aside > .v-list > li {
+    display: inline-block;
+  }
+
+  .wrapper > .content {
+    text-align: center;
+
+    padding-bottom: 0;
+    & > * {
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 0.625rem;
+    }
+    & > .tip {
+      display: none;
+    }
+  }
+
+  .wrapper > .help > .ad {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.625rem;
+  }
+  .wrapper > .help > .ad:last-child {
+    margin-bottom: 0;
+  }
+}

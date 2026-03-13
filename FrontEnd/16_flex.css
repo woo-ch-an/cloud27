@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+.flex {
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  /*  메인축 정렬
+  justify-content: space-evenly;
+  교차축 정렬
+  align-items: :stretch;
+   줄넘김 정렬
+  align-content : stretch; */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.set-border {
+  border: 1px black solid;
+}
