@@ -1,0 +1,466 @@
+body {
+  margin: 0px;
+  margin-top: 40px;
+  background-color: #18191b;
+}
+
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* 본문이 위로 올라올 때 헤더 밑으로 깔리게 해줌 */
+  background-color: #18191b;
+}
+
+/* 1. 상단 헤더 영역 */
+.mdn-header {
+  display: flex;
+  justify-content: space-between; /* 양 끝으로 밀어내기 */
+  align-items: center;
+  padding: 0 100px;
+  height: 64px;
+  border-bottom: 1px solid #333;
+}
+
+.mdn-header > .logo__image > .logo__letter {
+  fill: #a4cefe;
+}
+.mdn-header > .logo__image > .logo__text {
+  fill: #fff;
+}
+.mdn-header > .logo__image > .logo__cursor {
+  fill: #a4cefe;
+}
+
+/* 네비게이션 메뉴 */
+.main-nav {
+  display: flex;
+}
+
+.menu {
+  cursor: pointer;
+  display: flex;
+  color: #fff;
+  margin: 10px;
+  align-items: center;
+  gap: 4px; /* 양옆 margin 제외 */
+}
+
+.menu-tab-button,
+.menu-tab-button-graduation_cap,
+.menu-tab-button-wrench {
+  cursor: pointer;
+  display: inline-block; /* 너비와 높이를 가지면서 글자 옆에 나란히 오도록 설정 */
+  background-color: #fff; /* ⭐ 가장 중요! 마스크가 깎아낼 하얀색을 꼭 줘야 해 ⭐ */
+
+  /* 마스크 이미지 안 잘리고 가운데 예쁘게 오도록 설정 */
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.menu-tab-button {
+  mask-image: url('./mdn_img/chevron-down.svg');
+  width: 16px;
+  height: 16px;
+}
+
+.menu-tab-button-graduation_cap {
+  mask-image: url('./mdn_img/graduation-cap.svg');
+  width: 20px;
+  height: 20px;
+}
+
+.menu-tab-button-wrench {
+  mask-image: url('./mdn_img/wrench.svg');
+  width: 16px;
+  height: 16px;
+}
+
+/* 우측 검색 및 로그인 버튼 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 96px;
+  padding: 0 16px;
+  height: 36px;
+  background-color: transparent;
+  border: 1px solid #555;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.search-btn:hover {
+  background-color: #2b2b2b;
+  border-color: #888;
+}
+
+.search-hint {
+  width: 14px;
+  height: 2px;
+  background-color: #8cb4ff;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+.auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+}
+
+.auth-btn:hover {
+  background-color: #2b2b2b;
+  border-radius: 50%;
+}
+
+.icon-auth {
+  stroke: #fff; /* svg 선 테두리 --> color */
+}
+
+/* 3. 유틸리티 바 (탑 바, 서브 바) */
+.utility-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: #21252a;
+  border-top: 1px solid #858181;
+  border-bottom: 1px solid #858181;
+}
+
+.top-bar {
+  height: 20px;
+}
+.sub-bar {
+  height: 48px;
+}
+
+/* 브레드크럼 (현재 위치/경로)*/
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-left: 76px;
+}
+
+.breadcrumbs a {
+  color: #fff;
+  text-decoration: none;
+}
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs .separator {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-color: #fff;
+  mask-image: url('./mdn_img/chevron-right.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.breadcrumbs .current {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 테마/언어 설정 버튼 */
+.utilities {
+  display: flex;
+  gap: 16px;
+  margin-right: 80px;
+}
+
+.util-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.util-btn:hover {
+  background-color: #2b2b2b;
+}
+
+.icon-theme,
+.icon-lang {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-color: currentColor;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.icon-theme {
+  mask-image: url('./mdn_img/moon.svg');
+}
+.icon-lang {
+  mask-image: url('./mdn_img/languages.svg');
+}
+
+/* 4. 본문 레이아웃 (왼쪽 / 중앙 / 오른쪽) */
+/* 전체 래퍼 */
+.content-wrapper {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 72px;
+}
+
+/* 왼쪽 사이드바 */
+.sidebar-left {
+  width: 250px;
+  flex-shrink: 0; /* 화면이 좁아져도 250px 유지 */
+  padding: 24px;
+  border-right: 1px solid #333;
+  height: calc(100vh - 134px);
+  overflow-y: auto; /* 길어지면 스크롤바 생성 */
+  box-sizing: border-box;
+  position: sticky;
+  top: 134px;
+}
+
+/* 중앙 콘텐츠 */
+.main-content {
+  flex-grow: 1; /* 양옆 사이드바가 차지하고 남은 공간 꽉 채움 */
+  padding: 40px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* 오른쪽 목차 (In this article) */
+.sidebar-right {
+  width: 250px;
+  flex-shrink: 0; /* 250px 유지 */
+  padding: 0px 24px 24px 0;
+  height: calc(100vh - 134px);
+  box-sizing: border-box;
+  position: sticky;
+  top: 134px;
+}
+
+.filter-wrapper {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.filter-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%; /* 부모 상자의 절반만 내려와라 */
+  transform: translateY(-50%); /* 자기 자신의 키의 절반만큼 올려라 */
+  color: #ccc;
+}
+
+.sidebar-left-filter input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px 8px 36px;
+  background-color: transparent;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.sidebar-leftfilter input:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.sidebar-left-main_title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.sidebar-group {
+  margin-bottom: 16px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.sidebar-item:hover {
+  background-color: #2b2b2b;
+}
+
+.sidebar-item.active .item-text {
+  background-color: #19243b;
+  color: #8cb4ff;
+  border-left: 3px solid #8cb4ff;
+  border-radius: 0;
+  padding: 2px 6px;
+}
+
+/* 왼쪽 사이드 바 ">" */
+.toggle-icon {
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+  display: inline-block;
+  margin-right: 8px;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.arrow-right {
+  mask-image: url('./mdn_img/chevron-right.svg');
+}
+
+.sidebar-item.no-icon {
+  padding-left: 30px;
+}
+.lang-tag {
+  font-size: 12px;
+  font-weight: normal;
+  color: #ccc;
+  margin-left: 2px;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar-list li a {
+  display: block;
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 8px 6px 30px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.sidebar-list li a:hover {
+  background-color: #2b2b2b;
+  text-decoration: underline;
+}
+
+/* 6. 오른쪽 목차 (In this article) 스타일 */
+.sidebar-right-title {
+  font-size: 32px;
+  font-weight: 80;
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.sidebar-right-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 1px solid #333;
+}
+
+.sidebar-right-list li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 0 6px 16px;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+}
+
+.sidebar-right-list li a:hover {
+  color: #fff;
+}
+
+.sidebar-right-list li a.active {
+  color: #fff;
+  border-left-color: #8cb4ff;
+}
+
+/* --- 메인 본문 뼈대 --- */
+.main-content {
+  flex-grow: 1;
+  padding: 40px 48px;
+  color: #e5e7eb;
+  line-height: 1.6;
+  max-width: 900px;
+}
+
+/* --- 제목 디자인 --- */
+.main-content h1 {
+  font-size: 40px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
+.main-content h2 {
+  font-size: 28px;
+  margin-top: 48px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  color: #fff;
+}
+
+/* 글 중간중간에 들어가는 짧은 코드(`class`, `id` 등) 뱃지 스타일 */
+p code,
+td code {
+  background-color: #18191b;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, monospace;
+  color: #ecf4fe;
+}
+
+/* --- 표 (Table) 디자인 --- */
+.mdn-table {
+  width: 100%;
+  border-collapse: collapse; /* 표 테두리 두 줄로 나오는 거 한 줄로 */
+  margin-top: 16px;
+}
+
+.mdn-table td {
+  background-color: #262a2d;
+}
+
+.mdn-table th,
+.mdn-table td {
+  border: 1px solid #333;
+  padding: 12px;
+  text-align: left;
+}
+
+.mdn-table th {
+  background-color: #18191b;
+  color: #fff;
+}
