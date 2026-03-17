@@ -1,0 +1,87 @@
+/* input[type="text"] {
+  width: 100%;
+}
+input[type="number"] {
+  padding: 0.625rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem; 
+}
+input[type="text"] {
+  width: 100%;
+}
+input[type="number"] {
+  padding: 0.625rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem; 
+}
+
+input[type="number"]:focus {
+  outline: 0;
+  box-shadow: 0px 0px 1rem #0cc;
+}
+
+input[type="text"][maxlength] {
+  background-color: aqua;
+}
+
+input[type="text"][maxlength="20"] {
+  background-color: aqua;
+} */
+
+.grid {
+  display: grid;
+  row-gap: 0.625rem;
+  grid-template-columns: minmax(6.25rem, auto) 1fr;
+  align-items: center;
+}
+input[type="email"],
+input[type="password"] {
+  padding: 0.4rem 0.625rem;
+  outline: 0;
+}
+
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label {
+  display: inline-block;
+  padding: 0.3rem 0.625rem;
+  border: 1px solid black;
+}
+input[type="radio"]:checked + label {
+  color: red;
+  box-shadow: 1rem 1rem purple;
+  background-color: blue;
+  border: 1px solid white;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"] + label {
+  display: inline-block;
+  padding: 0.3rem 0.625rem;
+  border: 1px solid black;
+}
+input[type="checkbox"]:checked + label {
+  color: red;
+  box-shadow: 1rem 1rem purple;
+  background-color: blue;
+  border: 1px solid white;
+}
+select {
+  background-color: coral;
+  color: white;
+  border-radius: 0.6rem;
+  border: 1px solid coral;
+  box-shadow: 0.1rem 0.1rem rgb(195, 96, 60);
+}
+
+textarea {
+  padding: 0.625rem;
+  max-width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  min-height: 300px;
+  max-height: 400px;
+}

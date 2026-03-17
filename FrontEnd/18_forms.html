@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./18_forms.css" />
+  </head>
+  <body>
+    <div class="grid">
+      <label for="input_eamil">email</label>
+      <input id="input_eamil" type="email" />
+      <label for="input_password">password</label
+      ><input type="password" id="input_password" />
+
+      <label for="gender_male">gender</label>
+      <div>
+        <input type="radio" name="gender" id="gender_male" />
+        <label for="gender_male">male</label>
+        <input type="radio" name="gender" id="gender_female" />
+        <label for="gender_female">female</label>
+      </div>
+
+      <label>Path</label>
+      <div>
+        <input type="checkbox" name="locat" id="cb_insta" />
+        <label for="cb_insta">인스타</label>
+        <input type="checkbox" name="locat" id="cb_x" />
+        <label for="cb_x">엑스</label>
+        <input type="checkbox" name="locat" id="cb_intr" />
+        <label for="cb_intr">소개</label>
+        <input type="checkbox" name="locat" id="cb_youtube" />
+        <label for="cb_youtube">유튜브</label>
+        <input type="checkbox" name="locat" id="cb_ab" />
+        <label for="cb_ab">광고</label>
+      </div>
+
+      <label for="selector">Job</label>
+      <div>
+        <select id="selector">
+          <option>(선탞)</option>
+          <option value="">관련산업종사자</option>
+          <option value="">학생</option>
+          <option value="">직장인</option>
+          <option value="">일반인</option>
+          <option value="">주부</option>
+          <option value="">기타</option>
+        </select>
+      </div>
+
+      <label for="areatext">lastword</label>
+      <div>
+        <textarea id="areatext"></textarea>
+      </div>
+    </div>
+  </body>
+</html>

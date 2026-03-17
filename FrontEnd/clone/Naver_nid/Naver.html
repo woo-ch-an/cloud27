@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./Naver.css" type="text/css" />
+    <title>네이버 : 회원가입</title>
+  </head>
+  <body>
+    <div class="bodywraper">
+      <div class="form">
+        <div class="basic-info">
+          <div>
+            <input type="text" class="user_id" placeholder="아이디" />
+          </div>
+          <div>
+            <input type="password" class="user-pw" placeholder="비밀번호" />
+          </div>
+          <div>
+            <input
+              type="email"
+              class="user-email"
+              placeholder="[선택] 이메일주소"
+            />
+          </div>
+        </div>
+        <div class="personal-info">
+          <div><input type="text" class="user_name" placeholder="이름" /></div>
+          <div>
+            <input
+              type="text"
+              class="user_birthday"
+              placeholder="생년월일 8자리"
+              pattern="{0-9}[8]"
+            />
+          </div>
+          <div>
+            <input type="text" class="user_kt" placeholder="통신사선택" />
+          </div>
+
+          <div class="radios">
+            <div class="selectgender">
+              <input id="man" type="radio" name="gender" />
+              <label for="man">남자</label>
+              <input id="noman" type="radio" name="gender" />
+              <label for="noman">여자</label>
+            </div>
+            <div class="selectforize">
+              <input id="korean" type="radio" name="isforizeon" /><label
+                for="korean"
+                >내국인</label
+              >
+              <input id="nokor" type="radio" name="isforizeon" /><label
+                for="nokor"
+                >외국인</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="tel-info">
+          <input
+            type="tel"
+            placeholder="전화번호"
+            pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+          />
+        </div>
+        <div class="agreemenet-info">
+          <input id="agree" type="checkbox" />
+          <label for="agree">
+            <span>[필수]</span>
+            인증 약관 전체동의
+          </label>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

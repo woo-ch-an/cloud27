@@ -70,8 +70,6 @@ body {
 태블릿용 스타일
 화면을 보고 있는 기기의 너비가 1280px 이하일 경우의 스타일 */
 @media (max-width: 800px) {
-  .wrapper {
-  }
   .wrapper > .help {
     display: block;
     font-size: 0rem;
@@ -94,8 +92,6 @@ body {
 
 /* 핸드폰 기준 화면크기 */
 @media (max-width: 440px) {
-  .wrapper {
-  }
   .wrapper > .aside,
   .wrapper > .content,
   .wrapper > .help {
