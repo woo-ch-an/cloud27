@@ -14,13 +14,19 @@ String.prototype.contains = function (findtext) {
 
 // print 기능 추가
 Object.prototype.print = function () {
-  console.log("돌려돌려돌림판이젠 나의 보너스 타임");
+  // console.log("돌려돌려돌림판이젠 나의 보너스 타임");
 };
 var tempObj = {};
 tempObj.print();
 console.dir(tempObj);
 
 window.onload = function () {
+  var v = document.querySelector("input[type=text]");
+  console.log("asd" + v);
+
+  v.value = "asd";
+
+
   var text = "abhfgasdhfba jaksefbajeksbg";
 
   console.log(String);
@@ -41,6 +47,7 @@ window.onload = function () {
     tagName: "li", text: "first", class: "list-item"
   }, { tagName: "li", text: "second", class: "list-item" }, { tagName: "li", text: "third", class: "list-item" }, { tagName: "li", text: "fouth", class: "list-item" }
   ];
+
 
   for (var i = 0; i < listItems.length; i++) {
     var item = listItems[i];

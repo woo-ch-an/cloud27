@@ -223,7 +223,105 @@ jQuery 조금만알아도 금방쓸 수 있어서 잘씀
 26년 초 마참내 ECMA Online 
 
 
+ㅎㅇㅎㅇ 0320
+제이쿠ㅓ리 등장
+* window.jQuery인ㄷㅔ 윈도우 생략 가능
+** jQuery 를 $로 대체 가능함
 
+      window.onload = function () { 
+      var h1 = document.querySelector("h1"); 
+      console.log(h1.innerText); 
+      h1.innerText = "What do you want to do?"
+      }; 
+-> 이런 내용이
+      jQuery(document).ready(function () { 
+            var h1 = $("h1");
+            console.log(h1.text());
+            h1.text("What do you want to do");
+      });
+
+-> 
+      $(document).ready(function () { 
+            var h1 = $("h1");
+            console.log(h1.text());
+            h1.text("What do you want to do");
+      });
+-> 
+      $().ready(function () {
+            var h1 = $("h1");
+            console.log(h1.text());
+            h1.text("What do you want to do");
+      });
+->
+      $(function () { 
+            console.log($("h1").text());
+            $("h1").text("What do you want to do");
+      });
+
+이렇게 줄어듬 ;
+
+
+window.onload = function () {
+    var listItems = document.querySelectorAll("li");
+    console.log(listItems);
+    for (var i = 0; i < listItems.length; i++) {
+        listItems[i].innerText = "Seoul";
+    }
+};
+-> $(function () {
+    $("li").text("Seoul");
+})
+
+??
+
+pseudo Classes 
+정보) JQuery 는 셀렉팅이 핵심이고 
+
+    $("#destinations > li:nth-child(2)").text("Gyoung ju"); 
+    CSS랑 똑같이 사용 가능함
+
+검색이 좀 느림
+(css 셀렉 자체가 느려서 )
+를 대체하기 위한 
+
+DOM Traversing
+좀 작성할게 많지만 월등하게 빠르게 찾아오기 가능
+쉽게보는 예제
+$("li:fisrt-child");
+$("li").first();
+에서 아래 방식이 더욱 빠르다
+
+first last next prev 같은게 있는데 별로 안쓰인다
+
+많이쓰이는거 : ~의 부모에게 ~적용(찾기)
+parent(); 를 사용ㅎㅏㅁ 2
+랑 자식찾기
+children();
+
+근데 부모.find(자식) 이랑 부모.children();이랑 뭐가 다를까
+find(자식) -> desandeant 
+children(태그) -> 직속 자식만 
+
+
+일반 객체들은 Jquery함수 적용이 안되기 떄문에
+앵간하면 객체 셀렉할 때 $() 로 감싸서 쿼리로 사용할수 있도록 하자
+
+굉장히 쉬운뭐 그렇다고 볼 수 있ㄱ겠습니다 ~
+
+DOM 다루기.
+
+before -> 형제중 형이됨
+after -> 형제중 막내가 됨
+prepend -> 젤 앞에 붙인다 (첫째 자식이 되고) 
+append -> 젤 아래 붙인다 (막내가 됨)
+
+append는 많이 사용함
+
+* 정보 remove() 는 dom tree에서 완전 제거라
+이후 조회에 대해서는 암것도 안댐
+detach -> dom tree는 제거 안하고 화면에서만 빼는데 안씀
+
+closest() 기준으로부터 가장 인접한 부모를 찾아감
 
 Quiz
 > window.onload??

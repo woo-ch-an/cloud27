@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>jQuery Adventures</title>
+    <link rel="stylesheet" href="./ch04.css" /><script type="text/javascript" src="./jquery-4.0.0.slim.min.js"></script>
+    <script type="text/javascript" src="./ch04.js"></script>
+  </head>
+  <body>
+    <!-- contact 를 클릭하면 이전 형제태그 의 자식 중 패키지 딜 코멘트 태그의 내용을 출력-->
+    <h1 class="title">Vacation Packages</h1>
+    <h4 class="sub-title">jQuery Travels</h4>
+
+    <div class="package">
+      <h2 class="package-title">Hawaiian Vacation</h2>
+      <ul class="package-deal">
+        <li class="package-deal-comment-title">Comments on this deal:</li>
+        <li class="package-deal-comment">"Amazing Deal!"</li>
+        <li class="package-deal-comment">"Can't wait to take this trip</li>
+      </ul>
+
+      <div class="package-button-area">
+        <!-- <p> from $399.99  ~ 를 버튼 바깥 아래쪽에 배치시킨다 -->
+        <button class="package-green-button">GET PRICE</button>
+
+        <button class="add-license" type="button">자격증 추가</button>
+      </div>
+    </div>
+
+    <div class="contact">
+      Call us at 1-555-jquery-air to make a reservation today!
+    </div>
+  </body>
+</html>
