@@ -426,6 +426,38 @@ setInterval(function() {} , 1000); 1초주기로 계속반복
 setInterval(function() {
     console.log(fechProm);
 }, 100); 
+ 
+
+반복문안에서 이벤트 줄 때 뭐 암튼 그거 해결방법
+1. 이벤트 사용
+2. 즉시실행함수 사용
+
+ㅎㅇㅎㅇ 0324
+
+속성 = 속성이름: 값; 
+근데 값없이 속성이름만 있으면 프로퍼티라고 불른당
+prop("checked", true) <- 체크 프로퍼티 추가 / false하면 삭제겠죠 ?
+
+input 초기값 : value , 뒤에 흐릿하게 보이는거 : placeholder 
+select 의 option 에 보면 value가 있는데 위 초기값같은 value가 아니라 통신에 사용하는 value라 고 보면된다 
+
+input 라디오박스나 체크박스등에 ID 가 있는 이유 : label땜에
+여기 value또한 위 옵션과 같은 이유
+
+value 값 갖고 뭐 하는거 : form tag 의 공통적 기능
+
+value 가 없다면 Text가 나오고 있으면 Value값이나옴
+없는 value 선택하면 뭐 없음
+
+정리 [input]) 
+Vanilla -> value 를 get element.value
+            value set   element.set = "";
+jQuery ->   element.val();
+            element.val("");
+
+성능 문제는 코딩하는거보단 덜함
+CPU가 아니라 GPU 를 사용하는 체계다보니 ( web browser )
+
 
 
 Quiz
