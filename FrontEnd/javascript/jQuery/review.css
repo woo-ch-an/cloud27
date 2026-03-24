@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+.wrapper{
+    width: 40rem;
+    margin : 0 auto;
+    padding: auto;
+    background-color:#eee;
+    border:1px solid black;
+
+}
+.head-buttons{
+    padding: 0.625rem;
+
+    & > button{
+        margin: 0.625rem;
+    }
+}
+
+.item-list-division{ 
+    min-height: 3rem;
+    margin : 0 auto;
+    padding: auto;
+    border:1px solid black;
+}
+
+.text-lable{
+    text-align: center; 
+&>div{
+    margin : 1rem 0.625rem;
+
+        border:1px solid black;
+}
+}
+
+.item-lists{
+
+    list-style-type: none;
+    text-align: center;
+    border : 1px solid black;
+    margin:0.1rem 0.625rem;
+
+
+    &:hover {
+        color:wheat;
+        background-color: #333;
+    }
+}

@@ -24,6 +24,8 @@ body {
 
   & > li {
     margin: 10px 0;
+    font-weight: 400;
+    font-size : 1rem;
 
     & > .body {
       display: none;

@@ -9,9 +9,9 @@ $(function () {
 })
 
 
-// window.onload = function () {
-//     var listItems = document.querySelectorAll("li"); 
-//     for (var i = 0; i < listItems.length; i++) {
-//         listItems[i].innerText = "Seoul";
-//     }
-// };
+window.onload = function () {
+    var listItems = document.querySelectorAll("li");
+    for (var i = 0; i < listItems.length; i++) {
+        listItems[i].innerText = "Seoul";
+    }
+};

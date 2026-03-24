@@ -1,4 +1,11 @@
 $(function () {
+    // 첨에 존재했던 DOM(button-area)를 통해 
+    // 새롭게 생성된 p.whitecolor에게 ㅔClick이벤트 주기
+    $(".package-button-area").on("click", "p.white-color", function () {
+        alert($(this).text())
+
+    });
+
     $(".contact").on("click", function () {
         // console.log($(this).prev().find(".package-deal-comment").text());
         $(this)
@@ -20,11 +27,10 @@ $(function () {
         newp.addClass("white-color");
 
         newp.text("From $" + priceData);
+        // newp.on("click", function () {
+        //     alert($(this).text());
+        // })
         $(this).after(newp);
-
-
         $(this).remove();
-
-
     });
 })
