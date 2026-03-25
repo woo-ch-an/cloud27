@@ -1,0 +1,5 @@
+INDEX VERSION 1.134
+/Users/woochan/Documents/sts_workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1863281164.index
+/test/src/main/java
+/Users/woochan/Documents/sts_workspace/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/714540857.index
+/hello-spring/src/main/java

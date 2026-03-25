@@ -1,0 +1,12 @@
+# spring.application.name=hello-spring
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  application:
+    url: jdbc:oracle:thin@localhsot:1521:XE
+    driver-class-name: oracle.jdbc,driver.OracleDriver
+    username: SPRING_BOOT
+    password: 1234
+    name: hello-spring
