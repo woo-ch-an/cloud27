@@ -1,6 +1,8 @@
-package com.ktdsuniversity.edu.members.vo;
+package com.ktdsuniversity.edu.board.vo.response;
 
 import java.util.List;
+
+import com.ktdsuniversity.edu.board.vo.BoardVO;
 
 /**
  * 게시글 검색 결과를담고있는 클라ㅣ스

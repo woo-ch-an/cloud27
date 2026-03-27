@@ -1,4 +1,4 @@
-package com.ktdsuniversity.edu.members.vo;
+package com.ktdsuniversity.edu.board.vo;
 
 public class BoardVO {
 	private String id;

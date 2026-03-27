@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ktdsuniversity.edu.members.vo.BoardVO;
+import com.ktdsuniversity.edu.board.vo.BoardVO;
+import com.ktdsuniversity.edu.board.vo.request.WriteVO;
 
 @Mapper
 public interface BoardDao {
@@ -12,5 +13,13 @@ public interface BoardDao {
 	int selectBoardCount();
 
 	List<BoardVO> selectBoardList();
+
+	int insertNewBoard(WriteVO writeVO);
+
+	BoardVO selectBoardById(String articleId);
+
+	int updateViewCntIncreaseById(String articleId);
+
+	int deleteArticleByArticlId(String id);
 
 }
