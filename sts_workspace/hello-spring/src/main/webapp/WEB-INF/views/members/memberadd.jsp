@@ -20,7 +20,7 @@
 		<input type="password" id="password" name="password" placeholder="password" /> 
 	
         <div class="btn-group">
-			<div class="right-align">
+			<div class="right-align"> 
 				<input type="submit" value="제출" />
 			</div>
 		</div> 

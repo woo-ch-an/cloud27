@@ -247,7 +247,19 @@ DAO 쿼리
 ƒ(x) -> y;
 
 ㅎㅇㅎㅇ 0327
-
+private String movieId;
+	private String title;
+	private String movieRating;
+	private String openDate;
+	private String openCountry;
+	private int runningTime;
+	private String introduce;
+	private String sysnopsis;
+	private String originalTitle;
+	private String state;
+	private String language;
+	private int budget;
+	private int profit;
 
 
 

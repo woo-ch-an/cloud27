@@ -22,5 +22,9 @@ public class MemberVO {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	@Override
+	public String toString() {
+		return "MemberVO [email=" + email + ", name=" + name + ", password=" + password + "]";
 	}  
 }

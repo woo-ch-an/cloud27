@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ktdsuniversity.edu.board.enums.ReadType;
 import com.ktdsuniversity.edu.board.service.BoardService;
 import com.ktdsuniversity.edu.board.vo.BoardVO;
+import com.ktdsuniversity.edu.board.vo.request.UpdateVO;
 import com.ktdsuniversity.edu.board.vo.request.WriteVO;
 import com.ktdsuniversity.edu.board.vo.response.SearchResultVO;
 
@@ -69,7 +71,7 @@ public class BoardController {
 
 		System.out.print("start ~~~" + articleId);
 		
-		BoardVO findResult = this.boardService.findBoardByArticleId(articleId);
+		BoardVO findResult = this.boardService.findBoardByArticleId(articleId, ReadType.VIEW);
 		System.out.print("Result ~~~" + findResult);
 
 		model.addAttribute("article", findResult);
@@ -78,11 +80,33 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete")
-	public String doDeleteAction(@RequestParam String id) {
+	public String doDeleteArticleAction(@RequestParam String id) {
 		
-		// Delete 
-		boolean deleteResult = this.boardService.deleteBoardByArticleId(id);  
+		// Delete  
+		this.boardService.deleteBoardByArticleId(id);  
 		
 		return "redirect:/";
 	}
+	
+	@GetMapping("/update/{articleId}")
+	public String viewUpdatePage(Model model, @PathVariable String articleId) {
+		BoardVO data = this.boardService.findBoardByArticleId(articleId, ReadType.UPDATE);
+
+		model.addAttribute("article", data);
+		
+		return "board/update";
+	}
+	
+	@PostMapping("/update/{articleId}")
+	public String doUpdateAction(@PathVariable String articleId,  UpdateVO updateVO) {
+		
+		updateVO.setId(articleId);
+		
+		boolean updateResult = this.boardService.updateBoardByArticleId(updateVO); 
+
+		System.out.println("수정 성공 ? " + updateResult);
+		
+		return "redirect:/view/" + articleId;
+	}
+	
 }
