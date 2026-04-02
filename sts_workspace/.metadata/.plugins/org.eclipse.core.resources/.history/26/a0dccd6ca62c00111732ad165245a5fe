@@ -1,0 +1,7 @@
+package com.ktdsuniversity.edu.files.service;
+
+public class FilesServiceImpl implements FilesService {
+	@AutoWired
+	private FilesDao filesDao;
+
+}

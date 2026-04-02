@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/hello-spring.css" type="text/css"/>
+<title>게시글 조회 : 게시글 아이디</title>
+</head>
+<body>
+<h1> 게시글 내용 조회</h1>
+<div class="grid view"> 
+    <span> 아이디 </span>
+    <div>게시글의 아디 </div>
+
+        <span> 제목 </span>
+    <div>게시글의 제목 </div>
+
+    <span> 이메일 </span>
+    <div>게시글의 이메일 </div>
+
+    <span> 조회수  </span>
+    <div>게시글의 조회수  </div>
+</div>
+</body>
+</html>

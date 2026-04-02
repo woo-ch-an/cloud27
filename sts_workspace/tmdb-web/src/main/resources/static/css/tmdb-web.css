@@ -21,7 +21,7 @@ a:active{
 /* Start grid style */
 div.gird{
     display:grid; 
-
+    align-items:center;
     & > div.btn-group {
         grid-column: 1/-1;
 
@@ -45,10 +45,9 @@ div.gird{
 /* Start write content style */
 div.write{
     grid-template-columns: 10rem 1fr; 
-    row-gap: 0.625rem;
+    row-gap: 0.625rem; 
 }
-/* End write content style */
-
+/* End write content style */ 
 .wrapper{
     margin : 0.625rem 10rem;
 }

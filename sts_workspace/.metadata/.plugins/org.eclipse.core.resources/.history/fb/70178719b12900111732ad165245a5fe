@@ -1,0 +1,61 @@
+@charset "UTF-8";
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    color:#333;
+}
+
+/* Start grid style */
+div.gird{
+    display:grid;
+    background-color: blue;
+
+    & > div.btn-group {
+        grid-column: 1/-1;
+
+        & > div.right-align {
+            text-align: right; 
+        }
+    }
+
+    & > label{
+        padding-left:0.625rem;
+    }
+
+    & input,
+    & button,
+    & textarea {
+        padding: 0.625rem;
+    }
+} 
+/* End grid style*/
+
+/* Start write content style */
+div.write{
+    grid-template-columns: 5rem 1fr;
+    grid-template-rows: 1.75rem 1.75rem 20rem;
+    row-gap: 0.625rem;
+}
+/* End write content style */
+
+/* Start regist Style */
+div.regist{  
+    margin : 0.625rem 10rem; 
+    row-gap:0.625rem; 
+    flex-basis: 20rem;
+}
+
+/* End regist Style */
+
+/* Start view article style */
+div.view{
+    grid-template-columns:  7.5rem 1fr;
+    grid-template-rows: repeat(8, minmax(1.75rem, auto));
+    row-gap: 0.625rem;
+}
+
+
+/* End view article style */

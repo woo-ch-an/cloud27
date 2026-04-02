@@ -1,0 +1,12 @@
+package com.ktdsuniversity.edu.members.service;
+
+import com.ktdsuniversity.edu.members.vo.MemberVO;
+import com.ktdsuniversity.edu.members.vo.response.SearchMemberResultVO;
+
+public interface MembersService {
+
+	boolean createNewMember(MemberVO memberVo);
+
+	boolean SearchMemberResultVO findAllMembers(); 
+
+}

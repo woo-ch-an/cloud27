@@ -1,7 +1,6 @@
 package com.ktdsuniversity.edu.board.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import com.ktdsuniversity.edu.board.vo.request.UpdateVO;
 import com.ktdsuniversity.edu.board.vo.request.WriteVO;
 import com.ktdsuniversity.edu.board.vo.response.SearchResultVO;
 import com.ktdsuniversity.edu.files.dao.FilesDao;
-import com.ktdsuniversity.edu.files.vo.request.UploadVO;
+import com.ktdsuniversity.edu.files.helpers.MultipartFileHandler;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -24,8 +23,11 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao;
 	
 	@Autowired
+	private MultipartFileHandler multipartFileHandler;
+	
+	@Autowired
 	private FilesDao filesDao;
-
+	 
 	@Override
 	public SearchResultVO findAllBoard() {
 		SearchResultVO result = new SearchResultVO();
@@ -54,39 +56,8 @@ public class BoardServiceImpl implements BoardService {
 
 		// 첨부파일 업 로 드
 		List<MultipartFile> attachFiles = writeVO.getAttachFile();
-
-		if (attachFiles != null && attachFiles.size() > 0) {
-			for (int i = 0; i < attachFiles.size(); i++) {
-				// for (MultipartFile uploadedFile : attachFiles) { index 없는 버 전
-				// 업로드한 파일이 서버컴푸타의 파일 시스템에 저장되도록한 다
-				File storeFile = new File("/Users/woochan/Documents/sts_workspace/UploadTest",
-											attachFiles.get(i).getOriginalFilename());
-				if (!storeFile.getParentFile().exists()) {
-					storeFile.getParentFile().mkdirs();
-				}
-				try {
-					attachFiles.get(i).transferTo(storeFile);
-					// File 테이블에 첨부파일 데이터 Insert [파일이 있고, 업로드 성공시]
-					UploadVO uploadVO = new UploadVO();
-					String fileName = attachFiles.get(i).getOriginalFilename();
-					String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
-					
-					uploadVO.setFileNum(i);
-					uploadVO.setFileGroupId(writeVO.getId()); // 새롭게 등록되고있는 게시글의 ID는 알 수 없음 (자동생성이라) -> 이제 암
-					uploadVO.setObfuscateName(fileName); // 난독화 ㄴㄴ ; 
-					uploadVO.setDisplayName(fileName);
-					uploadVO.setExtendName(ext);
-					uploadVO.setFileLength(storeFile.length());
-					uploadVO.setFilePath(storeFile.getAbsolutePath());
-					this.filesDao.insertAttachFile(uploadVO);
-					
-				} catch (IOException | IllegalStateException e) {
-					e.printStackTrace();
-				}
-
-			}
-		}
-
+		this.multipartFileHandler.upload(attachFiles, writeVO.getId());
+		
 		System.out.print("생성된 게시글의 개수 : " + insertCount);
 
 		return insertCount == 1;
@@ -110,19 +81,52 @@ public class BoardServiceImpl implements BoardService {
 		return boardVariableObject;
 	}
 
-	@Override
-	public boolean deleteBoardByArticleId(String id) {
-
-		int deleteCount = this.boardDao.deleteArticleByArticlId(id);
-
-		return deleteCount == 1;
-	}
 
 	@Override
 	public boolean updateBoardByArticleId(UpdateVO updateVO) {
 		int updateCount = this.boardDao.updateBoardById(updateVO);
+		
+		if( updateVO.getDeleteFileNum() != null && 
+				updateVO.getDeleteFileNum().size() > 0) { 
+		// 선택 파일 삭제 필요한거 -> 파일경로 -> 파일제거 + DB 제거
+		List<String> deleteTargets = this.filesDao.selectFilePathByFileGroupIdAndFileNums(updateVO);
+		// 선택한거 경로가서 지우기 		
+		for(String target : deleteTargets){
+			new File(target).delete();
+		}
+		// 선택한거 DB가서 지우기 
+		int deleteCount = this.filesDao.deleteFilesByFileGroupIdAndFileNums(updateVO);
+		System.out.print("삭제한 파일 데이터 수 " + deleteCount);
+		}
+		// 첨부파일 업 로 드
+		List<MultipartFile> attachFiles = updateVO.getAttachFile();
+		
+		// 기존의 첨부파일 삭제  <-- 이거아님
+		// this.filesDao.deleteFilesById(updateVO.getId());
+		 
+		this.multipartFileHandler.upload(attachFiles, updateVO.getId());
+		
 
+		
 		return updateCount == 1;
 	}
 
+	public boolean deleteBoardByArticleId(String id) {
+		// 게시글 지울 때 안에 있는 첨부파일도 같이 지우깅 
+		// 1. 삭제 하려는 게시글에 첨부된 파일을 가져온다
+		List<String> filePaths = this.filesDao.selectFileByFileGroupId(id);
+		// 2. 파일 목록이 존재하면 모든 파일 제거
+		if(filePaths != null && filePaths.size() > 0) {
+			for(String path : filePaths)
+			new File(path).delete();
+		}
+		
+		// 3. 파일 목록 제거하고 fILES 테이블에서 파일 정보 모두 삭제
+
+		int deleteCount = this.filesDao.deleteFilesByFileGroupId(id);
+		
+		
+		
+		return deleteCount ==1;
+	}
 }

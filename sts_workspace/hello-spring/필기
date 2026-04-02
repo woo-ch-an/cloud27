@@ -254,7 +254,7 @@ private String movieId;
 	private String openCountry;
 	private int runningTime;
 	private String introduce;
-	private String sysnopsis;
+	private String synopsis;
 	private String originalTitle;
 	private String state;
 	private String language;

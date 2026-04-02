@@ -1,0 +1,59 @@
+package com.ktdsuniversity.edu.files.helpers;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.ktdsuniversity.edu.files.dao.FilesDao;
+import com.ktdsuniversity.edu.files.vo.request.UploadVO;
+
+@Component
+public class MultipartFileHandler {
+
+	@Autowired
+	private FilesDao filesDao;
+
+	public void upload(List<MultipartFile> attachFiles, String fileGroupId) {
+
+		if (attachFiles != null && attachFiles.size() > 0) {
+			for (int i = 0; i < attachFiles.size(); i++) {
+				// for (MultipartFile uploadedFile : attachFiles) { index 없는 버 전
+				if(attachFiles.get(i).isEmpty()) {
+					continue;
+				}
+				String obfuscateName = UUID.randomUUID().toString();
+
+				// 업로드한 파일이 서버컴푸타의 파일 시스템에 저장되도록한 다
+				File storeFile = new File("/Users/woochan/Documents/sts_workspace/UploadTest", obfuscateName);
+				if (!storeFile.getParentFile().exists()) {
+					storeFile.getParentFile().mkdirs();
+				}
+				try {
+					attachFiles.get(i).transferTo(storeFile);
+					// File 테이블에 첨부파일 데이터 Insert [파일이 있고, 업로드 성공시]
+					UploadVO uploadVO = new UploadVO();
+					String fileName = attachFiles.get(i).getOriginalFilename();
+					String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+					uploadVO.setFileGroupId(fileGroupId); // 새롭게 등록되고있는 게시글의 ID는 알 수 없음 (자동생성이라) -> 이제 암
+					uploadVO.setObfuscateName(obfuscateName); // 난독화 ㄴㄴ ;
+					uploadVO.setDisplayName(fileName);
+					uploadVO.setExtendName(ext);
+					uploadVO.setFileLength(storeFile.length());
+					uploadVO.setFilePath(storeFile.getAbsolutePath());
+					this.filesDao.insertAttachFile(uploadVO);
+
+				} catch (IOException | IllegalStateException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+	}
+}

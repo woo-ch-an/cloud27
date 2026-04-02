@@ -1,0 +1,14 @@
+package com.ktdsuniversity.edu.members.vo;
+
+public class BoardVO {
+	private String id;
+	private String subject;
+	private String content;
+	private String email;
+	private int view_cnt;
+	private String crt_dt;
+	private String mdfy_dt;
+	private String file_name;
+	private String origin_file_name;
+
+}

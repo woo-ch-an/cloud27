@@ -1,0 +1,25 @@
+package com.ktdsuniversity.edu.board.vo.request;
+
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class UpdateVO extends WriteVO{
+
+	private String id; // UPDATE - WHERE절에 사용할거임 
+
+	private List<MultipartFile> attachFile; // 파일 첨부용
+	
+	public List<MultipartFile> getAttachFile() {
+		return this.attachFile;
+	}
+	public void setAttachFile(List<MultipartFile> attachFile) {
+		this.attachFile = attachFile;
+	}
+	public String getId() {
+		return this.id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}  
+}

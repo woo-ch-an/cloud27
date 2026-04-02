@@ -1,0 +1,14 @@
+package com.ktdsuniversity.edu.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+
+// Application.yml 에서 작성할 수 없는 설정들을 적용하기위한 @Configuration ,
+@Configuration
+@EnableWebMvc
+public class HelloSpringConfiguration implements WebMvcConfigurer{
+	
+
+}

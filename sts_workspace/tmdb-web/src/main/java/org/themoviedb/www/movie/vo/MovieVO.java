@@ -1,6 +1,8 @@
 package org.themoviedb.www.movie.vo;
 
-public class MovieVO {
+import org.springframework.web.multipart.MultipartFile;
+
+public class MovieVO { 
 	private String movieId;
 	private String posterUrl;
 	private String title;
@@ -9,24 +11,40 @@ public class MovieVO {
 	private String openCountry;
 	private int runningTime;
 	private String introduce;
-	private String sysnopsis;
+	private String synopsis;
 	private String originalTitle;
 	private String state;
 	private String language;
 	private int budget;
 	private int profit;
-	public String getPosterUrl() {
-		return this.posterUrl;
-	}
-	public void setPosterUrl(String posterUrl) {
-		this.posterUrl = posterUrl;
-	}
+
+	private MultipartFile attachFile;
+	
+	  
 	public String getMovieId() {
 		return this.movieId;
 	}
 	public void setMovieId(String movieId) {
 		this.movieId = movieId;
 	}
+	public String getOpenDate() {
+		return this.openDate;
+	}
+	public void setOpenDate(String openDate) {
+		this.openDate = openDate;
+	}
+	public MultipartFile getAttachFile() {
+		return this.attachFile;
+	}
+	public void setAttachFile(MultipartFile attachFile) {
+		this.attachFile = attachFile;
+	}
+	public String getPosterUrl() {
+		return this.posterUrl;
+	}
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	} 
 	public String getTitle() {
 		return this.title;
 	}
@@ -38,12 +56,6 @@ public class MovieVO {
 	}
 	public void setMovieRating(String movieRating) {
 		this.movieRating = movieRating;
-	}
-	public String getOpenDate() {
-		return this.openDate;
-	}
-	public void setOpenDate(String openDate) {
-		this.openDate = openDate;
 	}
 	public String getOpenCountry() {
 		return this.openCountry;
@@ -63,11 +75,11 @@ public class MovieVO {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	public String getSysnopsis() {
-		return this.sysnopsis;
+	public String getSynopsis() {
+		return this.synopsis;
 	}
-	public void setSysnopsis(String sysnopsis) {
-		this.sysnopsis = sysnopsis;
+	public void setSynopsis(String sysnopsis) {
+		this.synopsis = sysnopsis;
 	}
 	public String getOriginalTitle() {
 		return this.originalTitle;
@@ -101,9 +113,9 @@ public class MovieVO {
 	}
 	@Override
 	public String toString() {
-		return "MovieVO [movieId=" + movieId + ", posterUrl=" + posterUrl + ", title=" + title + ", movieRating="
+		return "MovieVO [ posterUrl=" + posterUrl + ", title=" + title + ", movieRating="
 				+ movieRating + ", openDate=" + openDate + ", openCountry=" + openCountry + ", runningTime="
-				+ runningTime + ", introduce=" + introduce + ", sysnopsis=" + sysnopsis + ", originalTitle="
+				+ runningTime + ", introduce=" + introduce + ", sysnopsis=" + synopsis + ", originalTitle="
 				+ originalTitle + ", state=" + state + ", language=" + language + ", budget=" + budget + ", profit="
 				+ profit + "]";
 	} 

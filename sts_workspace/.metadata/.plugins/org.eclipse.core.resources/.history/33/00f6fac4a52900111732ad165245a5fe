@@ -1,0 +1,62 @@
+package com.ktdsuniversity.edu.board.web;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.ktdsuniversity.edu.board.service.BoardService;
+import com.ktdsuniversity.edu.board.vo.BoardVO;
+import com.ktdsuniversity.edu.board.vo.request.WriteVO;
+import com.ktdsuniversity.edu.board.vo.response.SearchResultVO;
+
+@Controller
+public class BoardController {
+	/**
+	 * 빈 컨테이너에 들어있는 객체 중 타입이 일치하는 객체를 할당받는다.
+	 */
+	@Autowired
+	private BoardService boardService;
+
+	@GetMapping("/")
+	public String viewListPage(Model model) {
+		
+		SearchResultVO searchResult = this.boardService.findAllBoard();
+		// 게시글 목록, 갯수 조회 하고 싶 다 
+		
+		// 게시글 목록을 조회
+		List<BoardVO> list = searchResult.getResult();		
+		int searchCount = searchResult.getCount();
+		
+		model.addAttribute("searchResult", list);
+		model.addAttribute("searchCount", searchCount);
+		
+		return "board/list";
+	}
+	/**
+	 *   게시글 등록하는 화면 보여주는 Endpoint 
+	 */
+	@GetMapping("/write")
+	public String viewWritePage() {
+		return "board/write";
+	}
+	
+	@PostMapping("/write")
+	public String doWriteAction(@ModelAttribute WriteVO writeVO) {
+		System.out.print("consolewirte"+writeVO.getContent());
+		System.out.print(writeVO.getEmail());
+		System.out.print(writeVO.getSubject());
+		
+		//create, update, delete 성공 실패 여부 반환 필요
+		boolean createResult = this.boardService.createNewBoard(writeVO);
+	
+		System.out.println("게시글성공 ? " + createResult);
+		
+		return "redirect:/";
+	}
+	
+}

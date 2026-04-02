@@ -1,0 +1,8 @@
+package com.ktdsuniversity.edu.files.helpers;
+
+public class MultipartFileHandler {
+	
+	public void upload() {
+		
+	}
+}

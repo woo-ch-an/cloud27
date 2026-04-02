@@ -1,0 +1,21 @@
+package com.ktdsuniversity.edu.members.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ktdsuniversity.edu.members.dao.MembersDao;
+import com.ktdsuniversity.edu.members.vo.MemberVO;
+
+public class MembersServiceImpl {
+
+	@Autowired
+	private MembersDao membersDao;
+	
+
+	@Override
+	public boolean createNewMember(MemberVO memberVO) { 
+		int insertCount = this.membersDao.insertNewBoard(memberVO); 
+		
+		return insertCount==1; 
+	}
+
+}

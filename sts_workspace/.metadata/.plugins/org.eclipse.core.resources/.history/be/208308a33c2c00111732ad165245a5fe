@@ -1,0 +1,82 @@
+@charset "UTF-8";
+*{
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    color:#333;
+        background-color: #fff5;
+}
+/* Start grid style */
+div.gird{
+    display:grid; 
+
+    & > div.btn-group {
+        grid-column: 1/-1;
+
+        & > div.right-align {
+            text-align: right; 
+        }
+    }
+
+    & > label{
+        padding-left:0.625rem;
+    }
+
+    & input,
+    & button,
+    & textarea {
+        padding: 0.625rem;
+    }
+} 
+/* End grid style*/
+
+/* Start write content style */
+div.write{
+    grid-template-columns: 10rem 1fr; 
+    row-gap: 0.625rem;
+}
+/* End write content style */
+
+.wrapper{
+    margin : 0.625rem 10rem;
+}
+/* Start grid style */
+.grid{ 
+    /* grid-template-columns: repeat(4, minmax(1fr, auto)); */
+    width:100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  
+    & > thead > tr > th {
+        background-color: #222;
+        font-weight: 600;
+        color : #fff;
+    } 
+
+    & > tbody > tr:nth-child(even){
+        
+        background-color: #eee;
+    }
+    & > tbody > tr:nth-child(odd){
+
+        background-color: #bbb;
+    }
+    & > tbody > tr > td:nth-child(even){
+        text-align: center; 
+    }
+} 
+/* End grid style*/
+.align-right{
+    text-align: right;
+    margin-top:2rem;
+}
+.btnlike{
+    border: 1px solid black; 
+    border-collapse: collapse;
+    padding: 0.5rem; 
+    color:black;
+    background-color: #fff; 
+    border-radius: 5px;
+}
+

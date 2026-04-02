@@ -1,0 +1,26 @@
+@charset "UTF-8";
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    color:#333;
+}
+.wrapper{
+    margin : 0.625rem 10rem;
+}
+/* Start grid style */
+.grid{ 
+  
+    & > thead > tr > th {
+        background-color: #91A8d1;
+        font-weight: 600;
+        color : #ddd;
+    }
+    & > tbody > tr > td:nth-child(even){
+        text-align: center; 
+    }
+} 
+/* End grid style*/
+  

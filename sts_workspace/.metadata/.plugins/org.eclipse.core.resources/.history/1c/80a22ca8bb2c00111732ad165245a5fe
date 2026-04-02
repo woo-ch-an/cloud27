@@ -1,0 +1,27 @@
+$(function () {
+   // ".add-file" 을 클릭하면 
+   // 새로운 파일 인과 버튼을 
+   // ".attach-files" 아래 추가한다
+   $(".add-file").on("click", function(){
+    
+    // 새로운 파일이 추가 될 때마다 기존 "add-file 을 "del-file"로 변경
+    // 텍스트를 + -> - 로 변경 
+     $(this).closest(".attach-files").children(".add-file").removeClass("add-file").addClass("del-file").text("-").off("click").on("click", function(){
+        // 버튼 왼쪽 input tag, this 삭제
+        $(this).prev().remove();
+        $(this).remove();
+     });
+    
+    var fileInput = $("<input />");
+    fileInput.attr({
+        type:"file",
+        name : "attachFile",
+    });
+    var addButton = $("<button />");
+    addButton.attr("type","button").addClass("add-file").text("+");
+    
+    
+    $(".attach-files").append(fileInput).append(addButton);
+    
+   });
+});

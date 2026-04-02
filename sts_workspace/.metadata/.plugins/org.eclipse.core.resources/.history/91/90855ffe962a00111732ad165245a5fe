@@ -1,0 +1,32 @@
+package org.themoviedb.www.movie.web;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.themoviedb.www.movie.service.MovieService;
+import org.themoviedb.www.movie.vo.MovieVO;
+import org.themoviedb.www.movie.vo.response.SearchResultVO;
+
+@Controller
+public class MovieController {
+
+
+	@Autowired
+	private MovieService movieService;
+	
+	@GetMapping("/list")
+	public String viewMovieListPage(Model model) {
+		// 영화 목록을 가져오기
+		SearchResultVO searchResult = this.movieService.findAllMovies();
+		
+		List<MovieVO> movieList = searchResult.getResult(); 
+		
+		model.getAttribute("model", " ");
+		
+		return "/list";
+		
+	}
+}

@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/hello-spring.css" type="text/css" />
+<title>회원가입</title>
+</head>
+<body>
+
+	<form method="post" action="/update">
+		<div class="gird update">
+			<h1>View Members</h1>
+			<div>
+				<label for="name">Name : </label> <label name="name"> name ~
+				</label>
+			</div>
+
+			<div>
+				<label for="email">email</label> <label 
+					name="email" > </label>
+
+			</div>
+
+			<div>
+				<label for="password">password</label> <label  name="password"   > </label>
+
+			</div>
+
+			<div class="btn-group">
+				<div class="right-align">
+					<input type="submit" value="제출" />
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

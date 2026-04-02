@@ -24,5 +24,6 @@ public interface BoardDao {
 	int deleteArticleByArticlId(String id);
 
 	int updateBoardById(UpdateVO updateVO);
+ 
 
 }

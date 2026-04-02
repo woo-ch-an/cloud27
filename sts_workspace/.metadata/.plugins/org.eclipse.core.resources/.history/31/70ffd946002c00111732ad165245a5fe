@@ -1,0 +1,53 @@
+package com.ktdsuniversity.edu.members.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ktdsuniversity.edu.members.dao.MembersDao;
+import com.ktdsuniversity.edu.members.vo.MemberVO;
+import com.ktdsuniversity.edu.members.vo.response.SearchMemberResultVO;
+
+@Service
+public class MembersServiceImpl implements MembersService{
+
+	@Autowired
+	private MembersDao membersDao;
+	
+
+	@Override
+	public boolean createNewMember(MemberVO memberVO) { 
+		int insertCount = this.membersDao.insertNewMember(memberVO); 
+		
+		return insertCount==1; 
+	}
+
+
+	@Override
+	public SearchMemberResultVO findAllMembers() { 
+		
+		SearchMemberResultVO result = new SearchMemberResultVO();
+		
+		int count = this.membersDao.selectMembersCount();
+		result.setCount(count);
+		
+		if(count==0) {
+			return result;
+		}
+		
+		List<MemberVO> list = this.membersDao.selectMemebers();
+		result.setResult(list);
+		
+		return result;
+	}
+
+
+	@Override
+	public MemberVO selectMemeber(String memberName) {
+		
+		MemberVO member = this.membersDao.selectMemeber(memberName);
+		return member;
+	}
+
+}

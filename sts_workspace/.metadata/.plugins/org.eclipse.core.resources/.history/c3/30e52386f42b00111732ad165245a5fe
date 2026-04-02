@@ -1,0 +1,38 @@
+<%-- <%@ 디렉티브 %> --%>
+<%-- Page Directive --%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%-- JSTL 을 사용하기 위해 taglib directory 필요 --%>
+<%@taglib prefix="C" uri="jakarta.tags.core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글 목록</title>
+</head>
+<body>
+<h1>게시글 목록</h1>
+<div>총 ${searchCount}개의 게시글이 검색되었습니다</div>
+
+<!-- HTML 주석 개발자도구에서 보 --> <%-- JSP주석 개발자 도구에서안보임 --%>
+<%--
+<% for (BoardVO board:searchResult) { %>
+<div> <%=board.getId()%></div>
+}
+<% } %> 
+--%>
+<C:forEach items="${searchResult}"  var="board">
+<!-- 반복상  -->
+<div>ID = ${board.id}</div>
+<div>Subject = ${board.subject}</div>
+<div>Content = ${board.content}</div>
+<div>Email = ${board.email}</div>
+<div>ViewCount = ${board.viewCnt}</div>
+<div>CreatDate = ${board.crtDt}</div>
+<div>ModifyDate = ${board.mdfyDt}</div>
+<div>FileName = ${board.fileName}</div>
+<div>OriginFile = ${board.originFileName}</div>
+</C:forEach>  
+</body>
+</html>

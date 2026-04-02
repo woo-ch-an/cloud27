@@ -1,0 +1,36 @@
+@charset "UTF-8";
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    color:#333;
+}
+.wrapper{
+    margin : 0.625rem 10rem;
+}
+/* Start grid style */
+.grid{
+    display:grid; 
+
+        background-color: black;
+    margin : 0.625rem, 5rem;
+      
+
+    & > label{
+        padding-left:0.625rem;
+    }
+
+    & input,
+    & button,
+    & textarea {
+        padding: 0.625rem;
+    }  
+    & > thead > tr > th:nth-child(even){
+        text-align: center;
+        background-color: #777;
+    }
+} 
+/* End grid style*/
+  

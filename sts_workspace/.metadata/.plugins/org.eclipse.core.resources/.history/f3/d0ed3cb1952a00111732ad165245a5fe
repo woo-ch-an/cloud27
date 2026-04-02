@@ -1,0 +1,5 @@
+package org.themoviedb.www.movie.service;
+
+public class MovieServiceImpl implements MovieService {
+
+}

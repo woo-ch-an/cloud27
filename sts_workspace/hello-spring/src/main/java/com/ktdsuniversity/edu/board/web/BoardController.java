@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,8 @@ import com.ktdsuniversity.edu.board.vo.BoardVO;
 import com.ktdsuniversity.edu.board.vo.request.UpdateVO;
 import com.ktdsuniversity.edu.board.vo.request.WriteVO;
 import com.ktdsuniversity.edu.board.vo.response.SearchResultVO;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class BoardController {
@@ -50,12 +53,16 @@ public class BoardController {
 		return "board/write";
 	}
 
-	@PostMapping("/write")
-	public String doWriteAction(@ModelAttribute WriteVO writeVO) {
+	@PostMapping("/write") // BindingResult => @Valid 의 결과를 받아오는 빠라미터,반드시 Valid 이후에 작성되어야 함 
+	public String doWriteAction(@Valid @ModelAttribute WriteVO writeVO, BindingResult bindingResult, Model model) {
 		System.out.print("consolewirte" + writeVO.getContent());
 		System.out.print(writeVO.getEmail());
 		System.out.print(writeVO.getSubject());
-
+		// 사용자 입력값 검증시 에러가 있으면 브라우저에 board.write 보여주고 해당페이지에 입력값전달 
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("inputData", writeVO);
+			return "board/write";
+		}
 		// create, update, delete 성공 실패 여부 반환 필요
 		boolean createResult = this.boardService.createNewBoard(writeVO);
 
@@ -101,6 +108,8 @@ public class BoardController {
 	public String doUpdateAction(@PathVariable String articleId,  UpdateVO updateVO) {
 		
 		updateVO.setId(articleId);
+
+		System.out.println("Test updateFile" + updateVO);
 		
 		boolean updateResult = this.boardService.updateBoardByArticleId(updateVO); 
 

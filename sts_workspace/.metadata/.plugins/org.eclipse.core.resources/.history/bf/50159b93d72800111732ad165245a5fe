@@ -1,0 +1,24 @@
+package com.ktdsuniversity.edu.board.service;
+
+import org.springframework.stereotype.Service;
+
+import com.ktdsuniversity.edu.board.dao.BoardDao;
+import com.ktdsuniversity.edu.members.vo.SearchResultVO;
+
+@Service
+public class BoardServiceImpl implements BoardService{
+
+	private BoardDao boardDao;
+	
+	@Override
+	public SearchResultVO findAllBoard() {
+		// 게시글개수 조회
+		int count = this.boardDao.selectBoardCount();
+		
+		// 게시글 목록조회
+		
+		List<BoardVO> list = this.boardDao.selectBoardList();
+		return null;
+	}
+
+}

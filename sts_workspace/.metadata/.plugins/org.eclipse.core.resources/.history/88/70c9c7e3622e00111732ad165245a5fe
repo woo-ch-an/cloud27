@@ -1,0 +1,36 @@
+/**
+ * 회원페이지와관련된 스크립트 작성 
+ */
+$().ready(function(){ 
+   // 브라우저에서 입력값 검증학기 
+   //회원가입 폼이 전송되기 전에 입력값을 제대로 작성했는지 체크
+
+   // 제대로 입력했다 --> 폼을 전송
+
+   // 제대로 입력하지않았다 -> 에러 메시지를 화면에 보여준다
+   
+   $("#memberVo").on("submit", function (event) {
+    // 1. 일단 브라우저에 할당되어있는 서브밋 콜백 이벤트 제거 -> 검증실패하면 send x
+    event.preventDefault();
+    
+    $(this).find(".VaildationError").remove();
+    // 이름 / 이멜 / pw 공백일까 
+    var email = $("#email").val();
+    if(!email){
+        var emailErrorMessage = $("<div>");
+        emailErrorMessage.addClass("VaildationError");
+        emailErrorMessage.text("이메일형태아님ㄴ다.");
+        
+        $("#email").after(emailErrorMessage);
+    }
+    var name = $("#name").val();
+        if(!name){
+            
+        }
+    var password = $("password").val();
+    if(!password){
+        
+    }
+    // 
+   });
+});

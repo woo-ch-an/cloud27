@@ -1,0 +1,20 @@
+package org.themoviedb.www.movie.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.themoviedb.www.movie.dao.MovieDao;
+import org.themoviedb.www.movie.vo.response.SearchResultVO;
+
+public class MovieServiceImpl implements MovieService {
+
+	@Autowired
+	private MovieDao movieDao;
+	@Override
+	public SearchResultVO findAllMovies() { 
+		
+		
+		
+		return null;
+	}
+
+	
+}

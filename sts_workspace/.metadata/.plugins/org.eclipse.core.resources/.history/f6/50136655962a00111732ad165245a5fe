@@ -1,0 +1,7 @@
+package org.themoviedb.www.movie.dao;
+
+public class MovieDao {
+
+	public int selectBoardCount()  
+
+}

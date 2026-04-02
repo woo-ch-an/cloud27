@@ -1,0 +1,5 @@
+package org.themoviedb.www.movie.web;
+
+public class MovieController {
+
+}

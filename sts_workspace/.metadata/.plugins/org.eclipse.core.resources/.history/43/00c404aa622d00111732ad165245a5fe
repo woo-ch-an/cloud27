@@ -1,0 +1,32 @@
+package com.ktdsuniversity.edu.files.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.ktdsuniversity.edu.files.service.FilesService;
+import com.ktdsuniversity.edu.files.vo.request.SearchFileVO;
+import com.ktdsuniversity.edu.files.vo.response.DownloadVO;
+
+@Controller
+public class FilesController {
+
+	@Autowired
+	private FilesService filesService;
+
+	@GetMapping("/file/{fileGroupId}/{fileNum}")
+	public ResponseEntity<Resource> doDownloadAction(@PathVariable String fileGroupId, @PathVariable int fileNum ){
+		
+		SearchFileVO searchFileVO = new SearchFileVO();
+		searchFileVO.setFileGroupId(fileGroupId);
+		searchFileVO.setFileNum(fileNum);
+		
+		
+		DownloadVO downloadVO = this.filesService.findAttachFile(searchFileVO);
+		
+		return null;
+	}
+}

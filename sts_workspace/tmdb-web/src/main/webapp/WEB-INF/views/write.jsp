@@ -10,16 +10,25 @@
 <body>
 <div class="wrapper">
 	<h1>New Movie</h1>
-	<form method="post" action="/write">
+	<form method="post" action="/write" enctype="multipart/form-data">
 		<div class="gird write">
 			<label for="title">Movie Title</label> 
             <input type="text" id="title"name="title" placeholder="Movie Title" /> 
-            <label for="posterUrl">Movie PosetURL</label> 
-            <input type="text" id="posterUrl"name="posterUrl" placeholder="Movie posetURL" />
+            
+            <!--  Poster area ~  -->
+            <!-- <label for="posterUrl">Movie PosetURL</label> 
+            <input type="text" id="posterUrl"name="posterUrl" placeholder="Movie posetURL" /> -->
+
+            <label for="attach-files">첨부파일</label>
+            <div id="attach-files" class="attach-files">
+                <input type="file" name="attachFile" /> 
+            </div>
+            <!--  Poster End -->
+            
             <label for="movieRating">Movie Rating</label>
-			<input id="movieRating" type="text" name="movieRating" placeholder="Movie Rating" />  
+			<input id="movieRating" type="text" name="movieRating" placeholder="Movie Rating Ex)PG" />  
             <label for="openDate"> Release Date</label>
-			<input id="openDate" type="text" name="openDate" placeholder="Movie Release Date" />  
+			<input id="openDate" type="date" name="openDate" placeholder="Movie Release Date" />  
             <label for="openCountry">Release Country</label>
 			<input id="openCountry" type="text" name="openCountry" placeholder="Release Country" />  
              <label for="runningTime">Runnig Time</label>
@@ -27,8 +36,8 @@
 
              <label for="introduce">Introduce</label>
 			<input id="introduce" type="text" name="introduce" placeholder="One-liner review" /> 
-             <label for="sysnopsis">Sysnopsis</label>
-			<input id="sysnopsis" type="text" name="sysnopsis" placeholder="This movie is about  ..." /> 
+             <label for="synopsis">Synopsis</label>
+			<input id="synopsis" type="text" name="synopsis" placeholder="This movie is about  ..." /> 
              <label for="originalTitle">Original Title</label>
 			<input id="originalTitle" type="text" name="originalTitle" placeholder="Original Title" /> 
              <label for="state">State</label>

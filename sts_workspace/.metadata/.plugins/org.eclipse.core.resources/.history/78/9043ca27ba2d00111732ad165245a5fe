@@ -1,0 +1,329 @@
+에러났을 떄 : 프로젝트 -> 클린
+혹은 프레젝트 우클릭 ->  maven -> Update Project ->  Force Update of Snadasjkafdk 
+하면 앵간하면 해결된다 
+
+큰규모의 프로젝트에서 사용하는 프레임웤으
+
+가장 중요한거 : 
+1. Bean Container
+2. Dependency Injection 의존 삽입 ? 뭐노이거
+
+객체지향 5원칙중 하나와같음 
+New 를 사용할 일이 적어짐 그이유들 
+
+웹 스프링에서 웹 개발할 때 사용하는 뭐 그런거
+컴포넌트 컨트롤러 서비스 레파지토리 < 이 4가지에 대해서 생성자 호출이 안됨
+—> 스프링 프레임워크가 객체를 만들어준다 
+만들어준 객체를 저장하는 곳 : Bean Container (자바 객체들이 들어있는 컨테이너)
+[빈 컨테이너 내부에서 동작하는거랑 바깥의 사용자가 만든 new객체는 서로 참조몬함] 
+
+**** 기술면접 : DI가 뭔지 아세요 ? 
+@Override 이게 뭔지 아세요 ? 
+들어도 모르겠네요 ㅇㅇ
+
+3. 컴파일된 실행파일 수정 가능
+Transaction 처리 가능 -> commit or rollback 
+
+wjwaja===-
+
+객체로 뭐가 필요할 떄 : 클로뢰
+
+*** Di Framework 혹은 IoC Framework 가 다른건가요 ? 
+-> 모르면 탈락 ! 
+
+사용자 < —— > 백엔드  (서버 + DB) 
+브라우저 정보조회 등]   [ Server -> Spring ] + DB
+
+www.naver.com -> 네이버 화면이 출력되는 이유 ?
+HTTP 프로토콜로 통신 / (TCP/IP) 목적지(IP)에 데이터 전송(TCP)
+url(사람이 이해할 수 있는 주소) -> DNS 가 IP 주소 변환 -> 해당 서버로 이동
+이 과정이 http request 
+
+백엔드에서 사용자의 요청이 오면 DB에서 대응하는 값을 뽑아서 HTML 화 한 값을 사용자에게 응답
+-> http response 
+
+request를 받아오는 기능 + DB와 소통하는 뭐 그런 기능 + 받아온 데이터를 객체화 시키는 기능 + 을 응답하는 기능 등등이 필요함
+을 그냥 라이브러리로 편하게
+
+—> 간단설명 
+Web - Spring Web = http request + http response; (+서버에서 쓰는것도 몇 개)
+SQL - Oracle Driver (DB 연동) , MyBatis Framework ( dataAccessHelper 같은거) 등등 
+Servlet Container -> 웹 서버에 접속할 수 있게 도와주는 것 (빌드 배포 간소화)
+
+Version 명 관리 
+0.0.1 -> Major.Minor.BugFix 
+
+
+src/main/java 
+> 클래스 파일이 들어가는 곳 (실제 코드가 작성되는 곳) Java File only
+Src/main/resources 
+> 밑에 application.properties 헬로 스프링 프로젝트 자체의 설정 정보를 적는 곳 
+          Static / CSS 파일들 , 이미지 , jS 파일들  [Templates -> HTML 파일쓰는곳인데 안쓰일예정]
+
+Src/test/java 
+> 작성한 Java 파일 테스트하는 곳 단위테스트 할 때 사용
+Src/test/resources 
+> 단위 테스트를 위한 설정 정보들 저장 
+
+위 네 영역들을 ClassPath 라고 부른다
+
+Maven Dependencies
+Dependency 파일들 묶음
+Pom.xml에 있는 dependency 얘들을 Maven 이 확인해서 다운받아줌 
+
+.src>main>webapp 
+> Jsp 파일 쓰는 곳
+Target 
+> 프로젝트가 빌드/컴파일 되면 뭔가 생김 [별 도움은안됨] 
+근데 밑에있는 classes에 배포버전이 생성됨 
+
+Clean package -> clean[target 밑에 다 지움] , package [다시 만듬]
+
+엄 청 나 게 중 요 한 
+Spring Application이 시작이 될 때 @Controller가 적용된 모든 클래스를 찾아 해당 클래스를 인스턴스로 생성
+생성된 인스턴스들을 Bean Container에 적재한다
+
+HTML 을 어느세월에 써서 전송ㅇ할까 
+템플릿에 저장해서 그거나 쓰자 
+=JSP, Thymeleaf, FreeMarker, Mustach(캐치마인드했던거)
+자카르타 서버 페이지
+[JSP 지원안함 -> 설정해줘야함 ]
+
+메이븐에 dependency 아이템 추가할 때 버전에 노란거 생기면 노란거 떼서 
+스프링이 지 알아 할 수 있도록 함 
+[버전 챙기는 경우 => 스프링도 모르는 거 들고왔을 때]
+
+Return jsp이름만해도 되는ㅇ ㅣ유 : 
+Spring.mvc.view.prefix + 이름 + spring.mvc.view.suffix 로 되어있기 때문
+
+저걸이제 /src/main/webapp 아래에서 찾아감 
+->그걸인제 HTML로 변환해서 브라우저에게 토스
+
+css를 쓰고싶을때는 /css/파일이름~
+/로 시작하면 static에서 시작하게 된다 
+
+js도 똑같이 /js/file_name ~ 
+
+
+
+ㅎㅇㅎㅇ 0326
+오늘할거 : 템플릿에 데이터 던져서 그거 노출시키기
+
+템플릿에서 받은 데이터 표시하는거 : ${변수명}  <- EL Extended Language 
+는 이제 옛날 기술 (클래식, 정석 뭐 그런거로 보면 되겠습니다)
+
+임포트할 때 임포트할거 : 스프링 프레임워크 먼저
+
+model.addAttribute("myname", "식케이"); 로 넣고 
+
+        <h3>my name is ... ${myname} </h3>
+
+뭐야이거 
+
+뭘 넣을 수 있냐면 객체면 다 넣을 수 있다 인트스트링뭐시기리스트저시기 가능 
+
+
+이거 데이터를 어떻게 던져주남 -> 서블릿이라는게 해줌 
+프레임워크 없으면 웹페이지 하나당 (엔드포인트 하나당) 서블릿이 하나씩 필요함
+—> 서블릿이라는 클래스 하나로 여기저기 던지기 (고급언어 : URL 별로 분기처리) 
+일단 서블릿이 받고 url별로 분기처리 (doDispatch라는얘가해줌)
+[TMI : 원래 뭐 기능두개 따로따로있었는데 하나로 합쳐짐] 
+> Mapping , Adapter 가 분리되어있었따 
+
+Request handler -> 핸들러가 브라우저가 보내준 url 가지고 어디 클래스의 어떤 메소드가 핸들링하는지 찾아다가 보내줌
+[Request Mapping handler Adapter] 
+Url 뭘 던져줘도 알아서 찾아서 해줌
+
+P59. handlerAdapter -> 스트링만 리턴 
+viewResolver -> prefix suffix 조합해서 어딨나 찾아봄
+Servlet -> 데이터 들고있는얘
+View(8번) => 데이터들 다 갖고 조합해서 HTML로 조합
+위에처럼 데이터 가져온거 띄우는 화면에서 HTML 소스보기 하면 변수명은 없어지고 결과만남음
+킹크림슨임
+
+Mapping, ViewResolver가 가장 중요한얘들로 볼 수있따
+Endpoint가 있냐 없냐 + url 존재 유무확인하는ㅇㅒ들
+
+
+** 앵간한 파라미터 넣어도 스프링이 반응해줌
+
+P.59를참고 _> 
+이런거 MVC 패턴이라고 함 (Model View Controller)
+M : 애플레키에션 정보 
+V : 사용자 뷰 
+C : 둘 사이의 상호작용 관리
+
+Browser 에서 end point 로 파라미터 보내는 3가지 방법 
+	1. Query String Parameter [endpoint 뒤에 ? 붙이기]
+		Ex) /endpoint?key=value1&key2=value2 .. 
+	2. Form Parameters =? <form></form> 을 이용해서 보내는 법
+		Ex) <form action=“/endpoint”> <input name=“key”/> <select /> <textarea /> 덩덩 </form>
+			여기서 안에있는 element 에 name 으로 키 값을 써놓는 것 -> value가 전달될 수있다
+			<input name=“key” value =“value”/>, <textarea name=“key”>Value</textarea>  요롷게
+			[ul]같은 리스트에 name을 주고 옵션이나 뭐 그런거에 Value 가져오는것도 가능함 ul 이 아니엇던거같기도 하고 ? 버튼인가 
+	3. Request Body   - http request body 영역에 파라미터를 보내는 방법	
+		Ex) 파일 업로드, AJAX 요청 시 (고 오 급 기술이라 아직 예시 들기 어렵다)
+	https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages < 이거보면암
+	4. Hybrid (Alternative or Complex) 뭐암튼 다 쓰는거
+ 	   뭘 다 쓰나요 ? => Query String Parameter + Form Parameter , Query String Parameter + Request Parameter 
+			like this like this like thiii is oh yeah 
+
+
+** GetMapping 으로 하던 이유 : 요청방식이 GET이라 나중에 POST 뜨면 PostMapping 으로도 뭐 있음
+* Spring 전용 Parameter -> Path(URL) Variable _> QueryStringParameter 말고 그냥 보내고 싶을 때
+
+Spring Endpoint에서 파라미터를 받아오는 4가지 방법 
+	1. HttpServletRequest 객체를 이용하는 방법 (스프링에서는 잘 사용 안됨) 
+		-> Query String Parameter Form Parameter 머 암튼 위에 3개
+		— HTTP Header 정보 취득 가능 (요청자의 IP 획득 가능 ) 
+		— Endpoint 를 호출한 위치 획득 가능 [그게 뭐임 -> 구글검색 네이버 검색 등 오또케 왔는지]
+	2. @RequestParam을 이용한 방버ㅂ -> ㅈㅗㅇ ㅈㅗㅇ 사용됨 (파라미터 개수가 한두개)
+		-> 쿼리스트링파람, 폼파람 일 때
+	3. @ModelAttribute 를 이용한 방법 -> 해봤던거죵 ? (가장 많이 사용됨 파람개수 많을 떄)
+		-> Command Object, @ModelAttribute Annotation은 생략이 가능함
+		-> 쿼리스트링파람, 폼파람일 ㄸㅐ
+	4. @RequestBody를 이용한 방법 (API AJAX 기반의 프로젝트에서 주로 사용)
+		-> Request Body 취득
+	번외편 @PathVariable 이용 ( 얘도 많이 쓰임 Path Variable (URL) 취득할떄씀 )
+
+* 이거 어따쓰나용 -> 매핑 메소드 파라미터 자리에
+참고) 화이트라벨 에러 페이지 떳을 때 에러를 읽어봅시다
+
+파라미터 걍 쓰면 “필수”파라미터가 되어 안넣으면 에러터지게되는 마법
+을 해결하기 위해 ~ 설정안에 가보면 required() true 가 default로 되어있으니 false로 바꿔주자
+@RequestParam(required = false) Wow 때깔보소
+
+
+My basis 설정하기
+mybatis.org 에서 xml 복사해서 가져오기
+Src/main/resources 밑에 mybatis-config.xml 파일 -> Source -> 에 붙여넣기
+
+리소스 밑에 com/ktdsuniversity/edu 도 만들어주기 (폴더)
+외용 -> java에 java파일 넣고 resources에 sql 문 만들기
+
+Interface 하나로 연결시키기 (Class X 이거넣으면 옛날방식임) 예전 DAO 
+실습으로 가보자고
+
+1 패키지 = 1 매퍼
+
+DB SQL 하는데 갑자기 서버가 터짐 펑)
+logging:
+  level:
+    root: debug 
+이걸로 로그 추적해가는 중
+일단 뭐 만들면 스프링이 빈 컨테이너에 넣어준다했으니 그거 되나보기
+로그에 찍히는거 보면 Creating shared instance of singleton bean ‘boardController’ <- 잘된걸볼 수 있따
+boardDao 또한 뭐 클래스 암것도 안만들었는데 빈 컨테이너에 잘 들어간걸 볼 수 있다 밑에보면 친주 membersDAO도있음
+
+@(에노테이션) 
+@Controller
+@Service (클래스)
+@repository 
+@Mapper 인터페이스
+
+이런거 붙어있으면 스프링이 찾아다가 객체화해서 컨테이너에 담금
+
+빈 컨테이너에 있는 객체들끼리 서로 참조하게 해서 값을 할당할 수 있게해줌 
+-> 의ㅣ존성 머시기 DI 
+
+를 ! 코드로 표현하면 
+@Autowired (W대문자 아님)
+
+?? Zzz ‘w’ehla
+
+Primitive type 들은 Mybatis에서 변환해서 매핑해줌
+Int -> _int 
+String -> string
+_short -> short 뭐 이런거
+83page 
+
+
+나머지는 퀴즈 ㅎ 모름 교재 66쪽보면나옴
+서비스는 트랜잭션 
+DAO 쿼리
+
+
+암튼 브라우저 -> DB 의 사이클을 돌았음 
+ƒ(x) -> y;
+
+ㅎㅇㅎㅇ 0327
+private String movieId;
+	private String title;
+	private String movieRating;
+	private String openDate;
+	private String openCountry;
+	private int runningTime;
+	private String introduce;
+	private String sysnopsis;
+	private String originalTitle;
+	private String state;
+	private String language;
+	private int budget;
+	private int profit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

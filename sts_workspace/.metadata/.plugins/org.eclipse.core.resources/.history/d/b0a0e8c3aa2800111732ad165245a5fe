@@ -1,0 +1,27 @@
+package com.ktdsuniversity.edu;
+
+import org.springframework.http.ResponseEntity;
+
+public class CalculateController {
+	
+	/**<pre>
+	 * Endpoint = "/calc/
+	 * return template = calc.jsp
+	 * data that use template 
+	 * 		-1 : firstNum
+	 * 		-2 : secondNum
+	 * 		-3 : result (firstNum+secondNum)
+	 * result of the template
+	 *		- div>span*3 , insert the datas to span consequncely
+	 * </pre>
+	 */
+	
+	@GetMapping("/calc")
+	public String CalculatorHtml(){
+		
+		
+		
+		return "calculator";
+	};
+
+}

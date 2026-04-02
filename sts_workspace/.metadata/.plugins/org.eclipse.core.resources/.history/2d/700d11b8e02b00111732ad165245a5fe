@@ -1,0 +1,43 @@
+package com.ktdsuniversity.edu.members.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.ktdsuniversity.edu.members.service.MembersService;
+import com.ktdsuniversity.edu.members.vo.MemberVO;
+
+@Controller
+public class MemberController {
+	@Autowired
+	private MembersService membersService;
+
+	@GetMapping("/regist")
+	public String viewMemberView() {
+		return "/members/memberadd";
+	}
+
+	@PostMapping("/regist")
+	public String createMember(MemberVO memberVo) {
+
+		boolean createResult = this.membersService.createNewMember(memberVo);
+		System.out.println(createResult+ "그거용그거디버");
+ 
+		return "redirect:/regist";
+ 	}
+	
+	@GetMapping("/view")
+	public String viewMemebersPage(Model model) {
+		MemberVO memberResult = this.membersService.findAllMembers();
+		
+		List<MemberVO> list =  SearchMemberResultVO.getResult();
+		
+		return "/members/view";
+	}
+	// /member/view/userId  회원 정보 조회
+	// /member/update/userId 회원 정보 수정
+	// /member/update/userId 회원 정보 수정(do)
+	// /member/delete?id=userId 회원 정보 삭제 
+}

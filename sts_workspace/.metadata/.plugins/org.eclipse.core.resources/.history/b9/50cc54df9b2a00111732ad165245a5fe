@@ -1,0 +1,9 @@
+package org.themoviedb.www.movie.vo;
+
+public class MovieVO {
+	
+	
+	
+	private String movieName;
+	
+}

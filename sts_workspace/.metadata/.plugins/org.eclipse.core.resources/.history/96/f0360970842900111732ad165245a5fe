@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+</head>
+<body>
+<div class="gird joinmem">
+			<label for="subject">Name</label> <input type="text" id="subject"
+				name="subject" placeholder="Write your Name" /> <label for="email">email</label>
+			<input id="email" type="email" name="email"
+				placeholder="Enter the Email" /> 
+                
+                 <label for="password">비밀번호</label> <input type="password" id="password"
+				name="subject" placeholder="Write your title" /> <label for="email">이메일</label>
+		</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+package com.ktdsuniversity.edu.board.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ktdsuniversity.edu.board.dao.BoardDao;
+import com.ktdsuniversity.edu.board.vo.BoardVO;
+import com.ktdsuniversity.edu.board.vo.request.WriteVO;
+import com.ktdsuniversity.edu.board.vo.response.SearchResultVO;
+
+@Service
+public class BoardServiceImpl implements BoardService{
+	
+
+	@Autowired
+	private BoardDao boardDao;
+	
+	@Override
+	public SearchResultVO findAllBoard() {
+		SearchResultVO result = new SearchResultVO(); 
+		
+		// 게시글개수 조회
+		int count = this.boardDao.selectBoardCount();
+
+		result.setCount(count);
+		// 게시글 목록조회
+		
+		List<BoardVO> list = this.boardDao.selectBoardList();
+
+		result.setResult(list);
+
+		return result;
+	}
+
+	@Override
+	public boolean createNewBoard(WriteVO writeVO) {
+		// dao-> insert 요청 
+		
+		int insertCount = this.boardDao.insertNewBoard(writeVO);
+		System.out.print("생성된 게시글의 개수 : " + insertCount);
+		
+		return insertCount==1; 
+	}
+
+	@Override
+	public BoardVO findBoardByArticleId(String articleId) {
+		int updateCount= this.boardDao.updateViewCntIncreaseById(articleId);
+		System.out.println("조회수가 증가된 게시글의 수 " + updateCount);
+		
+		if(updateCount ==0) {
+			// 존재하지 않는 게시글
+			return null;
+//			throw new RuntimeExceiption("존재하지 않는 게시글입니다 ");현업 모먼트
+		}
+		BoardVO boardVariableObject = this.boardDao.selectBoardById(articleId); 
+		
+		return boardVariableObject;
+	}
+
+}

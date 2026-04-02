@@ -1,0 +1,24 @@
+package com.ktdsuniversity.edu.members.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ktdsuniversity.edu.members.dao.MembersDao;
+import com.ktdsuniversity.edu.members.vo.MemberVO;
+
+public class MembersServiceImpl {
+
+	@Autowired
+	private MembersDao membersDao;
+	
+
+	@Override
+	public boolean createNewMember(MemberVO memberVO) {
+		// dao-> insert 요청 
+		
+		int insertCount = this.membersDao.insertNewBoard(memberVO);
+		System.out.print("생성된 게시글의 개수 : " + insertCount);
+		
+		return insertCount==1; 
+	}
+
+}

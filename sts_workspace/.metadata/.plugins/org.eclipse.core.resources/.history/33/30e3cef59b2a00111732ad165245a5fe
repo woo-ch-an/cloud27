@@ -1,0 +1,23 @@
+package org.themoviedb.www.movie.vo;
+
+public class MovieVO {
+	
+	
+	
+	private String movieId;
+	private String title;
+	private String movieRating;
+	private String openDate;
+	private String openCountry;
+	private String runningTime;
+	private String introduce;
+	private String sysnopsis;
+	private String originalTitle;
+	private String state;
+	private String language;
+	private String budget;
+	private String profit;
+		
+	
+	
+}

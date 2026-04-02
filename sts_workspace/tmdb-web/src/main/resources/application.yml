@@ -6,7 +6,7 @@ logging:
 mybatis:
   config-location: classpath:mybatis-config.xml
   # set up location of mapper files
-  mapper-locations: classpath:org/themoviedb/new/movie/**/mapper/*Mapper.xml
+  mapper-locations: classpath:org/themoviedb/www/**/mapper/*Mapper.xml
 
 spring:
   mvc:

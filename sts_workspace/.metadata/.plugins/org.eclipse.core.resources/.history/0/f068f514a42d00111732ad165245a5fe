@@ -1,0 +1,12 @@
+package org.themoviedb.www.files.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.themoviedb.www.files.service.FilesService;
+
+@Controller
+public class FilesController {
+
+	@Autowired
+	private FilesService filesService;
+}

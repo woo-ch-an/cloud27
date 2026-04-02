@@ -1,0 +1,65 @@
+package org.themoviedb.www.movie.web;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.themoviedb.www.movie.service.MovieService;
+import org.themoviedb.www.movie.vo.MovieVO;
+import org.themoviedb.www.movie.vo.response.SearchResultVO;
+
+@Controller
+public class MovieController {
+
+	@Autowired
+	private MovieService movieService;
+	
+	@GetMapping("/")
+	public String viewIntroPage() {
+		return "intro";
+	}
+
+	@GetMapping("/list")
+	public String viewMovieListPage(Model model) {
+		// 영화 목록을 가져오기
+		SearchResultVO searchResult = this.movieService.findAllMovies();
+
+		List<MovieVO> movieList = searchResult.getResult();
+
+		model.addAttribute("movieCount", searchResult.getCount());
+		model.addAttribute("movieResult", movieList);
+
+		System.out.println(movieList);
+		return "list";
+
+	}
+
+	@GetMapping("/write")
+	public String viewMWritePage() {
+
+		return "write";
+	}
+	
+	@PostMapping("/write")
+	public String doWriteAction(MovieVO movieVO) { 
+		System.out.print("creatResult STart");
+		System.out.print("movieVO :::" + movieVO.getBudget());
+		System.out.print(movieVO); 
+//		if(movieVO.getTitle() == null || movieVO.getSysnopsis() == null || movieVO.getLanguage() == null || movieVO.getPosterUrl() == null) {
+//
+//			System.out.print("creatResult faile");
+//			return "/list";
+//		}
+		boolean creatResult = this.movieService.creatNewMovie(movieVO);
+		System.out.print("creatResult "+creatResult);
+		return "redirect:/list";
+	}
+	
+//	@GetMapping("/errorrr")
+//	public String viewErrorPage() {
+//		return "error";
+//	}
+}

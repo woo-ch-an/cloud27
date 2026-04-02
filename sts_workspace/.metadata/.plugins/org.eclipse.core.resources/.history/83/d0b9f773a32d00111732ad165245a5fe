@@ -1,0 +1,6 @@
+package org.themoviedb.www.files.dao;
+
+@Mapper
+public interface FilesDao {
+
+}

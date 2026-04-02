@@ -1,0 +1,43 @@
+package com.ktdsuniversity.edu.files.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.ktdsuniversity.edu.files.service.FilesService;
+import com.ktdsuniversity.edu.files.vo.request.SearchFileVO;
+import com.ktdsuniversity.edu.files.vo.response.DownloadVO;
+
+@Controller
+public class FilesController {
+
+	@Autowired
+	private FilesService filesService;
+
+	@GetMapping("/file/{fileGroupId}/{fileNum}")
+	public ResponseEntity<Resource> doDownloadAction(@PathVariable String fileGroupId, @PathVariable int fileNum ){
+		
+		SearchFileVO searchFileVO = new SearchFileVO();
+		searchFileVO.setFileGroupId(fileGroupId);
+		searchFileVO.setFileNum(fileNum);
+		
+		// 다운로드를 위한 정보와 파일  찾앙오기
+		DownloadVO downloadVO = this.filesService.findAttachFile(searchFileVO);
+		
+		// 다운ㄷ로 드  시 작 
+		// Http Response setting
+		HttpHeaders headers = new HttpHeaders();
+		// HTTP Responese Header Setting
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + downloadVO.getDisplayName());
+		
+		// Content-Disposition / Length / type 
+		headers.set(HttpHeaders.CONTENT_LENGTH, downloadVO.getFileLength()+"");
+		
+		
+		return null;
+	}
+}

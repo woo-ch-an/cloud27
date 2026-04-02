@@ -1,0 +1,22 @@
+package com.ktdsuniversity.edu.members.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class MemberController {
+
+	@GetMapping("/regist")
+	public String viewMemberView() {
+		return "/members/memberadd";
+	}
+	
+	@PostMapping("/regist")
+	public String createMember() {
+		
+		
+		
+		return "redirect: /member";
+	}
+}

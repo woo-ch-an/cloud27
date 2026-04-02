@@ -1,0 +1,11 @@
+package org.themoviedb.www.files.service;
+
+import org.springframework.stereotype.Service;
+import org.themoviedb.www.files.dao.FilesDao;
+
+@Service
+public interface FilesService {
+
+	@Autowrired
+	private FilesDao filesDao;
+}

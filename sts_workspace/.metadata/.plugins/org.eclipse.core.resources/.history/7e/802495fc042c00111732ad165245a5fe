@@ -1,0 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/hello-spring.css" type="text/css" />
+<title>회원가입</title>
+</head>
+<body>
+ 
+		<div class="gird update">
+			<h1>List of  Members</h1>
+            <h4>we have ${Count} Members ~</h4>
+			<div>
+				<label for="name">Name : </label> <label> ${memberList[0].name} ~ </label>
+			</div>
+
+			<div>
+				<label for="email">email</label> <label> ${memberList[0].email} </label>
+
+			</div>
+
+			<div>
+				<label for="password">password</label> <label> ${memberList[0].password}</label>
+			</div> 
+		</div> 
+		
+		<table class="grid">
+		<thead>
+		<tr>
+		
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        
+		</tr>
+		
+		</thead>
+		<tbody>
+		<c:choose>
+                <c:when test="${not empty memberList}">
+                    <C:forEach items="${memberList}" var="member">
+                        <tr>
+                            <!-- 반복상  -->
+                            <td>${member.name}</td>
+                            <td><a href="/view/${member.id}"> ${board.subject}</a></td>
+                            <td>${member.email}</td>
+                             
+                        </tr>
+                    </C:forEach>
+                </c:when>
+                <c:otherwise><tr>
+
+                    <td colspan="3"> no Memeber</td>
+                </tr></c:otherwise>
+            </c:choose>
+		</tbody>
+		 </table>
+		
+</body>
+</html>

@@ -4,15 +4,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.themoviedb.www.files.helpers.MultipartFileHandler;
 import org.themoviedb.www.movie.dao.MovieDao;
 import org.themoviedb.www.movie.vo.MovieVO;
 import org.themoviedb.www.movie.vo.response.SearchResultVO;
+import org.themoviedb.www.movie.vo.response.SelectResultForMovieUrlVO;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	private MovieDao movieDao;
+	
+	@Autowired 
+	private MultipartFileHandler multipartFileHandler;
+	
 	@Override
 	public SearchResultVO findAllMovies() { 
 
@@ -35,10 +42,29 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public boolean creatNewMovie(MovieVO movieVO)  {
 		
-		int insertCount = this.movieDao.insertNewMovie(movieVO);
+		// 1. Movie 에 insert 할때 id 일단 먼저 받아오기
+		// Poster URL 주기
+		movieVO.setPosterUrl(movieVO.getAttachFile().getOriginalFilename());
+		
+		System.out.print("----------------------------------------------");
+		System.out.println(movieVO.getAttachFile().getOriginalFilename());
+		System.out.println("debug -----" + movieVO.getPosterUrl());
+		int insertCount = this.movieDao.insertNewMovie(movieVO); 
+		
+		
+		// 첨부파일 업 로 드
+		MultipartFile attachFiles = movieVO.getAttachFile();
+		this.multipartFileHandler.upload(attachFiles, movieVO.getMovieId());
 		
 		
 		return insertCount ==1;
+	}
+	@Override
+	public SelectResultForMovieUrlVO findMovieByMovieId(String movieId) {
+		
+		SelectResultForMovieUrlVO returnValue = this.movieDao.findMovieByMovieId(movieId);
+		
+		return returnValue;
 	}
 
 	

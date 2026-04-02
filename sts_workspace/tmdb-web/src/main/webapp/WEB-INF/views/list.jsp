@@ -27,7 +27,7 @@
 					<c:when test="${not empty movieResult}">
 						<c:forEach items="${movieResult }" var="movie">
 							<tr>
-								<td>${movie.title }</td>
+								<td> <a>${movie.title}</a>  </td>
 								<td>${movie.movieRating }</td>
 								<td>${movie.introduce}</td>
 								<td>${movie.runningTime }m</td>

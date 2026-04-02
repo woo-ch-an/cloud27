@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/tmdb-web.css" type="text/css"/>
+<title>Movie Write</title>
+</head>
+<body>
+<div class="wrapper">
+	<h1>New Movie</h1>
+	<form method="post" action="/write">
+		<div class="gird write">
+			<label for="title">Movie Title</label> 
+            <input type="text" id="title"name="title" placeholder="Movie Title" /> 
+            
+            <!--  Poster area ~  -->
+            <label for="posterUrl">Movie PosetURL</label> 
+            <input type="text" id="posterUrl"name="posterUrl" placeholder="Movie posetURL" />
+
+            <!--  Poster End -->
+            
+            <label for="movieRating">Movie Rating</label>
+			<input id="movieRating" type="text" name="movieRating" placeholder="Movie Rating" />  
+            <label for="openDate"> Release Date</label>
+			<input id="openDate" type="text" name="openDate" placeholder="Movie Release Date" />  
+            <label for="openCountry">Release Country</label>
+			<input id="openCountry" type="text" name="openCountry" placeholder="Release Country" />  
+             <label for="runningTime">Runnig Time</label>
+			<input id="runningTime" type="number" name="runningTime" placeholder="Running Time" /> 
+
+             <label for="introduce">Introduce</label>
+			<input id="introduce" type="text" name="introduce" placeholder="One-liner review" /> 
+             <label for="sysnopsis">Sysnopsis</label>
+			<input id="sysnopsis" type="text" name="sysnopsis" placeholder="This movie is about  ..." /> 
+             <label for="originalTitle">Original Title</label>
+			<input id="originalTitle" type="text" name="originalTitle" placeholder="Original Title" /> 
+             <label for="state">State</label>
+			<input id="state" type="text" name="state" placeholder="Current status of the movie" /> 
+             <label for="language">Language</label>
+			<input id="language" type="text" name="language" placeholder="Language" /> 
+             <label for="budget">Production Cost</label>
+			<input id="budget" type="number" name="budget" placeholder="-1000$ ..." /> 
+             <label for="profit">Gross revenue</label>
+			<input id="profit" type="number" name="profit" placeholder="+1000$ ..." /> 
+        
+        
+        <div class="btn-group">
+			<div class="right-align">
+				<input type="submit" value="저장" />
+			</div>
+		</div> 
+		</div>
+	</form></div>
+</body>
+</html>

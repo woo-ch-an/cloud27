@@ -1,0 +1,12 @@
+$(function () {
+   // ".add-file" 을 클릭하면 
+   // 새로운 파일 인과 버튼을 
+   // ".attach-files" 아래 추가한다
+   $(".add-file").on("click", function(){
+    var fileInput = $("<input />");
+    var addButton = $("<button />");
+    
+    $(".attach-files").append(fileInput)append(addButton);
+    
+   });
+});

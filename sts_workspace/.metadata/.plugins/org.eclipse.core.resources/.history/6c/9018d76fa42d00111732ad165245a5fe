@@ -1,0 +1,5 @@
+package org.themoviedb.www.files.vo.request;
+
+public class UploadVO {
+
+}

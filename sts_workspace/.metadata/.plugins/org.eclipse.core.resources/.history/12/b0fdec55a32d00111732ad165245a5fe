@@ -1,0 +1,5 @@
+package org.themoviedb.www.files.web;
+
+public class FilesController {
+
+}

@@ -1,0 +1,15 @@
+package org.themoviedb.www.movie.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.themoviedb.www.movie.vo.MovieVO;
+
+@Mapper
+public interface MovieDao {
+
+	public int selectBoardCount() ;
+
+	public List<MovieVO> selectBoardList(); 
+
+}

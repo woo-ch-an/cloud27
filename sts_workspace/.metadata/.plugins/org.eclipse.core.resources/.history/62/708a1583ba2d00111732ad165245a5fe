@@ -1,0 +1,22 @@
+# change Console log  level 
+logging:
+  level:
+    root: debug
+# my batis setting
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  # set up location of mapper files
+  mapper-locations: classpath:org/themoviedb/new/movie/**/mapper/*Mapper.xml
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: TMDB
+    password: TMDB
+  application:
+    name: tmdb-web

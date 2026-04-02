@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.themoviedb.www.movie.dao.MovieDao">
+
+
+    public int selectBoardCount() ;
+
+    public List<MovieVO> selectBoardList(); 
+    
+    
+  <select id="selectBoardCount" resultType="_int"> 
+  </select>
+  <select id="selectBoardList" resultType="org.themoviedb.www.movie.dao.MovieDao">
+  </select>
+</mapper>

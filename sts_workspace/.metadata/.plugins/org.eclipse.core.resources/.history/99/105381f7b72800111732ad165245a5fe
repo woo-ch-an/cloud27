@@ -1,0 +1,48 @@
+package com.ktdsuniversity.edu;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class CalculateController {
+	
+	/**<pre>
+	 * Endpoint = "/calc/
+	 * return template = calc.jsp
+	 * data that use template 
+	 * 		-1 : firstNum
+	 * 		-2 : secondNum
+	 * 		-3 : result (firstNum+secondNum)
+	 * result of the template
+	 *		- div>span*3 , insert the datas to span consequncely
+	 * </pre>
+	 */
+	
+	@GetMapping("/calc")
+	public String CalculatorHtml(Model model){
+		model.addAttribute("firstNum", 5);
+		model.addAttribute("secondNum", 2);
+		model.addAttribute("result", 7); 
+		
+		return "calc";
+	};
+	
+	/**
+	 * <pre>
+	 * 3way to send parameter to endpoint form browser
+	 * 		1. Query String parameter - use "?" end of the endpoint 
+	 * 		 -- /endpint?key=value&key2=value2 ~ 
+	 *       -- /calc2?
+	 *       자세한건 필기참고 
+	 * </pre>
+	 */
+	@GetMapping("/calc2")
+	public String ViewParamCalcPage(@RequestParam int f, @RequestParam int s, Model model) {
+		int result = f+s ; 
+		
+		return "calc";
+	}
+
+}

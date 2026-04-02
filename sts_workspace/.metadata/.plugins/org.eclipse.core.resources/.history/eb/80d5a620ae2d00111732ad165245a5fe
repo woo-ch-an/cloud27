@@ -1,0 +1,13 @@
+package org.themoviedb.www.files.helpers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.themoviedb.www.files.dao.FilesDao;
+
+@Component
+public class MultipartFileHandler {
+	
+	@Autowired
+	private FilesDao filesDao;
+
+}

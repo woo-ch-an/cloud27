@@ -1,0 +1,8 @@
+package org.themoviedb.www.movie.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public class MovieDao { 
+
+}
