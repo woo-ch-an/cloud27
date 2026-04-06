@@ -46,6 +46,27 @@ div.gird{
 div.write{
     grid-template-columns: 10rem 1fr; 
     row-gap: 0.625rem; 
+    
+    & > div.attach-files{ 
+    display : grid;
+    grid-template-columns: 1fr minmax(5rem, auto);
+    gap: 0.625rem;
+    } 
+    
+    & > div.inputdiv {
+        & > .VaildationError{
+        color:red;
+        font-weight:600;
+        font-size:0.8rem;
+        margin-top:0.3rem;
+        padding:0.5rem;
+        background-color:#f002;
+        }
+         & > input{
+            width:100%; 
+            display:block;
+        }
+    }
 }
 /* End write content style */ 
 .wrapper{

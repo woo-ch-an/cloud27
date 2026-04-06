@@ -27,7 +27,7 @@
         
         <span> Poster </span>
         <div> 
-        <img src="${movieVO.filePath}">
+        <img src="/file/${movieVO.movieId}">
         </div>
         
         <span> Synopsis </span> 

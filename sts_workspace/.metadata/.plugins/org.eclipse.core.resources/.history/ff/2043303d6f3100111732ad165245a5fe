@@ -1,0 +1,26 @@
+package com.ktdsuniversity.edu.members.service;
+
+import com.ktdsuniversity.edu.members.vo.MemberVO;
+import com.ktdsuniversity.edu.members.vo.request.LoginVO;
+import com.ktdsuniversity.edu.members.vo.response.SearchMemberResultVO;
+
+import jakarta.validation.Valid;
+
+public interface MembersService {
+
+	boolean createNewMember(MemberVO memberVo);
+
+	SearchMemberResultVO findAllMembers();
+
+	MemberVO selectMemeber(String memberName);
+	
+
+	MemberVO selectMemeberByEmail(String memberName);
+
+	boolean updateMembersByMemberEmail(MemberVO memberVO);
+
+	int deleteMember(String email);
+
+	MemberVO findMemberByEmailAndPassword(@Valid LoginVO loginVO); 
+
+}

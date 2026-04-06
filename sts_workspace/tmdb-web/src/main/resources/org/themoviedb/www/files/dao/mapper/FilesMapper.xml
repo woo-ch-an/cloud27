@@ -21,4 +21,16 @@
 		, #{fileLength}
 		, #{filePath})
 	</insert>
+	
+	<select id="selectFilesByFileGroupAndFileNum" parameterType="string" resultType="org.themoviedb.www.files.vo.response.DownloadVO">
+	SELECT FILE_GROUP_ID
+        , OBFUSCATE_NAME
+        , DISPLAY_NAME
+        , EXTEND_NAME
+        , FILE_LENGTH
+        , FILE_PATH
+      FROM TMDB.FILES
+     WHERE FILE_GROUP_ID = #{_parameter}
+	
+	</select>
 </mapper>

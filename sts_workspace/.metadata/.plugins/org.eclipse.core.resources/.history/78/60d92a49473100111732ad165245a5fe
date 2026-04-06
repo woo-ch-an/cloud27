@@ -1,0 +1,13 @@
+package org.themoviedb.www.members.serivce;
+
+import org.themoviedb.www.members.vo.MembersVO;
+
+import jakarta.validation.Valid;
+
+public interface MembersService {
+
+	MembersVO selectMember(String email);
+
+	void createNewMember(@Valid MembersVO membersVO);
+
+}

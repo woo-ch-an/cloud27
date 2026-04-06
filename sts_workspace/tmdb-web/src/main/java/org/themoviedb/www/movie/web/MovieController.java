@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.themoviedb.www.movie.service.MovieService;
 import org.themoviedb.www.movie.vo.MovieVO;
 import org.themoviedb.www.movie.vo.response.SearchResultVO;
 import org.themoviedb.www.movie.vo.response.SelectResultForMovieUrlVO;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class MovieController {
@@ -46,15 +50,31 @@ public class MovieController {
 	}
 	
 	@PostMapping("/write")
-	public String doWriteAction(MovieVO movieVO) { 
-		System.out.print("creatResult STart");
-		System.out.print("movieVO :::" + movieVO.getBudget());
-		System.out.print(movieVO); 
+	public String doWriteAction(@Valid @ModelAttribute MovieVO movieVO, BindingResult bindingResult,Model model) { 
+		
 //		if(movieVO.getTitle() == null || movieVO.getSysnopsis() == null || movieVO.getLanguage() == null || movieVO.getPosterUrl() == null) {
 //
 //			System.out.print("creatResult faile");
 //			return "/list";
 //		}
+		
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("inputData", movieVO);
+			return "write";
+		}
+		String posterUrl = movieVO.getPosterUrl();
+		posterUrl = posterUrl.replace("<", "&lt;")
+							 .replace(">", "&gt;");
+		movieVO.setPosterUrl(posterUrl);
+		
+		String title = movieVO.getTitle();
+		title = title.replace("<", "&lt;")
+					 .replace(">", "&gt;");
+		movieVO.setTitle(title);
+		
+		// 여따 적는 이유 : 다른 진입경로에서 들어오는 공격 막기 위함
+ 
+		
 		boolean creatResult = this.movieService.creatNewMovie(movieVO);
 		System.out.print("creatResult "+creatResult);
 		return "redirect:/list";

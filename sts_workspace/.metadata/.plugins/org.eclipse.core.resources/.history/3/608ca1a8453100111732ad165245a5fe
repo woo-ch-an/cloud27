@@ -1,0 +1,36 @@
+package org.themoviedb.www.members.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.themoviedb.www.members.serivce.MembersService;
+import org.themoviedb.www.members.vo.MembersVO;
+import org.themoviedb.www.members.vo.response.DuplicateResultVO;
+
+@Controller
+public class MembersController {
+
+	@Autowired
+	private MembersService membersService;
+
+	@ResponseBody
+	@GetMapping("/regist/check/duplicate/{email}")
+	public DuplicateResultVO doCheckDuplicateEmailAction(@PathVariable String email) {
+		MembersVO membersVO = this.membersService.selectMember(email);
+		
+		DuplicateResultVO result = new DuplicateResultVO();
+		
+		result.setEmail(email);
+		result.setDuplicate(membersVO !=null);
+		
+		return result;
+		
+	}
+	
+	@GetMapping("/regist")
+	public String viewMembersView() {
+		return "/members/regist";
+	}
+}

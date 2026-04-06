@@ -1,0 +1,43 @@
+package org.themoviedb.www.members.serivce;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.themoviedb.www.members.dao.MembersDao;
+import org.themoviedb.www.members.vo.MembersVO;
+
+import com.ktdsuniversity.edu.members.helpers.SHA256Util;
+
+import jakarta.validation.Valid;
+
+@Service
+public class MembersServiceImpl implements MembersService {
+
+	@Autowired
+	private MembersDao membersDao;
+
+	@Override
+	public MembersVO selectMember(String email) {
+		MembersVO member = this.membersDao.selectMemberByEmail(email);
+		return member;
+	}
+
+	@Override
+	public boolean createNewMember(@Valid MembersVO membersVO) {
+		MembersVO uploadVO = this.membersDao.selectMemberByEmail(membersVO.getEmail());
+		
+		if(uploadVO != null) {
+			throw new IllegalArgumentException(membersVO.getEmail());
+		}
+		
+		String newSalt = SHA256Util.generateSalt();
+		String usersPassword = membersVO.getPassword();
+		
+		usersPassword=SHA256Util.getEncrypt(usersPassword, newSalt);
+		
+		membersVO.setSalt(newSalt);
+		membersVO.setPassword(usersPassword);
+		
+		int insertCount = this.membersDao.insertNewMember(membersVO);
+		return insertCount == 1;
+	}
+}

@@ -14,11 +14,16 @@ public class WriteVO {
 	private String id;
 	@NotEmpty(message= "Subject MUST to be Filled.")
 	private String subject;
-	@NotEmpty(message= "Email MUST to be Filled.")
-	@Email(message= "Not Email Type.")
 	private String email;
 	private String content;
+	private String fileGroupId;
 	
+	public String getFileGroupId() {
+		return this.fileGroupId;
+	}
+	public void setFileGroupId(String fileGroupId) {
+		this.fileGroupId = fileGroupId;
+	}
 	private List<MultipartFile> attachFile;
 	
 	public String getId() {

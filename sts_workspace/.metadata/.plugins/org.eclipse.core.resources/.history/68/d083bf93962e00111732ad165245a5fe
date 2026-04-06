@@ -1,0 +1,5 @@
+package org.themoviedb.www.files.vo.response;
+
+public class DownloadVO {
+
+}

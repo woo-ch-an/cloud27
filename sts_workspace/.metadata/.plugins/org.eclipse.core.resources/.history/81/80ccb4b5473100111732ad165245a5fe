@@ -1,0 +1,15 @@
+package org.themoviedb.www.members.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.themoviedb.www.members.vo.MembersVO;
+
+import jakarta.validation.Valid;
+
+@Mapper
+public interface MembersDao {
+
+	MembersVO selectMemberByEmail(String email);
+
+	int insertNewMember(@Valid MembersVO membersVO);
+
+}

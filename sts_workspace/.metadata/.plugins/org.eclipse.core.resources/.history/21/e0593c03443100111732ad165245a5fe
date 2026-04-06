@@ -1,0 +1,5 @@
+package org.themoviedb.www.members.serivce;
+
+public interface MembersService {
+
+}

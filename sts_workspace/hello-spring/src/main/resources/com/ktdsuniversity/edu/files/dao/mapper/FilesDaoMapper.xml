@@ -53,7 +53,7 @@
 		parameterType="com.ktdsuniversity.edu.files.vo.request.UploadVO">
 		SELECT FILE_PATH
 		FROM SPRING_BOOT.FILES
-		WHERE FILE_GROUP_ID = #{id}
+		WHERE FILE_GROUP_ID = #{fileGroupId}
 		AND
 		FILE_NUM IN
 		<foreach collection="deleteFileNum" item="fileNum" open="("
@@ -65,7 +65,7 @@
 	<delete id="deleteFilesByFileGroupIdAndFileNums"
 		parameterType="com.ktdsuniversity.edu.files.vo.request.UploadVO">
 		DELETE SPRING_BOOT.FILES
-		WHERE FILE_GROUP_ID = #{id}
+		WHERE FILE_GROUP_ID = #{fileGroupId}
 		AND FILE_NUM IN
 		<foreach collection="deleteFileNum" item="fileNum" open="("
 			close=")" separator=", ">
@@ -84,4 +84,16 @@
        WHERE FILE_GROUP_ID = #{_parameter}
 	</delete>
 
+    <select id="selectNewFileGroupId" resultType="string">
+        SELECT 'FG-' || TO_CHAR(SYSDATE, 'YYYYMMDD-') ||
+            LPAD(SEQ_FILES_GROUP_PK.NEXTVAL,6,'0')
+            FROM DUAL
+    </select>
+
+    <insert id="insertFileGroupId" parameterType="string">
+        INSERT INTO
+        SPRING_BOOT.FILES_GROUP
+        (FILE_GROUP_ID)
+        VALUES(#{#_parameter})
+    </insert>
 </mapper>

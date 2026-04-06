@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktdsuniversity.edu.members.service.MembersService;
 import com.ktdsuniversity.edu.members.vo.MemberVO;
+import com.ktdsuniversity.edu.members.vo.request.LoginVO;
+import com.ktdsuniversity.edu.members.vo.response.DuplicateResultVO;
 import com.ktdsuniversity.edu.members.vo.response.SearchMemberResultVO;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -22,6 +27,19 @@ public class MemberController {
 	@Autowired
 	private MembersService membersService;
 
+	@ResponseBody
+	@GetMapping("/regist/check/duplicate/{email}")
+	public DuplicateResultVO doCheckDuplicateEmailAction(@PathVariable String email) {
+		// 이메일이 이미 사용중인가 ?-> 에 대한 결과를 JSON으로다가전돌송 사용 true / 미사용 false
+		MemberVO memberVO = this.membersService.selectMemeber(email);
+		
+		DuplicateResultVO result = new DuplicateResultVO();
+		result.setEmail(email);
+		result.setDuplicate(memberVO != null);
+		
+		return result;
+	}
+	
 	@GetMapping("/regist")
 	public String viewMemberView() {
 		return "/members/memberadd";
@@ -35,7 +53,7 @@ public class MemberController {
 			return "members/memberadd";
 		}
 		
-		boolean createResult = this.membersService.createNewMember(memberVO);
+		this.membersService.createNewMember(memberVO);
 		return "redirect:/mview";
 	}
 
@@ -99,7 +117,37 @@ public class MemberController {
 
 	@GetMapping("/members")
 	public String viewMembersListPage(Model model) {
-		return "/member/list";
+		return "/members/list";
 
 	}
+	
+	@GetMapping("/login")
+	public String viewLoginPage() {
+		return "/members/login";
+		}
+	
+	@PostMapping("/login")
+	public String doLoginAction(@Valid @ModelAttribute LoginVO loginVO, BindingResult bindingResult, Model model, HttpServletRequest request) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("loginData",loginVO);
+			return "members/login";
+			
+		}
+		String userIp = request.getRemoteAddr();
+		loginVO.setIp(userIp);
+		
+		MemberVO member = this.membersService.findMemberByEmailAndPassword(loginVO);
+		
+		// 서버의 세션을 삭제한다. (로그아웃 혹은 30분 후)
+		request.getSession().invalidate();
+		
+		// request.getSession(); Http Requst header로 전달된 JSessionID 객체 변환
+		// request.getSession(true); <- 안에 True 가 있음 -> 이전 세션 discard.  새로운 세션 생성
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("__LOGIN_DATA__", member);
+		
+		return "redirect:/";
+	}
+	
 }

@@ -1,0 +1,42 @@
+package com.ktdsuniversity.edu.members.vo;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+public class MemberVO {
+	
+	@NotEmpty(message = "Email must to be filled.")
+	@Email(message="Not Email Type.")
+	private String email; 
+	@NotEmpty(message = "Name must to be filled.")	
+	@Size(min = 2, max = 10, message = "2~ 10")
+	private String name; 
+	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", 
+			message = "Password must to be filled With Condition.")
+	private String password;
+	
+	public String getEmail() {
+		return this.email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getName() {
+		return this.name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPassword() {
+		return this.password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	@Override
+	public String toString() {
+		return "MemberVO [email=" + email + ", name=" + name + ", password=" + password + "]";
+	}  
+}

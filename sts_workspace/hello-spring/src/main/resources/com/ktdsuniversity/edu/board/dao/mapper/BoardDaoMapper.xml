@@ -39,15 +39,14 @@
 		(ID
 		, SUBJECT
 		, CONTENT
-		,
-		EMAIL
+		, EMAIL
 		, VIEW_CNT
 		,
 		CRT_DT
 		, MDFY_DT
 		, FILE_NAME
-		,
-		ORIGIN_FILE_NAME)
+		, ORIGIN_FILE_NAME
+		, FILE_GROUP_ID)
 		VALUES(#{id}
 		, #{subject}
 		,
@@ -57,7 +56,10 @@
 		, ''
 		, ''
 		, ''
-		, '')
+		, ''
+		,
+		#{fileGroupId}
+		)
 	</insert>
 
 	<!-- <select id="selectBoardById" resultType="com.ktdsuniversity.edu.board.vo.BoardVO" 
@@ -68,33 +70,27 @@
 
 	<!-- Join 을 사용하는 쿼리의 결과를 Has A를 사용하는VO에게 값읋 할당 하기 위한 수단 / resultMap -->
 	<resultMap type="com.ktdsuniversity.edu.board.vo.BoardVO"
-		id="BoardVOMap"
-	autoMapping="true">
-		
+		id="BoardVOMap" autoMapping="true">
+
 		<id column="ID" property="id"></id>
-		<!-- <result column="SUBJECT" property="subject"></result>
-		<result column="CONTENT" property="content"></result>
-		<result column="EMAIL" property="email"></result>
-		<result column="VIEW_CNT" property="viewCnt"></result>
-		<result column="CRT_DT" property="crtDt"></result>
-		<result column="MDFY_DT" property="mdfyDt"></result> 
-		<result column="FILE_NAME" property="fileName"></result>
-		<result column="ORIGIN_FILE_NAME" property="originFileName"></result> -->
+		<!-- <result column="SUBJECT" property="subject"></result> <result column="CONTENT" 
+			property="content"></result> <result column="EMAIL" property="email"></result> 
+			<result column="VIEW_CNT" property="viewCnt"></result> <result column="CRT_DT" 
+			property="crtDt"></result> <result column="MDFY_DT" property="mdfyDt"></result> 
+			<result column="FILE_NAME" property="fileName"></result> <result column="ORIGIN_FILE_NAME" 
+			property="originFileName"></result> -->
 
 		<collection property="files" javaType="list"
-			ofType="com.ktdsuniversity.edu.files.vo.FilesVO"
-		     autoMapping="true">
+			ofType="com.ktdsuniversity.edu.files.vo.FilesVO" autoMapping="true">
 			<id column="FILE_NUM" property="fileNum"></id>
 			<id column="FILE_GROUP_ID" property="fileGroupId"></id>
-        <!-- <result column="OBFUSCATE_NAME" property="obfuscateName"></result>
-        <result column="DISPLAY_NAME" property="displayName"></result>
-        <result column="EXTEND_NAME" property="extendName"></result>
-        <result column="FILE_LENGTH" property="fileLength"></result>
-        <result column="FILE_PATH" property="filePath"></result>  -->
+			<!-- <result column="OBFUSCATE_NAME" property="obfuscateName"></result> 
+				<result column="DISPLAY_NAME" property="displayName"></result> <result column="EXTEND_NAME" 
+				property="extendName"></result> <result column="FILE_LENGTH" property="fileLength"></result> 
+				<result column="FILE_PATH" property="filePath"></result> -->
 		</collection>
 	</resultMap>
-	<select id="selectBoardById"
-		resultMap="BoardVOMap"
+	<select id="selectBoardById" resultMap="BoardVOMap"
 		parameterType="string">
 		SELECT B.ID
 		,B.SUBJECT
@@ -113,8 +109,17 @@
 		,F.FILE_LENGTH
 		,F.FILE_PATH
 		FROM BOARD B
-		LEFT OUTER JOIN FILES F
-		ON B.ID = F.FILE_GROUP_ID
+		LEFT OUTER JOIN (SELECT F.FILE_NUM
+		,FG.FILE_GROUP_ID
+		,F.OBFUSCATE_NAME
+		,F.DISPLAY_NAME
+		,F.EXTEND_NAME
+		,F.FILE_LENGTH
+		,F.FILE_PATH
+		FROM FILES_GROUP FG
+		INNER JOIN FILES F
+		ON FG.FILE_GROUP_ID = F.FILE_GROUP_ID) F
+		ON B.FILE_GROUP_ID = F.FILE_GROUP_ID
 		WHERE ID =
 		#{_parameter}
 	</select>
@@ -140,6 +145,26 @@
 		CONTENT=#{content}
 		, EMAIL=#{email}
 		, MDFY_DT = SYSDATE
+		, FILE_GROUP_ID =
+		#{fileGroupId}
 		WHERE ID=#{id}
 	</update>
+
+
+	<select id="selectNewFileGroupId" resultType="string">
+		SELECT 'FG-' ||
+		TO_CHAR(SYSDATE, 'YYYYMMDD-') ||
+		LPAD(SEQ_FILES_GROUP_PK.NEXTVAL,6,'0')
+		FROM DUAL
+	</select>
+
+	<insert id="insertFileGroupId" parameterType="string">
+		INSERT INTO
+		SPRING_BOOT.FILES_GROUP
+		(FILE_GROUP_ID)
+		VALUES(#{#_parameter})
+	</insert>
+
+
+
 </mapper>

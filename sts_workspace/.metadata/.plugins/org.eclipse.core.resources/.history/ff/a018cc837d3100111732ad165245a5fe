@@ -1,0 +1,32 @@
+package com.ktdsuniversity.edu.members.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.ktdsuniversity.edu.members.vo.MemberVO;
+
+@Mapper
+public interface MembersDao {
+
+	int insertNewMember(MemberVO memberVO);
+
+	List<MemberVO> selectMemebers();
+
+	int selectMembersCount();
+
+	MemberVO selectMemeber(String memberName);
+
+	int updateMemberByMemberEmail(MemberVO memberVO);
+
+	int deleteMemberbyEmail(String email);
+
+	MemberVO selectMemeberbyEmail(String memberEmail);
+
+	void updateIncreaseLoginFailCount(String email);
+
+	void updateBlock(String email);
+
+	void updateSuccessLogin(String email);
+
+}

@@ -1,0 +1,105 @@
+/**
+ * 회원페이지와관련된 스크립트 작성 
+ */
+$().ready(function () {
+    $("#email").on("keyup", function () {
+        var emailValue = $(this).val();
+
+        if (emailValue) {
+            // 비동기로 중복 여부 검사
+            fetch("/regist/check/duplicate/" + emailValue).then(function (fetchResult) {
+                return fetchResult.json();
+            })
+                .then(function (json) {
+                    console.log(json);
+                    if (!json.duplicate) {
+                        var duplicateResult = $("<div>");
+                    } else {
+
+                    }
+
+                    $("#email").after(duplicateResult);
+                })
+        }
+    });
+
+    $("#confirm-password, #password").on("keyup", function () {
+        var confirmPassword = $("#confirm-password").val();
+        var password = $("#password").val();
+
+        $("#password, #confirm-password").closest(".inputdiv").children(".VaildationError").remove();
+
+        if (confirmPassword !== password) {
+            var passwordErrorMessage = $("<div>");
+            passwordErrorMessage.addClass("VaildationError");
+            passwordErrorMessage.text("password missmatch");
+
+            var confirmErrorMessage = $("<div>");
+            confirmErrorMessage.addClass("VaildationError");
+            confirmErrorMessage.text("password missmatch");
+
+            // $(this).after(passwordErrorMessage);
+            $("#password").after(passwordErrorMessage);
+            $("#confirm-password").after(confirmErrorMessage);
+        }
+
+    });
+
+    $("#show-password").on("change", function () {
+        var checked = $(this).prop("checked");
+        if (checked) {
+            $("#password").attr("type", "text");
+        }
+        else {
+            $("#password").attr("type", "password");
+        }
+    });
+    // 브라우저에서 입력값 검증학기 
+    //회원가입 폼이 전송되기 전에 입력값을 제대로 작성했는지 체크
+
+    // 제대로 입력했다 --> 폼을 전송
+
+    // 제대로 입력하지않았다 -> 에러 메시지를 화면에 보여준다
+
+    $("#memberVO").on("submit", function (event) {
+        // 1. 일단 브라우저에 할당되어있는 서브밋 콜백 이벤트 제거 -> 검증실패하면 send x
+        event.preventDefault();
+        $("#password").trigger("keyup");
+
+        $(this).find(".VaildationError").remove();
+        // 이름 / 이멜 / pw 공백일까 
+        var email = $("#email").val();
+        if (!email) {
+            var emailErrorMessage = $("<div>");
+            emailErrorMessage.addClass("VaildationError");
+            emailErrorMessage.text("이메일형태아님ㄴ다.");
+
+            $("#email").after(emailErrorMessage);
+        }
+        var name = $("#name").val();
+        if (!name) {
+            var nameErrorMessage = $("<div>");
+            nameErrorMessage.addClass("VaildationError");
+            nameErrorMessage.text("Name Er or");
+
+            $("#name").after(nameErrorMessage);
+
+        }
+        var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        var password = $("#password").val();
+        if (!passwordPattern.test(password)) {
+            var passwordErrorMessage = $("<div>");
+            passwordErrorMessage.addClass("VaildationError");
+            passwordErrorMessage.text("password Erro");
+
+            $("#password").after(passwordErrorMessage);
+
+        }
+        // 폼 전송하기
+        if ($(".VaildationError").length === 0) {
+            //  $(this).submit();  < jQuery          
+            // event.preventDefault();이거땜에 제이쿼리는 안 
+            this.submit(); // JavaScript Event 
+        }
+    });
+});

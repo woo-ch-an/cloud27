@@ -1,0 +1,12 @@
+package org.themoviedb.www.members.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.themoviedb.www.members.serivce.MembersService;
+
+@Controller
+public class MembersController {
+
+	@Autowired
+	private MembersService membersService;
+}

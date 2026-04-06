@@ -1,6 +1,7 @@
 package com.ktdsuniversity.edu.members.service;
 
 import com.ktdsuniversity.edu.members.vo.MemberVO;
+import com.ktdsuniversity.edu.members.vo.request.LoginVO;
 import com.ktdsuniversity.edu.members.vo.response.SearchMemberResultVO;
 
 public interface MembersService {
@@ -10,9 +11,14 @@ public interface MembersService {
 	SearchMemberResultVO findAllMembers();
 
 	MemberVO selectMemeber(String memberName);
+	
+
+	MemberVO selectMemeberByEmail(String memberName);
 
 	boolean updateMembersByMemberEmail(MemberVO memberVO);
 
-	int deleteMember(String email); 
+	int deleteMember(String email);
+
+	MemberVO findMemberByEmailAndPassword(LoginVO loginVO); 
 
 }

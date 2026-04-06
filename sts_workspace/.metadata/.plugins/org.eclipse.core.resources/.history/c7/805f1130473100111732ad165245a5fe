@@ -1,0 +1,52 @@
+package org.themoviedb.www.members.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.themoviedb.www.members.serivce.MembersService;
+import org.themoviedb.www.members.vo.MembersVO;
+import org.themoviedb.www.members.vo.response.DuplicateResultVO;
+
+import jakarta.validation.Valid;
+
+@Controller
+public class MembersController {
+
+	@Autowired
+	private MembersService membersService;
+
+	@ResponseBody
+	@GetMapping("/regist/check/duplicate/{email}")
+	public DuplicateResultVO doCheckDuplicateEmailAction(@PathVariable String email) {
+		MembersVO membersVO = this.membersService.selectMember(email);
+		
+		DuplicateResultVO result = new DuplicateResultVO();
+		
+		result.setEmail(email);
+		result.setDuplicate(membersVO !=null);
+		
+		return result;
+	}
+	
+	@GetMapping("/regist")
+	public String viewMembersView() {
+		return "/members/regist";
+	}
+	
+	@PostMapping("/regist")
+	public String creatMemeber(@Valid @ModelAttribute MembersVO membersVO, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("inputData", membersVO);
+			return "/members/regist/";
+			
+		}
+		this.,membersService.createNewMember(membersVO);
+		return "redirect:/list";
+	}
+}

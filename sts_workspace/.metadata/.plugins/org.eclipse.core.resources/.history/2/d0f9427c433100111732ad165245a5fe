@@ -1,0 +1,5 @@
+package org.themoviedb.www.members.vo.response;
+
+public class DuplicateResultVO {
+
+}

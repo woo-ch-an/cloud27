@@ -1,2 +1,5 @@
 1775032119108	Rename resource 'new'
 1775032669074	Rename package 'org.themoviedb.www.files.helper'
+1775205187887	Move 'MembersMapper.jsp' to 'mapper'
+1775205199003	Delete element
+1775205284085	Delete element

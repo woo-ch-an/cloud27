@@ -17,10 +17,9 @@ public class MultipartFileHandler {
 
 	@Autowired
 	private FilesDao filesDao;
-
-	public void upload(List<MultipartFile> attachFiles, String fileGroupId) {
-
-		if (attachFiles != null && attachFiles.size() > 0) {
+	
+	public String upload(List<MultipartFile> attachFiles, String fileGroupId) {
+		if (attachFiles != null && attachFiles.size() > 0 && attachFiles.get(0).getName() != "") { 
 			for (int i = 0; i < attachFiles.size(); i++) {
 				// for (MultipartFile uploadedFile : attachFiles) { index 없는 버 전
 				if(attachFiles.get(i).isEmpty()) {
@@ -40,7 +39,7 @@ public class MultipartFileHandler {
 					String fileName = attachFiles.get(i).getOriginalFilename();
 					String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
 
-					uploadVO.setFileGroupId(fileGroupId); // 새롭게 등록되고있는 게시글의 ID는 알 수 없음 (자동생성이라) -> 이제 암
+					uploadVO.setFileGroupId(fileGroupId); 
 					uploadVO.setObfuscateName(obfuscateName); // 난독화 ㄴㄴ ;
 					uploadVO.setDisplayName(fileName);
 					uploadVO.setExtendName(ext);
@@ -53,7 +52,27 @@ public class MultipartFileHandler {
 				}
 
 			}
+			return fileGroupId;
 		}
+		//파일 없으면 N u l l
+		return null;
+	}
 
+	// 첨부파일의 그룹 아이디를 반환 하겠다
+	public String upload(List<MultipartFile> attachFiles) {
+
+
+		if (attachFiles != null && attachFiles.size() > 0 && attachFiles.get(0).getName() != "attachFile") { 
+			System.out.println(attachFiles.get(0));
+			System.out.println(attachFiles.get(0).getName());
+			String fileGroupId = this.filesDao.selectNewFileGroupId();
+			this.filesDao.insertFileGroupId(fileGroupId);
+			
+			this.upload(attachFiles, fileGroupId);
+			
+			return fileGroupId;
+		}
+		//파일 없으면 N u l l
+		return null;
 	}
 }

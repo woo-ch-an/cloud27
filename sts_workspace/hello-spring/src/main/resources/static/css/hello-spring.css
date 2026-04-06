@@ -66,25 +66,28 @@ input, & button, & textarea {
 div.write {
 	grid-template-columns: 5rem 1fr;
 	grid-template-rows: repeat(3,minmax(1.75rem, auto)) 20rem;
-	row-gap: 0.625rem; & > div .attach-files{ display : grid;
+	row-gap: 0.625rem; 
+    
+    & > div.attach-files{ 
+    display : grid;
 	grid-template-columns: 1fr minmax(5rem, auto);
 	gap: 0.625rem;
-	
-	
-}
-& > div.inputdiv {
-	& > .VaildationError{
-	color:red;
-	font-weight:600;
-	font-size:0.8rem;
-	margin-top:0.3rem;
-	padding:0.5rem;
-	background-color:#f002;
+    } 
+    
+    & > div.inputdiv {
+		& > .VaildationError{
+		color:red;
+		font-weight:600;
+		font-size:0.8rem;
+		margin-top:0.3rem;
+		padding:0.5rem;
+		background-color:#f002;
+		}
+		 & > input{
+			width:100%; 
+			display:block;
+		}
 	}
- & > input{
-	width:100%; 
-	display:block;
-	}}
 }
 /* End write content style */
 
@@ -149,3 +152,10 @@ padding:0.625rem 1rem;
  */
 
 /* End view article style */
+/* 회원 목록 style 시작 */
+div.login {
+  grid-template-columns: 7.5rem 1fr;
+  grid-template-rows: repeat(2, minmax(1.75rem, auto)) 1fr;
+  row-gap: 0.625rem;
+}
+/* 회원 목록 style 끝 */

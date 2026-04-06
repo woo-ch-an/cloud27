@@ -1,0 +1,35 @@
+/**
+ * 
+ */
+
+$(function() {
+
+    $("#movieVO").on("submit", function(event) {
+        event.preventDefault();
+
+        $(this).find(".VaildationError").remove();
+
+        var title = $("#title").val();
+        if (!title) {
+            var titleErrorMessage = $("<div>");
+            titleErrorMessage.addClass("VaildationError");
+            titleErrorMessage.text("Required Title");
+
+        }
+
+        var synopsis = $("#synopsis").val();
+        if (!synopsis) {
+            var synopsisErrorMessage = $("<div>");
+            synopsisErrorMessage.addClass("VaildationError");
+            synopsisErrorMessage.text("Required Synopsis");
+
+            $("#email").after(synopsisErrorMessage);
+        }
+
+
+
+        if ($(".VaildationError").length === 0) {
+            this.submit();
+        }
+    });
+});

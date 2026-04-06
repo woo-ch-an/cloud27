@@ -1,0 +1,12 @@
+package com.ktdsuniversity.edu.members.vo.request;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class LoginVO {
+
+	@NotBlank(message = "email 입력")
+	private String email;
+	@NotBlank(message = "password 입력")
+	private String password;
+	private String ip;
+}

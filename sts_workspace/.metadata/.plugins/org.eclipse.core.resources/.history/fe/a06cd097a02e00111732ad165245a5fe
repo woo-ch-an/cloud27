@@ -1,0 +1,32 @@
+/**
+ * 
+ */
+
+$(function() {
+
+    $("#movieVO").on("submit", function(event) {
+        event.preventDefault();
+
+        $(this).find(".VaildationError").remove();
+
+        var title = $("#title").val();
+        if (!title) {
+
+        }
+
+        var email = $("#email").val();
+        if (!email) {
+            var emailErrorMessage = $("<div>");
+            emailErrorMessage.addClass("VaildationError");
+            emailErrorMessage.text("이메일형태아님ㄴ다.");
+
+            $("#email").after(emailErrorMessage);
+        }
+
+
+
+        if ($(".VaildationError").length === 0) {
+            this.submit();
+        }
+    });
+});

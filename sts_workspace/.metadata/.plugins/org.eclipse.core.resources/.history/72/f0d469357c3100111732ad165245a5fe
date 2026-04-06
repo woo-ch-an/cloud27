@@ -1,0 +1,85 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ktdsuniversity.edu.members.dao.MembersDao">
+
+	<insert id="insertNewMember"
+		parameterType="com.ktdsuniversity.edu.members.vo.MemberVO">
+		INSERT INTO SPRING_BOOT.MEMBERS
+		(EMAIL
+		, NAME
+		, PASSWORD
+		,
+		SALT
+		, REGIST_DATE
+		, LATEST_PASSWORD_CHANGE_DATE
+		, LOGIN_FAIL_COUNT)
+		VALUES(
+		#{email}
+		, #{name}
+		, #{password}
+		, #{salt}
+		, SYSDATE
+		, SYSDATE
+		, 0
+		)
+	</insert>
+
+	<select id="selectMembersCount">
+		SELECT COUNT(EMAIL)
+		FROM SPRING_BOOT.MEMBERS
+	</select>
+
+	<select id="selectMemebers"
+		resultType="com.ktdsuniversity.edu.members.vo.MemberVO">
+		SELECT EMAIL
+		, NAME
+		, PASSWORD
+		FROM SPRING_BOOT.MEMBERS
+	</select>
+
+	<select id="selectMemeber"
+		resultType="com.ktdsuniversity.edu.members.vo.MemberVO"
+		parameterType="string">
+		SELECT EMAIL
+		, NAME
+		, PASSWORD
+		FROM SPRING_BOOT.MEMBERS
+		WHERE EMAIL=#{_parameter}
+
+	</select>
+
+	<update id="updateMemberByMemberEmail"
+		parameterType="com.ktdsuniversity.edu.members.vo.MemberVO">
+		UPDATE SPRING_BOOT.MEMBERS
+		SET NAME=#{name}
+		,
+		PASSWORD=#{password}
+		WHERE EMAIL=#{email}
+
+	</update>
+	<delete id="deleteMemberbyEmail" parameterType="string">
+		DELETE FROM
+		SPRING_BOOT.MEMBERS
+		WHERE EMAIL=#{_parameter}
+	</delete>
+
+	<select id="selectMemeberbyEmail" parameterType="string" resultType="com.ktdsuniversity.edu.members.vo.MemberVO">
+		SELECT EMAIL
+		, NAME
+		, PASSWORD
+		, SALT
+		, TO_CHAR(REGIST_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REGIST_DATE
+        , TO_CHAR(MODIFY_DATE, 'YYYY-MM-DD HH24:MI:SS') AS MODIFY_DATE
+        , TO_CHAR(LATEST_PASSWORD_CHANGE_DATE,  'YYYY-MM-DD HH24:MI:SS') AS LATEST_PASSWORD_CHANGE_DATE
+        , TO_CHAR(LOGIN_DATE, 'YYYY-MM-DD HH24:MI:SS') AS LOGIN_DATE
+        , LATEST_LOGIN_IP
+        , LOGIN_FAIL_COUNT
+        , TO_CHAR(LATEST_LOGIN_FAIL_DAE , 'YYYY-MM-DD HH24:MI:SS') AS LATEST_LOGIN_FAIL_DAE
+        , BLOCK_YN
+        , FILE_GROUP_ID
+		FROM SPRING_BOOT.MEMBERS
+		WHERE EMAIL=#{_parameter}
+	</select>
+</mapper>

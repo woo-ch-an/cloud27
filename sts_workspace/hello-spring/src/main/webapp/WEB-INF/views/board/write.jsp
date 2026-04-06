@@ -26,20 +26,13 @@
 					placeholder="Write your title" value="${inputData.subject}" />
 				<form:errors path="subject" cssClass="VaildationError" element="div"/>
 			</div>
-
-			<label for="email">이메일</label>
-			<div class="inputdiv">
-				<input id="email" type="email" name="email"
-					placeholder="Enter the Email" value="${inputData.email}" />
-				<form:errors path="email" cssClass="VaildationError" element="div"/>
-			</div>
+ 
 			<label for="attach-files">첨부파일</label>
-			<div id="attach-files" class="attach-files">
+			<div class="attach-files" id="attach-files">
 				<input type="file" name="attachFile" />
 
-				<button type="button" class="add-file">+</button>
+				<button type="button" class="add-file right-align">+</button>
 			</div>
-
 
 			<label for="content">내용</label>
 			<textarea id="content" name="content" placeholder="Enter the Content">${inputData.content}</textarea>

@@ -4,8 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.themoviedb.www.files.service.FilesService;
+import org.themoviedb.www.files.vo.response.DownloadVO;
 
 @Controller
 public class FilesController {
@@ -38,4 +44,17 @@ public class FilesController {
 		
 	}
 	
+	@GetMapping("/file/{fileGroupId}")
+	public ResponseEntity<Resource> doDownloadAction(@PathVariable String fileGroupId){
+		DownloadVO downloadVO = this.filesService.findAttachFile(fileGroupId);
+		
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + downloadVO.getDisplayName());
+		headers.set(HttpHeaders.CONTENT_LENGTH, downloadVO.getFileLength()+"");
+		headers.set(HttpHeaders.CONTENT_TYPE, this.mimeTypeMap.getOrDefault(downloadVO.getExtendName().toLowerCase(), "application/octet-stream"));
+		
+		
+		return ResponseEntity.ok().headers(headers).body(downloadVO.getResource());
+	}
 }
