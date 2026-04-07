@@ -4,25 +4,27 @@
 
 <mapper namespace="com.ktdsuniversity.edu.board.dao.BoardDao">
 	<select id="selectBoardCount" resultType="_int">
-		SELECT COUNT(ID)
-		FROM
-		BOARD
+		SELECT COUNT(B.ID)
+		FROM BOARD B
+	  INNER JOIN MEMBERS M 
+	    ON B.EMAIL = M.EMAIL
 	</select>
 	<select id="selectBoardList"
-		resultType="com.ktdsuniversity.edu.board.vo.BoardVO">
+		resultMap="BoardVOMap">
 		SELECT ID
-		, SUBJECT
-		, CONTENT
-		, EMAIL
-		, VIEW_CNT
-		,
-		TO_CHAR(CRT_DT, 'YYYY-MM-DD HH24:MI:SS') AS CRT_DT
-		, TO_CHAR(MDFY_DT,
-		'YYYY-MM-DD HH24:MI:SS') AS MDFY_DT
-		, FILE_NAME
-		, ORIGIN_FILE_NAME
-		FROM
-		BOARD
+		, B.SUBJECT
+		, B.CONTENT
+		, B.EMAIL
+		, B.VIEW_CNT
+		, TO_CHAR(B.CRT_DT, 'YYYY-MM-DD HH24:MI:SS') AS CRT_DT
+		, TO_CHAR(B.MDFY_DT, 'YYYY-MM-DD HH24:MI:SS') AS MDFY_DT
+		, B.FILE_NAME
+		, B.ORIGIN_FILE_NAME
+		, M.NAME
+		, TO_CHAR(M.REGIST_DATE , 'YYYY-MM-DD HH24:MI:SS') AS REGIST_DATE
+		FROM BOARD B
+	  INNER JOIN Members M
+	    ON B.EMAIL = M.EMAIL
 		ORDER BY ID DESC
 	</select>
 
@@ -41,16 +43,14 @@
 		, CONTENT
 		, EMAIL
 		, VIEW_CNT
-		,
-		CRT_DT
+		, CRT_DT
 		, MDFY_DT
 		, FILE_NAME
 		, ORIGIN_FILE_NAME
-		, FILE_GROUP_ID)
+		, FILE_GROUP_ID) 
 		VALUES(#{id}
 		, #{subject}
-		,
-		#{content}
+		, #{content}
 		, #{email}
 		, 0
 		, ''
@@ -79,7 +79,12 @@
 			property="crtDt"></result> <result column="MDFY_DT" property="mdfyDt"></result> 
 			<result column="FILE_NAME" property="fileName"></result> <result column="ORIGIN_FILE_NAME" 
 			property="originFileName"></result> -->
-
+       <!--   단일 VO 에게 값을 할당하는 방법 -->
+        <association property="memberVO" javaType="com.ktdsuniversity.edu.members.vo.MemberVO" autoMapping="true"> 
+        <id column="EMAIL" property="email"></id>
+        </association>
+        
+        
 		<collection property="files" javaType="list"
 			ofType="com.ktdsuniversity.edu.files.vo.FilesVO" autoMapping="true">
 			<id column="FILE_NUM" property="fileNum"></id>
@@ -89,6 +94,7 @@
 				property="extendName"></result> <result column="FILE_LENGTH" property="fileLength"></result> 
 				<result column="FILE_PATH" property="filePath"></result> -->
 		</collection>
+
 	</resultMap>
 	<select id="selectBoardById" resultMap="BoardVOMap"
 		parameterType="string">
@@ -108,7 +114,11 @@
 		,F.EXTEND_NAME
 		,F.FILE_LENGTH
 		,F.FILE_PATH
+        , M.NAME
+        ,TO_CHAR(M.REGIST_DATE,'YYYY-MM-DD HH24:MI:SS') AS REGIST_DATE
 		FROM BOARD B
+	   INNER JOIN MEMBERS M
+	      ON B.EMAIL = M.EMAIL
 		LEFT OUTER JOIN (SELECT F.FILE_NUM
 		,FG.FILE_GROUP_ID
 		,F.OBFUSCATE_NAME
@@ -141,8 +151,7 @@
 		parameterType="com.ktdsuniversity.edu.board.vo.request.UpdateVO">
 		UPDATE SPRING_BOOT.BOARD
 		SET SUBJECT=#{subject}
-		,
-		CONTENT=#{content}
+		, CONTENT=#{content}
 		, EMAIL=#{email}
 		, MDFY_DT = SYSDATE
 		, FILE_GROUP_ID =

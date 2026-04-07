@@ -1,25 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script type="text/javascript" src="/js/jquery-4.0.0.slim.min.js"></script>
-<script type="text/javascript" src="/js/board.js"></script>
-<link rel="stylesheet" href="/css/hello-spring.css" type="text/css" />
-<title>Article Update</title>
-</head>
-<body>
+<!-- JSP Import -->
+ <jsp:include page="/WEB-INF/views/templates/header.jsp"> 
+    <jsp:param value ="Article Update" name="title" />
+    <jsp:param value ="<script type='text/javascript' src='/js/board.js'> </script>" name="script" />
+</jsp:include>
 	<h1>Article Update</h1>
 	<form method="post" action="/update/${article.id}" enctype="multipart/form-data">
 	<input type="hidden" name="fileGroupId" value="${article.fileGroupId}"/>
 		<div class="gird write">
 			<label for="subject">제목</label> <input type="text" id="subject"
 				name="subject" placeholder="Write your title"
-				value="${article.subject}" /> <label for="email">이메일</label> <input
-				id="email" type="email" name="email" placeholder="Enter the Email"
-				value="${article.email}" /> 
+				value="${article.subject}" /> 
 				
 				
 				<label for="attach-files">첨부파일</label>
@@ -47,5 +40,6 @@
 			</div>
 		</div>
 	</form>
-</body>
-</html>
+ <jsp:include page="/WEB-INF/views/templates/footer.jsp"> 
+    <jsp:param value ="게시글 내용 조회 : ${board.id} " name="title" />
+ </jsp:include>

@@ -1,5 +1,6 @@
 package com.ktdsuniversity.edu.members.web;
 
+import com.ktdsuniversity.edu.members.service.MembersServiceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.ktdsuniversity.edu.members.service.MembersService;
 import com.ktdsuniversity.edu.members.vo.MemberVO;
@@ -24,8 +26,13 @@ import jakarta.validation.Valid;
 
 @Controller
 public class MemberController {
+	private final MembersServiceImpl membersServiceImpl;
 	@Autowired
 	private MembersService membersService;
+
+	MemberController(MembersServiceImpl membersServiceImpl) {
+		this.membersServiceImpl = membersServiceImpl;
+	}
 
 	@ResponseBody
 	@GetMapping("/regist/check/duplicate/{email}")
@@ -71,10 +78,10 @@ public class MemberController {
 	}
 
 	// /member/update/userId 회원 정보 수정
-	@GetMapping("/mview/{memberName}")
-	public String viewMemeberDetailPage(Model model, @PathVariable String memberName) {
+	@GetMapping("/mview/{memberEmail}")
+	public String viewMemeberDetailPage(Model model, @PathVariable String memberEmail) {
 
-		MemberVO member = this.membersService.selectMemeber(memberName);
+		MemberVO member = this.membersService.selectMemeber(memberEmail);
 		model.addAttribute("name", member.getName());
 		model.addAttribute("password", member.getPassword());
 		model.addAttribute("email", member.getEmail());
@@ -123,6 +130,7 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public String viewLoginPage() {
+		 
 		return "/members/login";
 		}
 	
@@ -148,6 +156,28 @@ public class MemberController {
 		session.setAttribute("__LOGIN_DATA__", member);
 		
 		return "redirect:/";
+	}
+	
+	@GetMapping("/logout")
+	public String doLogoutAction(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/delete-me")
+	public String doDeleteAction(HttpSession session, @SessionAttribute(name="__LOGIN_DATA__", required=false) MemberVO loginMember) {
+		// 1. 로그인 세션에서 회원 이메일을 가져온다
+		String loginEmail = loginMember.getEmail();
+		
+		// 2. Members Table에서 이메일을 이용해 회원의 정보를 삭제한다
+		this.membersServiceImpl.deleteMember(loginEmail);
+		
+		// 3. 현재 로그인된 사용자를 로그아웃 시킨다
+		session.invalidate();
+		
+		// 4. "members/deletesuccesss" 페이지를 보연준다
+		// 내용 : 탈퇴가 완료되었습니다 다음에 다시 만나욤 
+		return "members/deletesuccess";
 	}
 	
 }

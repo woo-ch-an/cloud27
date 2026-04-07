@@ -52,7 +52,11 @@ table.grid > tbody > tr > td {
 
 /* grid style 시작 */
 div.grid {
-  display: grid;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1000px;
+  border: 1px solid #ddd;
+  text-align:center;
 }
 
 div.grid > div.btn-group {

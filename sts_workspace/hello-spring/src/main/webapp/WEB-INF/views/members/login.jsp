@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>로그인</title>
-    <link rel="stylesheet" type="text/css" href="/css/hello-spring.css" />
 
-    <script type="text/javascript" src="/js/jquery-4.0.0.slim.min.js"></script>
-    <script type="text/javascript" src="/js/members.js"></script>
-  </head>
-  <body>
+<!-- JSP Import -->
+ <jsp:include page="/WEB-INF/views/templates/header.jsp"> 
+    <jsp:param value ="Login " name="title" />
+    <jsp:param value ="<script type='text/javascript' src='/js/board.js'> </script>" name="script" />
+</jsp:include>
     <h1>로그인</h1>
     <form:form modelAttribute="loginVO" method="post" action="/login">
       <div class="gird login">
@@ -48,5 +43,6 @@
         </div>
       </div>
     </form:form>
-  </body>
-</html>
+ <jsp:include page="/WEB-INF/views/templates/footer.jsp"> 
+    <jsp:param value ="게시글 내용 조회 : ${board.id} " name="title" />
+ </jsp:include>

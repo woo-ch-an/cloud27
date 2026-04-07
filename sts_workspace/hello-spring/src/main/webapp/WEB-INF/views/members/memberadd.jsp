@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/css/hello-spring.css" type="text/css"/>
-    <script src="/js/jquery-4.0.0.slim.min.js"></script>
-    <script src="/js/members.js"></script>
-<title>회원가입</title>
-</head>
-<body> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
+<!-- JSP Import -->
+ <jsp:include page="/WEB-INF/views/templates/header.jsp"> 
+    <jsp:param value ="Regist Member " name="title" />
+    </jsp:include>
+
     <form:form modelAttribute="memberVO" method="post" action="/regist" enctype="multipart/form-data">
     <div class="gird regist">
         <h1>Member Regist</h1>
@@ -46,5 +41,6 @@
         </div> 
     </div>
     </form:form> 
-</body>
-</html>
+ <jsp:include page="/WEB-INF/views/templates/footer.jsp"> 
+    <jsp:param value ="게시글 내용 조회 : ${board.id} " name="title" />
+ </jsp:include>

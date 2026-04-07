@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.ktdsuniversity.edu.board.enums.ReadType;
 import com.ktdsuniversity.edu.board.service.BoardService;
@@ -20,7 +21,6 @@ import com.ktdsuniversity.edu.board.vo.request.WriteVO;
 import com.ktdsuniversity.edu.board.vo.response.SearchResultVO;
 import com.ktdsuniversity.edu.members.vo.MemberVO;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -57,17 +57,14 @@ public class BoardController {
 	}
 
 	@PostMapping("/write") // BindingResult => @Valid 의 결과를 받아오는 빠라미터,반드시 Valid 이후에 작성되어야 함 
-	public String doWriteAction(@Valid @ModelAttribute WriteVO writeVO, BindingResult bindingResult, Model model,HttpServletRequest request) {
-		 
+	public String doWriteAction(@Valid @ModelAttribute WriteVO writeVO, BindingResult bindingResult, Model model,@SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
+
 		// 사용자 입력값 검증시 에러가 있으면 브라우저에 board.write 보여주고 해당페이지에 입력값전달 
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("inputData", writeVO);
 			return "board/write";
 		}
 		
-		//로그인한 사용자의 이메일 가져오기
-		HttpSession session = request.getSession();
-		MemberVO loginMember = (MemberVO) session.getAttribute("__LOGIN_DATA__");
 		writeVO.setEmail(loginMember.getEmail());
 		
 		
@@ -99,29 +96,35 @@ public class BoardController {
 		
 		// Delete  
 		this.boardService.deleteBoardByArticleId(id);  
-		
+		 
 		return "redirect:/";
 	}
 	
 	@GetMapping("/update/{articleId}")
-	public String viewUpdatePage(Model model, @PathVariable String articleId) {
+	public String viewUpdatePage(Model model, @PathVariable String articleId,  @SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
 		BoardVO data = this.boardService.findBoardByArticleId(articleId, ReadType.UPDATE);
-
+ 
+		if(!(data.getEmail().equals(loginMember.getEmail()))) {
+			throw new IllegalArgumentException("잘못된 접근입니다");
+		}
+		
 		model.addAttribute("article", data);
 		
 		return "board/update";
 	}
 	
 	@PostMapping("/update/{articleId}")
-	public String doUpdateAction(@PathVariable String articleId,  UpdateVO updateVO) {
+	public String doUpdateAction(@PathVariable String articleId,  UpdateVO updateVO,@SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
 		
-		updateVO.setId(articleId);
-
-		System.out.println("Test updateFile" + updateVO);
+		updateVO.setId(articleId);  
 		
-		boolean updateResult = this.boardService.updateBoardByArticleId(updateVO); 
+		updateVO.setEmail(loginMember.getEmail());
+		
+		
+		
 
-		System.out.println("수정 성공 ? " + updateResult);
+		this.boardService.updateBoardByArticleId(updateVO); 
+ 
 		
 		return "redirect:/view/" + articleId;
 	}

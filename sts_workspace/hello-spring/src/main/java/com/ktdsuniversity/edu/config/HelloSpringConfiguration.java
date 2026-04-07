@@ -2,9 +2,13 @@ package com.ktdsuniversity.edu.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.ktdsuniversity.edu.config.interceptors.IllegalAccessInterceptor;
+import com.ktdsuniversity.edu.config.interceptors.SessionInterceptor;
 
 // Application.yml 에서 작성할 수 없는 설정들을 적용하기위한 @Configuration ,
 @Configuration
@@ -31,5 +35,30 @@ public class HelloSpringConfiguration implements WebMvcConfigurer {
 		registry.addResourceHandler("/image/**").addResourceLocations("classpath:/static/image/");
 		registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
 	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		SessionInterceptor sessioninterceptor = new SessionInterceptor();
+		
+		registry.addInterceptor(sessioninterceptor).addPathPatterns("/**").excludePathPatterns(
+				"/regist/check/duplicate/**", // 회원가입 이메일 중복 검사.
+				"/regist", // 회원가입 페이지 & 처리
+				"/login", // 로그인 페이지 & 처리
+				"/js/**", // static resources
+				"/css/**", // static resources
+				"/image/**", // static resources
+				"/", // 게시글 목록 조회
+				"/view/**", // 게시글 내용 조회
+				"/file/**" // 첨부파일 다운로드
+				); // sessionInterceptor가 적용되지 않을 URL 명시.
+		
+		IllegalAccessInterceptor illegalAccessInterceptor = new IllegalAccessInterceptor();
+		registry.addInterceptor(illegalAccessInterceptor).addPathPatterns(
+				"/regist/check/duplicate/**", // 회원가입 이메일 중복 검사.
+				"/regist", // 회원가입 페이지 & 처리
+				"/login" // 로그인 페이지 & 처리
+				);
+		
+	} 
 
 }

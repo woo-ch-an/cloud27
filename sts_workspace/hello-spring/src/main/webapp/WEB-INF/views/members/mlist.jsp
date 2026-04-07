@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/css/grid.css" type="text/css" />
-<title>회원가입</title>
-</head>
-<body>
+<!-- JSP Import -->
+ <jsp:include page="/WEB-INF/views/templates/header.jsp"> 
+    <jsp:param value ="List Member " name="title" />
+    <jsp:param value ="<script type='text/javascript' src='/js/members.js'> </script>" name="script" />
+</jsp:include>
+
 
 	<div class="gird update">
 		<h1>List of Members</h1>
@@ -48,5 +46,6 @@
 
     <a href="/regist"> Register</a>
 	</div>
-</body>
-</html>
+ <jsp:include page="/WEB-INF/views/templates/footer.jsp"> 
+    <jsp:param value ="게시글 내용 조회 : ${board.id} " name="title" />
+ </jsp:include>

@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/css/hello-spring.css" type="text/css" />
-<title>회원가입</title>
-</head>
-<body>
+<!-- JSP Import -->
+ <jsp:include page="/WEB-INF/views/templates/header.jsp"> 
+    <jsp:param value ="Update Member " name="title" />
+</jsp:include>
+
 	<form method="post" action="/mupdate/${email}">
 		<div class="gird update">
 			<h1>View Members</h1>
@@ -34,5 +31,6 @@
 			</div>
 		</div>
 	</form>
-</body>
-</html>
+ <jsp:include page="/WEB-INF/views/templates/footer.jsp"> 
+    <jsp:param value ="게시글 내용 조회 : ${board.id} " name="title" />
+ </jsp:include>
