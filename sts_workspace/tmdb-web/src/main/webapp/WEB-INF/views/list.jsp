@@ -11,9 +11,7 @@
 <body>
 	<div class="wrapper">
 		<h1>Movie List</h1>
-
 		<table class="grid">
-
 			<thead>
 				<tr>
 					<th>Movie Name</th>

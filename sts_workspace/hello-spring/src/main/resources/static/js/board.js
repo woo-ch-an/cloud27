@@ -1,4 +1,31 @@
 $(function() {
+    $(".page-navigator").find("a").on("click", function(){
+            var pageNo =$(this).data("page-no");
+             var listSize= $("#list-size").val();
+             var searchType = $("#search-type").val();
+             var searchKeyword = $("#search-keyword").val();
+             
+
+             location.href = "/?pageNo=" + pageNo +  "&listSize=" + listSize + "&searchType=" + searchType + "&searchKeyword=" + searchKeyword;
+    });
+    
+    $("#list-size").on("change", function(){
+       // location.href = "/?pageNo=0&listSize=" + $(this).val(); 
+       $(".search-button").trigger("click");
+    });
+    
+    $(".search-button").on("click", function(){
+       // ?pageNo=0&listSize=#list-size&searchType=#search-type&searchKeyWord=#search-keyword  
+       var pageNo =0;
+       var listSize= $("#list-size").val();
+       var searchType = $("#search-type").val();
+       var searchKeyword = $("#search-keyword").val();
+       
+
+       location.href = "/?pageNo=" + pageNo +  "&listSize=" + listSize + "&searchType=" + searchType + "&searchKeyword=" + searchKeyword;
+    });
+    
+    
     // ".add-file" 을 클릭하면 
     // 새로운 파일 인과 버튼을 
     // ".attach-files" 아래 추가한다

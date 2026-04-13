@@ -46,8 +46,9 @@ public class FilesController {
 	
 	@GetMapping("/file/{fileGroupId}")
 	public ResponseEntity<Resource> doDownloadAction(@PathVariable String fileGroupId){
+		System.out.print("doDownloadAction+ SETATE  file ID : " + fileGroupId);
 		DownloadVO downloadVO = this.filesService.findAttachFile(fileGroupId);
-		
+		System.out.print("downloadVO" +downloadVO +  "file ID : " + fileGroupId);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + downloadVO.getDisplayName());

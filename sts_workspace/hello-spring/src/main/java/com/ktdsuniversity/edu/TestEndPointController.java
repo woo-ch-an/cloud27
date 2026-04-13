@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TestEndPointController {
-	public TestEndPointController() {
-		System.out.println("TestEndPointControlllererl " + this);
+	public TestEndPointController() { 
 	}
 
 	/**
@@ -21,12 +20,10 @@ public class TestEndPointController {
 	 */
 	@GetMapping("/jsp")
 	public String viewHelloJspPage(Model model) {
-		// Model model parameter ==> Transper data to Template Engine
-		System.out.println(model);
+		// Model model parameter ==> Transper data to Template Engine 
 		// myname 이라는 키("변수명")로 이름을 할당해 템플릿에게 주고싶당
 		model.addAttribute("myname", "식케이");
-		model.addAttribute("age", "30");
-		System.out.println(model);
+		model.addAttribute("age", "30"); 
 		return "hellojsp";
 	}
 

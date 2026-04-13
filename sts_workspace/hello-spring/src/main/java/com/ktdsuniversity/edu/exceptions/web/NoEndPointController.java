@@ -1,0 +1,23 @@
+package com.ktdsuniversity.edu.exceptions.web;
+
+import org.springframework.boot.webmvc.error.ErrorController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+/**
+ *  /error 전용 컨뜨로라 
+ *  반드시 ErrorController 를 통해서만 구현이가능함
+ */
+@Controller
+public class NoEndPointController implements ErrorController{
+	
+	@GetMapping("/error")
+	public String viewNotFoundPage(Model model) {
+
+		model.addAttribute("errorMessage", "존재하지 않는 URL");
+		
+		return "errors/404";
+	}
+
+}

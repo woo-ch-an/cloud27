@@ -25,7 +25,6 @@ public class IllegalAccessInterceptor implements HandlerInterceptor {
 			// 근데 유알엘은 아바껴야하
 			// 융ㄹ엘은 그대론데 페이지는 로그인인것
 			 
-			
 			response.sendRedirect("/");
 
 			return false;

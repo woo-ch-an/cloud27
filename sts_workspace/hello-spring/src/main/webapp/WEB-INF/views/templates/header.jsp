@@ -30,8 +30,8 @@ ${param.script}
 				<%--로그인 안 했을 때 --%>
 			</c:when>
 			<c:otherwise>
-				<div> ${sessionScope.__LOGIN_DATA__.name} ( ${sessionScope.__LOGIN_DATA__.email} )</div>
-				<%--로그인 했을 때 --%>
+				<div class="member-info" data-email="${sessionScope.__LOGIN_DATA__.email}"> ${sessionScope.__LOGIN_DATA__.name} ( ${sessionScope.__LOGIN_DATA__.email} )</div>
+				<%--로그인 했을 때 --%>  
 				<a href="/mview/${sessionScope.__LOGIN_DATA__.email}">마이페이지</a>
 				<a href="/logout"> 로그아웃 </a>
 				<%--로그인 했을 때 --%>

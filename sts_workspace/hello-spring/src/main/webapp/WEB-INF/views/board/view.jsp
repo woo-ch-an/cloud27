@@ -5,11 +5,11 @@
 <jsp:include page="/WEB-INF/views/templates/header.jsp">
 	<jsp:param value="게시글 조회 : 게시글 아이디 " name="title" />
 	<jsp:param
-		value="<script type='text/javascript' src='/js/board.js'> </script>"
+		value="<script type='text/javascript' src='/js/reply.js'> </script>"
 		name="script" />
 </jsp:include>
 <h1>게시글 내용 조회</h1>
-<div class="gird view">
+<div class="gird view" data-article-id="${article.id}">
 	<span> id </span>
 	<div>${article.memberVO.registDate}</div>
 
@@ -41,6 +41,63 @@
 	<span> content </span>
 	<!-- pre => Presentation -->
 	<pre>${article.content}</pre>
+
+  <div class="replies-count">
+    총 <span class="count">0</span>개의 댓글이 검색되었습니다.
+  </div>
+  <ul class="replies"></ul>
+  <div class="reply-form">
+    <input type="text" class="parent-reply-id" readonly />
+    <textarea class="reply-content"></textarea>
+    <input type="file" class="reply-attach-file" multiple />
+    <button class="reply-save" data-article-id="${article.id}">등록</button>
+  </div>
+
+  <template class="reply-item-update-files">
+    <div>
+      <input
+        type="checkbox"
+        id="#fileGroupId#-#fileNum#"
+        name="deleteFileNum"
+        value="#fileNum#"
+      />
+      <label for="#fileGroupId#-#fileNum#">#fileDisplayName#</label>
+    </div>
+  </template>
+
+  <template class="reply-item-update-template">
+    <div class="update-form">
+      <textarea></textarea>
+      <div class="update-file-list"></div>
+      <input type="file" class="reply-update-attach-file" multiple />
+      <div class="update-button-area">
+        <button class="update-save">저장</button>
+        <button class="update-cancel">취소</button>
+      </div>
+    </div>
+  </template>
+
+  <template class="reply-item-template">
+    <li class="reply-item" data-reply-id="#replyId#">
+      <div class="writer">
+        <span class="writer-name">#name#</span>
+        <span class="writer-email">(#email#)</span>
+        <span class="recommend-count">#recommendCount#</span> 추천
+      </div>
+      <div class="dates">
+        <div class="create-date">#createDate# 작성</div>
+        <div class="modify-date">#modifyDate# 수정</div>
+      </div>
+      <pre class="content">#content#</pre>
+      <div class="reply-attach-files" data-files=""></div>
+      <div class="links">
+        <span class="links-write">답글 쓰기</span>
+        <span class="links-recommend">추천하기</span>
+        <span class="links-update">수정</span>
+        <span class="links-delete">삭제</span>
+      </div>
+    </li>
+  </template>
 
 	<div class="btn-group">
 		<div class="right-align">

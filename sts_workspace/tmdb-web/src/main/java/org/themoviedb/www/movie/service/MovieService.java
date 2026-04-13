@@ -1,6 +1,7 @@
 package org.themoviedb.www.movie.service;
 
 import org.themoviedb.www.movie.vo.MovieVO;
+import org.themoviedb.www.movie.vo.request.UpdateVO;
 import org.themoviedb.www.movie.vo.response.SearchResultVO;
 import org.themoviedb.www.movie.vo.response.SelectResultForMovieUrlVO;
 
@@ -11,5 +12,7 @@ public interface MovieService {
 	boolean creatNewMovie(MovieVO movieVO);
 
 	SelectResultForMovieUrlVO findMovieByMovieId(String movieId);
+
+	boolean updateMovie(UpdateVO updateVO);
 
 }

@@ -14,8 +14,7 @@
 
         <span> Rate </span>
         <div>${movieVO.movieRating}</div>
- 
-
+        
         <span> openCountry </span>
         <div>${movieVO.openCountry}</div>
 
@@ -33,7 +32,7 @@
         <span> Synopsis </span> 
         <pre>${article.synopsis}</pre>
         
-        
+        <a href="/update/${movieVO.movieId}"> update </a>
  
     </div>
 </body>

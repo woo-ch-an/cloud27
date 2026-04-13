@@ -58,6 +58,15 @@
 </c:if>
 </div>
 
+  <ul class="page-navigator">
+          <c:forEach begin="0" 
+                     end="${pagination.pageCount}" 
+                     step="1"
+                     var="page">
+            ${page}
+          </c:forEach>
+        </ul>
+
 	<jsp:include page="/WEB-INF/views/templates/footer.jsp"> 
     <jsp:param value ="게시글 내용 조회 : ${board.id} " name="title" />
  </jsp:include>

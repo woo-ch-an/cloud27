@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.ktdsuniversity.edu.exceptions.HelloSpringException;
 import com.ktdsuniversity.edu.members.dao.MembersDao;
 import com.ktdsuniversity.edu.members.helpers.SHA256Util;
 import com.ktdsuniversity.edu.members.vo.MemberVO;
@@ -19,12 +21,13 @@ public class MembersServiceImpl implements MembersService {
 	@Autowired
 	private MembersDao membersDao;
 
+	@Transactional
 	@Override
 	public boolean createNewMember(MemberVO memberVO) {
 		MemberVO uploadVO = this.membersDao.selectMemeber(memberVO.getEmail());
 
 		if (uploadVO != null) {
-			throw new IllegalArgumentException(memberVO.getEmail());
+			throw new HelloSpringException("members/memberadd","this Email already used", memberVO);
 		}
 		
 		String newSalt = SHA256Util.generateSalt();
@@ -64,6 +67,7 @@ public class MembersServiceImpl implements MembersService {
 		return member;
 	}
 
+	@Transactional
 	@Override
 	public boolean updateMembersByMemberEmail(MemberVO memberVO) {
 
@@ -71,6 +75,7 @@ public class MembersServiceImpl implements MembersService {
 
 	}
 
+	@Transactional
 	@Override
 	public int deleteMember(String email) {
 		return this.membersDao.deleteMemberbyEmail(email);
@@ -82,7 +87,8 @@ public class MembersServiceImpl implements MembersService {
 		MemberVO member = this.membersDao.selectMemeberbyEmail(memberEmail);
 		return member;
 	}
-
+	
+	@Transactional(noRollbackFor = HelloSpringException.class)
 	@Override
 	public MemberVO findMemberByEmailAndPassword(LoginVO loginVO) {
 
@@ -90,7 +96,7 @@ public class MembersServiceImpl implements MembersService {
 		MemberVO member = this.selectMemeberByEmail(loginVO.getEmail());
 		//2. 조회된 결과가 없다면 “이메일 또는 비밀번호가 잘못되었다.” 예외 던지기
 		if(member == null) {
-			throw new IllegalArgumentException("이메일 또는 비밀번호가 잘못되었다.");
+			throw new HelloSpringException("members/login", "email or password mismatched" ,member);
 		}
 		if(member.getBlockYn().equals("Y")) {
 			String latestLoginFailDate = member.getLatestLoginFailDate();
@@ -99,7 +105,7 @@ public class MembersServiceImpl implements MembersService {
 			LocalDateTime lastestBlockDateTime = LocalDateTime.parse(latestLoginFailDate, dateTimePattern);
 			
 			if(lastestBlockDateTime.isAfter(LocalDateTime.now().minusMinutes(120))) {
-				throw new IllegalArgumentException("이메일 또는 비밀번호가 잘못되었습니다.");
+				throw new HelloSpringException("members/login", "email or password mismatched" ,member);
 			} 
 			
 			
@@ -119,10 +125,7 @@ public class MembersServiceImpl implements MembersService {
 			
 			// 최근 로그인 실패 횟수가 5 이상이라면 blcok_yn Y로변경
 			this.membersDao.updateBlock(loginVO.getEmail());
-			
-			
-			
-			throw new IllegalArgumentException("이메일 또는 비밀번호가 잘못되었습니다 .");
+			throw new HelloSpringException("members/login", "email or password mismatched" ,member);
 		}
 		// 로그인 성공처리 실패카운트 초기화 + 최근 로그인 시간 변경
 		this.membersDao.updateSuccessLogin(loginVO); 

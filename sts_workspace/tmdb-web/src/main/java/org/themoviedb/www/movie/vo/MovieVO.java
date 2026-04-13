@@ -60,7 +60,7 @@ public class MovieVO {
 		return this.posterUrl;
 	}
 	public void setPosterUrl(String posterUrl) {
-		this.posterUrl = posterUrl;
+		this.posterUrl = posterUrl+"asd";
 	} 
 	public String getTitle() {if(this.title != null) {
 		this.title = this.title.replace("<", "&lt;")

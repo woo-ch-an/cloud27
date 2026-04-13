@@ -31,6 +31,5 @@
         , FILE_PATH
       FROM TMDB.FILES
      WHERE FILE_GROUP_ID = #{_parameter}
-	
 	</select>
 </mapper>

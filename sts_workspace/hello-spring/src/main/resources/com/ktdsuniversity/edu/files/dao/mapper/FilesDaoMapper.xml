@@ -50,7 +50,7 @@
 	</select>
 
 	<select id="selectFilePathByFileGroupIdAndFileNums"
-		parameterType="com.ktdsuniversity.edu.files.vo.request.UploadVO">
+		parameterType="com.ktdsuniversity.edu.files.vo.request.SearchFileGroupVO">
 		SELECT FILE_PATH
 		FROM SPRING_BOOT.FILES
 		WHERE FILE_GROUP_ID = #{fileGroupId}
@@ -63,7 +63,7 @@
 	</select>
 
 	<delete id="deleteFilesByFileGroupIdAndFileNums"
-		parameterType="com.ktdsuniversity.edu.files.vo.request.UploadVO">
+		parameterType="com.ktdsuniversity.edu.files.vo.request.SearchFileGroupVO">
 		DELETE SPRING_BOOT.FILES
 		WHERE FILE_GROUP_ID = #{fileGroupId}
 		AND FILE_NUM IN

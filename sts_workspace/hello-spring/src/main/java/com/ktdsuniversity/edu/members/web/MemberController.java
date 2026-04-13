@@ -1,8 +1,9 @@
 package com.ktdsuniversity.edu.members.web;
 
-import com.ktdsuniversity.edu.members.service.MembersServiceImpl;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.ktdsuniversity.edu.members.service.MembersService;
+import com.ktdsuniversity.edu.members.service.MembersServiceImpl;
 import com.ktdsuniversity.edu.members.vo.MemberVO;
 import com.ktdsuniversity.edu.members.vo.request.LoginVO;
 import com.ktdsuniversity.edu.members.vo.response.DuplicateResultVO;
@@ -26,6 +29,7 @@ import jakarta.validation.Valid;
 
 @Controller
 public class MemberController {
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	private final MembersServiceImpl membersServiceImpl;
 	@Autowired
 	private MembersService membersService;
@@ -104,20 +108,17 @@ public class MemberController {
 	@PostMapping("/mupdate/{memberEmail}")
 	public String doUpdateMembersAction(@PathVariable String memberEmail, MemberVO memberVO) {
 
-		System.out.println("member VO" + memberVO);
 		boolean updateResult = this.membersService.updateMembersByMemberEmail(memberVO);
 
-		System.out.println("member 수정 성공 ? " + updateResult);
-
+		logger.debug("member 수정 성공 ? {}", updateResult);
+		
 		return "redirect:/mview/" + memberVO.getEmail();
 	}
 
 	// /member/delete?id=userId 회원 정보 삭제
 	@GetMapping("/mdelete/{memberEmail}")
 	public String doDeleteMemberAction(@PathVariable String memberEmail) {
-
-		System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-
+ 
 		this.membersService.deleteMember(memberEmail);
 		return "redirect:/mview";
 	}
@@ -135,7 +136,7 @@ public class MemberController {
 		}
 	
 	@PostMapping("/login")
-	public String doLoginAction(@Valid @ModelAttribute LoginVO loginVO, BindingResult bindingResult, Model model, HttpServletRequest request) {
+	public String doLoginAction(@Valid @ModelAttribute LoginVO loginVO, BindingResult bindingResult, Model model,@RequestParam(required= false, defaultValue="/") String go ,HttpServletRequest request) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("loginData",loginVO);
 			return "members/login";
@@ -155,7 +156,7 @@ public class MemberController {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("__LOGIN_DATA__", member);
 		
-		return "redirect:/";
+		return "redirect:"+go;
 	}
 	
 	@GetMapping("/logout")

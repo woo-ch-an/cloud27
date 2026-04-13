@@ -2,6 +2,8 @@ package com.ktdsuniversity.edu.board.web;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,26 +18,31 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.ktdsuniversity.edu.board.enums.ReadType;
 import com.ktdsuniversity.edu.board.service.BoardService;
 import com.ktdsuniversity.edu.board.vo.BoardVO;
+
+import com.ktdsuniversity.edu.board.vo.request.SearchListVO;
 import com.ktdsuniversity.edu.board.vo.request.UpdateVO;
 import com.ktdsuniversity.edu.board.vo.request.WriteVO;
 import com.ktdsuniversity.edu.board.vo.response.SearchResultVO;
+import com.ktdsuniversity.edu.exceptions.HelloSpringException;
 import com.ktdsuniversity.edu.members.vo.MemberVO;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
 public class BoardController {
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	/**
 	 * 빈 컨테이너에 들어있는 객체 중 타입이 일치하는 객체를 할당받는다.
 	 */
 	@Autowired
 	private BoardService boardService;
 
+	// Pagination 
+	// http:192.168.211.11:80806/?pageNO=0&listSize=10 .. 으로 들어올 예정
 	@GetMapping("/")
-	public String viewListPage(Model model) {
+	public String viewListPage(Model model, SearchListVO searchListVO) {
 
-		SearchResultVO searchResult = this.boardService.findAllBoard();
+		SearchResultVO searchResult = this.boardService.findAllBoard(searchListVO);
 		// 게시글 목록, 갯수 조회 하고 싶 다
 
 		// 게시글 목록을 조회
@@ -44,8 +51,8 @@ public class BoardController {
 
 		model.addAttribute("searchResult", list);
 		model.addAttribute("searchCount", searchCount);
-
-		return "board/list";
+		model.addAttribute("pagination", searchListVO);
+		return "board/newlist";
 	}
 
 	/**
@@ -56,22 +63,22 @@ public class BoardController {
 		return "board/write";
 	}
 
-	@PostMapping("/write") // BindingResult => @Valid 의 결과를 받아오는 빠라미터,반드시 Valid 이후에 작성되어야 함 
-	public String doWriteAction(@Valid @ModelAttribute WriteVO writeVO, BindingResult bindingResult, Model model,@SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
+	@PostMapping("/write") // BindingResult => @Valid 의 결과를 받아오는 빠라미터,반드시 Valid 이후에 작성되어야 함
+	public String doWriteAction(@Valid @ModelAttribute WriteVO writeVO, BindingResult bindingResult, Model model,
+			@SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
 
-		// 사용자 입력값 검증시 에러가 있으면 브라우저에 board.write 보여주고 해당페이지에 입력값전달 
-		if(bindingResult.hasErrors()) {
+		// 사용자 입력값 검증시 에러가 있으면 브라우저에 board.write 보여주고 해당페이지에 입력값전달
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("inputData", writeVO);
 			return "board/write";
 		}
-		
+
 		writeVO.setEmail(loginMember.getEmail());
-		
-		
+
 		// create, update, delete 성공 실패 여부 반환 필요
 		boolean createResult = this.boardService.createNewBoard(writeVO);
 
-		System.out.println("게시글성공 ? " + createResult);
+		logger.debug("게시글 성공 ? {}", createResult);
 
 		return "redirect:/";
 	}
@@ -81,52 +88,49 @@ public class BoardController {
 		// 1.디비에서 조회함
 		// 2. 조회수 증가시키기
 
-		System.out.print("start ~~~" + articleId);
-		
 		BoardVO findResult = this.boardService.findBoardByArticleId(articleId, ReadType.VIEW);
-		System.out.print("Result ~~~" + findResult);
 
 		model.addAttribute("article", findResult);
 
 		return "board/view";
 	}
-	
+
 	@GetMapping("/delete")
 	public String doDeleteArticleAction(@RequestParam String id) {
-		
-		// Delete  
-		this.boardService.deleteBoardByArticleId(id);  
-		 
+
+		// Delete
+		this.boardService.deleteBoardByArticleId(id);
+
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/update/{articleId}")
-	public String viewUpdatePage(Model model, @PathVariable String articleId,  @SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
+	public String viewUpdatePage(Model model, @PathVariable String articleId,
+			@SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
 		BoardVO data = this.boardService.findBoardByArticleId(articleId, ReadType.UPDATE);
- 
-		if(!(data.getEmail().equals(loginMember.getEmail()))) {
-			throw new IllegalArgumentException("잘못된 접근입니다");
+
+		// TODO when comaper the Aritlces email and sessions email , always act in
+		// serviceImpl
+		if (!(data.getEmail().equals(loginMember.getEmail()))) {
+			throw new HelloSpringException("errors/403", "잘못된 접근입니다");
 		}
-		
+
 		model.addAttribute("article", data);
-		
+
 		return "board/update";
 	}
-	
-	@PostMapping("/update/{articleId}")
-	public String doUpdateAction(@PathVariable String articleId,  UpdateVO updateVO,@SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
-		
-		updateVO.setId(articleId);  
-		
-		updateVO.setEmail(loginMember.getEmail());
-		
-		
-		
 
-		this.boardService.updateBoardByArticleId(updateVO); 
- 
-		
+	@PostMapping("/update/{articleId}")
+	public String doUpdateAction(@PathVariable String articleId, UpdateVO updateVO,
+			@SessionAttribute("__LOGIN_DATA__") MemberVO loginMember) {
+
+		updateVO.setId(articleId);
+
+		updateVO.setEmail(loginMember.getEmail());
+
+		this.boardService.updateBoardByArticleId(updateVO);
+
 		return "redirect:/view/" + articleId;
 	}
-	
+
 }

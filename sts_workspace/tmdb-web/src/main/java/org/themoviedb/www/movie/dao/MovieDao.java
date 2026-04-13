@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.themoviedb.www.movie.vo.MovieVO;
+import org.themoviedb.www.movie.vo.request.UpdateVO;
 import org.themoviedb.www.movie.vo.response.SelectResultForMovieUrlVO;
 
 @Mapper
@@ -15,6 +16,8 @@ public interface MovieDao {
 
 	int insertNewMovie(MovieVO movieVO);
 
-	SelectResultForMovieUrlVO findMovieByMovieId(String movieId); 
+	SelectResultForMovieUrlVO findMovieByMovieId(String movieId);
+
+	int updateMovie(UpdateVO updateVO); 
 
 }

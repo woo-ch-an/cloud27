@@ -67,7 +67,6 @@ div.grid{
   width: 100%;
   max-width: 1000px;
   border: 1px solid #ddd;
-  text-align:center;
 }
  
 /* End grid style*/
@@ -176,7 +175,15 @@ div.wrapper{
         padding : 0.625rem 0;
     }
 }
-
+.VaildationError{
+	
+        color:red;
+        font-weight:600;
+        font-size:0.8rem;
+        margin-top:0.3rem;
+        padding:0.5rem;
+        background-color:#f002;
+}
 
 /* 게시글 내용 조회 style 시작 */
 div.view {
@@ -185,3 +192,117 @@ div.view {
   row-gap: 0.625rem;
 }
 /* 게시글 내용 조회 style 끝 */
+
+
+/* 댓글 style 시작 */
+.replies-count,
+.replies,
+.reply-form {
+  grid-column: 1 / -1;
+}
+
+.replies {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 0.625rem;
+}
+
+.replies > li {
+  padding: 0.625rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.replies > li:nth-child(odd) {
+  background-color: #f3f3f3;
+}
+
+.replies > li > .links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.replies > li > .links > span {
+  display: inline-block;
+  padding: 0.625rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.replies > li > .links > span:hover {
+  color: #fff;
+  background-color: #0003;
+  border-radius: 0.5rem;
+}
+
+.reply-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-form > .parent-reply-id {
+  align-self: flex-start;
+  width: auto;
+  border: 0;
+  outline: 0;
+}
+
+.reply-form > .reply-content {
+  height: 10rem;
+}
+
+.reply-form > .reply-save {
+  align-self: flex-end;
+}
+
+.replies > li > .reply-attach-files{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    gap:0.625rem;
+}
+.update-form > .update-file-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.update-form > .update-file-list > div > input {
+  display: none;
+}
+
+.update-form > .update-file-list > div > input + label {
+  cursor: not-allowed;
+}
+
+.update-form > .update-file-list > div > input:checked + label {
+  color: #f00;
+  text-decoration: line-through;
+  cursor: pointer;
+}
+
+/* 댓글 style 끝 */
+
+
+/* page-navigator */
+ul.page-navigator {
+  display: flex;
+  flex-direction: row;
+  gap: 0.625rem;
+  justify-content: center;
+  margin: 0.625rem 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.page-navigator > li.active > a {  
+	color:#f00; 
+}
+
+/* End */

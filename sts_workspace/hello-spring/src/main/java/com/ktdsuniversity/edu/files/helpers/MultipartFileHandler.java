@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +17,7 @@ import com.ktdsuniversity.edu.files.vo.request.UploadVO;
 @Component
 public class MultipartFileHandler {
 
+	private static final Logger logger = LoggerFactory.getLogger(MultipartFileHandler.class);
 	@Autowired
 	private FilesDao filesDao;
 	
@@ -48,7 +51,7 @@ public class MultipartFileHandler {
 					this.filesDao.insertAttachFile(uploadVO);
 
 				} catch (IOException | IllegalStateException e) {
-					e.printStackTrace();
+					logger.error("Error ! {}", e);
 				}
 
 			}
@@ -63,8 +66,6 @@ public class MultipartFileHandler {
 
 
 		if (attachFiles != null && attachFiles.size() > 0 && attachFiles.get(0).getName() != "attachFile") { 
-			System.out.println(attachFiles.get(0));
-			System.out.println(attachFiles.get(0).getName());
 			String fileGroupId = this.filesDao.selectNewFileGroupId();
 			this.filesDao.insertFileGroupId(fileGroupId);
 			

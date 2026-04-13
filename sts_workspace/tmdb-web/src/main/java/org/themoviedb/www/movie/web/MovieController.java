@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.themoviedb.www.movie.service.MovieService;
 import org.themoviedb.www.movie.vo.MovieVO;
+import org.themoviedb.www.movie.vo.request.UpdateVO;
 import org.themoviedb.www.movie.vo.response.SearchResultVO;
 import org.themoviedb.www.movie.vo.response.SelectResultForMovieUrlVO;
 
@@ -38,7 +39,6 @@ public class MovieController {
 		model.addAttribute("movieCount", searchResult.getCount());
 		model.addAttribute("movieResult", movieList);
 
-		System.out.println(movieList);
 		return "list";
 
 	}
@@ -51,20 +51,13 @@ public class MovieController {
 	
 	@PostMapping("/write")
 	public String doWriteAction(@Valid @ModelAttribute MovieVO movieVO, BindingResult bindingResult,Model model) { 
-		
-//		if(movieVO.getTitle() == null || movieVO.getSysnopsis() == null || movieVO.getLanguage() == null || movieVO.getPosterUrl() == null) {
-//
-//			System.out.print("creatResult faile");
-//			return "/list";
-//		}
+		 
 		
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("inputData", movieVO);
 			return "write";
 		}
-		String posterUrl = movieVO.getPosterUrl();
-		posterUrl = posterUrl.replace("<", "&lt;")
-							 .replace(">", "&gt;");
+		String posterUrl = "tasad";
 		movieVO.setPosterUrl(posterUrl);
 		
 		String title = movieVO.getTitle();
@@ -73,10 +66,8 @@ public class MovieController {
 		movieVO.setTitle(title);
 		
 		// 여따 적는 이유 : 다른 진입경로에서 들어오는 공격 막기 위함
- 
 		
 		boolean creatResult = this.movieService.creatNewMovie(movieVO);
-		System.out.print("creatResult "+creatResult);
 		return "redirect:/list";
 	}
 	
@@ -86,11 +77,36 @@ public class MovieController {
 		model.addAttribute("movieVO", movieVO); 
 		
 		return "view";
+	}	
+	
+	@GetMapping("/update/{movieId}")
+	public String updateMoviePage(@PathVariable String movieId, Model model) {
+		SelectResultForMovieUrlVO movieVO = this.movieService.findMovieByMovieId(movieId);
+		
+		model.addAttribute("updateVO", movieVO);  
+		return "update";
+	}
+	@PostMapping("/update/{movieId}")
+	public String updateMovieAction(@Valid @ModelAttribute UpdateVO UpdateVO, BindingResult bindingResult ,@PathVariable String movieId, Model model) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("inputData", UpdateVO);
+			return "write";
+		}
+		
+		UpdateVO.setMovieId(movieId);
+		String posterUrl = "tasad";
+		UpdateVO.setPosterUrl(posterUrl);
+		
+		String title = UpdateVO.getTitle();
+		title = title.replace("<", "&lt;")
+					 .replace(">", "&gt;");
+		UpdateVO.setTitle(title); 
+		
+		boolean updateResult = this.movieService.updateMovie(UpdateVO);
+		return "redirect:/list";
 	}
 	
-//	@GetMapping("/errorrr")
-//	public String viewErrorPage() {
-//		return "error";
-//	}
 	
+
 }
+

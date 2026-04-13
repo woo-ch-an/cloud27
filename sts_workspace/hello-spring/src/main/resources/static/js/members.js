@@ -3,6 +3,17 @@
  */
 $().ready(function () {
 
+    // 현재 Location의 Path Name을 가지고 온다
+    var pathName = location.pathname;
+    // Path Name 이 /login이 아니면 action을 /login?go=${pathname} 으로 수정한다
+    if(pathName !== "/login"){
+        pathName ="?go=" + pathName;
+    }
+    else{
+        pathName = "";
+    } 
+    $("#loginVO").attr({action:"/login" + pathName});
+    
     $("#email").on("blur", function () {
         setTimeout(function () {
             $("#email").trigger("keyup");

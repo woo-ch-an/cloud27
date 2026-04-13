@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.themoviedb.www.files.helpers.MultipartFileHandler;
 import org.themoviedb.www.movie.dao.MovieDao;
 import org.themoviedb.www.movie.vo.MovieVO;
+import org.themoviedb.www.movie.vo.request.UpdateVO;
 import org.themoviedb.www.movie.vo.response.SearchResultVO;
 import org.themoviedb.www.movie.vo.response.SelectResultForMovieUrlVO;
 
@@ -44,11 +45,7 @@ public class MovieServiceImpl implements MovieService {
 		
 		// 1. Movie 에 insert 할때 id 일단 먼저 받아오기
 		// Poster URL 주기
-		movieVO.setPosterUrl(movieVO.getAttachFile().getOriginalFilename());
-		
-		System.out.print("----------------------------------------------");
-		System.out.println(movieVO.getAttachFile().getOriginalFilename());
-		System.out.println("debug -----" + movieVO.getPosterUrl());
+		movieVO.setPosterUrl(movieVO.getAttachFile().getOriginalFilename()+ "Asd");
 		int insertCount = this.movieDao.insertNewMovie(movieVO); 
 		
 		
@@ -66,6 +63,11 @@ public class MovieServiceImpl implements MovieService {
 		
 		return returnValue;
 	}
-
-	
+	@Override
+	public boolean updateMovie(UpdateVO updateVO) {
+		int updateCount = this.movieDao.updateMovie(updateVO);
+		
+		
+		return updateCount==1;
+	}
 }

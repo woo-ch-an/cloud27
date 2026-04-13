@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +14,7 @@ import org.themoviedb.www.files.vo.request.UploadVO;
 
 @Component
 public class MultipartFileHandler {
+	private static final Logger logger = LoggerFactory.getLogger(MultipartFileHandler.class);
 	
 	@Autowired
 	private FilesDao filesDao;
@@ -19,8 +22,8 @@ public class MultipartFileHandler {
 	public void upload(MultipartFile attachFiles, String movieId) { 
 
 		String obfuscateName = UUID.randomUUID().toString();
-		
-		System.out.println("debug -----" + obfuscateName);
+		 
+		logger.debug("debug ------ {}",obfuscateName);
 
 		// 업로드한 파일이 서버컴푸타의 파일 시스템에 저장되도록한 다
 		File storeFile = new File("/Users/woochan/Documents/sts_workspace/UploadTest", obfuscateName);
