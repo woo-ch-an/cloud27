@@ -1,5 +1,7 @@
 package com.ktdsuniversity.edu.members.vo;
 
+import java.util.List;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -26,6 +28,14 @@ public class MemberVO {
 	private String latestLoginFailDate;
 	private String BlockYn;
 	private String fileGroupId;
+	private List<String> roles;
+	 
+	public List<String> getRoles() {
+		return this.roles;
+	}
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
 	public String getEmail() {
 		return this.email;
 	}

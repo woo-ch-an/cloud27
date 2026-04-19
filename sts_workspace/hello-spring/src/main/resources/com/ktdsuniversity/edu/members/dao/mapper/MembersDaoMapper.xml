@@ -10,8 +10,7 @@
 		(EMAIL
 		, NAME
 		, PASSWORD
-		,
-		SALT
+		, SALT
 		, REGIST_DATE
 		, LATEST_PASSWORD_CHANGE_DATE
 		, LOGIN_FAIL_COUNT)
@@ -42,12 +41,22 @@
 	<select id="selectMemeber"
 		resultType="com.ktdsuniversity.edu.members.vo.MemberVO"
 		parameterType="string">
-		SELECT EMAIL
-		, NAME
-		, PASSWORD
-		FROM SPRING_BOOT.MEMBERS
-		WHERE EMAIL=#{_parameter}
-
+        SELECT EMAIL
+             , NAME
+             , PASSWORD
+             , SALT
+             , TO_CHAR(REGIST_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REGIST_DATE
+             , TO_CHAR(MODIFY_DATE, 'YYYY-MM-DD HH24:MI:SS') AS MODIFY_DATE
+             , TO_CHAR(LATEST_PASSWORD_CHANGE_DATE, 'YYYY-MM-DD HH24:MI:SS') AS LATEST_PASSWORD_CHANGE_DATE
+             , TO_CHAR(LOGIN_DATE, 'YYYY-MM-DD HH24:MI:SS') AS LOGIN_DATE
+             , LATEST_LOGIN_IP
+             , LOGIN_FAIL_COUNT
+             , TO_CHAR(LATEST_LOGIN_FAIL_DATE, 'YYYY-MM-DD HH24:MI:SS') AS LATEST_LOGIN_FAIL_DATE
+             , BLOCK_YN
+             , FILE_GROUP_ID
+          FROM MEMBERS
+         WHERE EMAIL = #{_parameter}
+    
 	</select>
 
 	<update id="updateMemberByMemberEmail"
@@ -102,5 +111,14 @@
       ,LATEST_LOGIN_IP = #{ip}
     WHERE EMAIL = #{email}
     
-    </update>
+    </update> 
+    <select id="selectMemberRolesByEmail" parameterType="string" resultType="string">
+    SELECT ROLE_ID 
+      FROM ROLES 
+     START WITH ROLE_ID = ( SELECT ROLE_ID
+                              FROM MEMBERS
+                             WHERE EMAIL = #{_parameter})
+   CONNECT BY PRIOR ROLE_ID = TOP_ROLE_ID
+    
+    </select>
 </mapper>

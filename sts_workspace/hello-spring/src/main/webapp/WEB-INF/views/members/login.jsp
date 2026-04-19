@@ -6,12 +6,10 @@
 <!-- JSP Import -->
 <jsp:include page="/WEB-INF/views/templates/header.jsp">
 	<jsp:param value="Login " name="title" />
-	<jsp:param
-		value="<script type='text/javascript' src='/js/board.js'> </script>"
-		name="script" />
+    <jsp:param value ="<script type='text/javascript' src='/js/members.js'> </script>" name="script" />
 </jsp:include>
 <h1>로그인</h1>
-<form:form modelAttribute="loginVO" method="post" action="/login">
+<form:form modelAttribute="loginVO" method="post" action="/login-provider">
 	<c:if test="${not empty errorMessage}">
 		<div class="VaildationError">${errorMessage}</div>
 	</c:if>

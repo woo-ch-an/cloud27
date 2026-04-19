@@ -5,6 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.ktdsuniversity.edu.common.utils.ServletUtils;
 import com.ktdsuniversity.edu.members.service.MembersService;
 import com.ktdsuniversity.edu.members.service.MembersServiceImpl;
 import com.ktdsuniversity.edu.members.vo.MemberVO;
@@ -53,7 +57,7 @@ public class MemberController {
 	
 	@GetMapping("/regist")
 	public String viewMemberView() {
-		return "/members/memberadd";
+		return "members/memberadd";
 	}
 
 	@PostMapping("/regist")
@@ -90,7 +94,7 @@ public class MemberController {
 		model.addAttribute("password", member.getPassword());
 		model.addAttribute("email", member.getEmail());
 
-		return "/members/view";
+		return "members/view";
 	}
 
 	// /member/update/userId 회원 정보 수정(do)
@@ -125,14 +129,14 @@ public class MemberController {
 
 	@GetMapping("/members")
 	public String viewMembersListPage(Model model) {
-		return "/members/list";
+		return "members/list";
 
 	}
 	
 	@GetMapping("/login")
 	public String viewLoginPage() {
 		 
-		return "/members/login";
+		return "members/login";
 		}
 	
 	@PostMapping("/login")
@@ -144,24 +148,17 @@ public class MemberController {
 		}
 		String userIp = request.getRemoteAddr();
 		loginVO.setIp(userIp);
-		
-		MemberVO member = this.membersService.findMemberByEmailAndPassword(loginVO);
-		
-		// 서버의 세션을 삭제한다. (로그아웃 혹은 30분 후)
-		request.getSession().invalidate();
-		
-		// request.getSession(); Http Requst header로 전달된 JSessionID 객체 변환
-		// request.getSession(true); <- 안에 True 가 있음 -> 이전 세션 discard.  새로운 세션 생성
-		
-		HttpSession session = request.getSession(true);
-		session.setAttribute("__LOGIN_DATA__", member);
-		
+		 
 		return "redirect:"+go;
 	}
 	
 	@GetMapping("/logout")
-	public String doLogoutAction(HttpSession session) {
-		session.invalidate();
+	public String doLogoutAction(Authentication authentication) {
+
+		LogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+
+		logoutHandler.logout(ServletUtils.getRequest(), ServletUtils.getResponse(), authentication);
+
 		return "redirect:/login";
 	}
 	

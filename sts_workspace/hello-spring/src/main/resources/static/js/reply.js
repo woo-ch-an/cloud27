@@ -119,6 +119,7 @@ $(function () {
 
                             var updateFormData = new FormData();
                             updateFormData.append("content", updateContent);
+                            updateFormData.append("_csrf", $("meta[name='_csrf']").attr("content"));
                             deleteFilesNum.each(function () {
                                 updateFormData.append("delFileNum", $(this).val());
                             });
@@ -193,6 +194,7 @@ $(function () {
         formData.append("reply", replyContent);
         formData.append("articleId", articleId);
         formData.append("parentReplyId", parentReplyId);
+        formData.append("_csrf", $("meta[name='_csrf']").attr("content"));;
 
         if (files.length > 0) {
             for (var k = 0; k < files.files.length; k++) {

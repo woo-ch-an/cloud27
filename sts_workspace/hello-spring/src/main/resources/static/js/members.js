@@ -1,19 +1,20 @@
 /**
  * 회원페이지와관련된 스크립트 작성 
  */
-$().ready(function () {
-
+$().ready(function () { 
     // 현재 Location의 Path Name을 가지고 온다
     var pathName = location.pathname;
     // Path Name 이 /login이 아니면 action을 /login?go=${pathname} 으로 수정한다
-    if(pathName !== "/login"){
-        pathName ="?go=" + pathName;
-    }
-    else{
-        pathName = "";
-    } 
-    $("#loginVO").attr({action:"/login" + pathName});
-    
+    if (pathname !== "/login" && pathname !== "/login-provider") {
+        pathname = "?go=" + pathname;
+      }
+      else {
+        pathname = "";
+      }
+      
+      $("#loginVO")
+          .attr({action: "/login-provider" + pathname});
+          
     $("#email").on("blur", function () {
         setTimeout(function () {
             $("#email").trigger("keyup");
@@ -103,6 +104,7 @@ $().ready(function () {
     // 제대로 입력하지않았다 -> 에러 메시지를 화면에 보여준다
 
     $("#memberVO").on("submit", function (event) {
+    alert("@");
         // 1. 일단 브라우저에 할당되어있는 서브밋 콜백 이벤트 제거 -> 검증실패하면 send x
         event.preventDefault();
         $("#password").trigger("keyup");
@@ -138,8 +140,10 @@ $().ready(function () {
         }
         // 폼 전송하기
         if ($(".VaildationError").length === 0) {
+            console.log("왜됨");
             //  $(this).submit();  < jQuery          
             // event.preventDefault();이거땜에 제이쿼리는 안 
+            alert("#");
             this.submit(); // JavaScript Event 
         }
     });

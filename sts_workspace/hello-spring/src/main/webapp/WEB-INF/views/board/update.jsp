@@ -8,6 +8,7 @@
 </jsp:include>
 	<h1>Article Update</h1>
 	<form method="post" action="/update/${article.id}" enctype="multipart/form-data">
+	 <sec:csrfInput />
 	<input type="hidden" name="fileGroupId" value="${article.fileGroupId}"/>
 		<div class="gird write">
 			<label for="subject">제목</label> <input type="text" id="subject"
