@@ -83,9 +83,12 @@ const ArticleMain = () => {
         // console.log(articleData);
         setNewArticle({ subject: "", content: "", email: "", membersVO: { name: "" } });
     };
-    const onClickCancleButtonHandler = () => { console.log("cancleBtn"); };
-    
-    const [artcleDatas, setArticles] = useState(articleData.articles);
+    const onClickCancleButtonHandler = () => {
+        setViewWriteComponent(!isViewWriteComponent);
+    };
+
+
+    const [isViewWriteComponent, setViewWriteComponent] = useState(false);
 
     return (
         <div className="wrapper">
@@ -99,17 +102,21 @@ const ArticleMain = () => {
             </table>
             {/**게시글 작성 폼 (제목 이메일 내용 정도만) */}
             {/** Math.random() , 을 이용하여 조회수 채우기 (원하면 ) , 제목/이름/이메일을 적으면 목록에 채우도록 , Key추가될수있도록하고, 게시글아이디는 그냥 숫자로 (Length 쓰기) */}
+            {isViewWriteComponent === true ? (
+                <ArticleWriter
+                    inputData={{ subject, content, email, membersVO }}
+                    onChangeSubject={onChangeSubjectHandler}
+                    onChangeEmail={onChangeEmailHandler}
+                    onChangeId={onChangeIdHandler}
+                    onChangeContent={onChangeContentHandler}
+                    onClickCancleButton={onClickCancleButtonHandler}
+                    onClickSaveButton={onClickSaveButtonHandler} />
+            ) : (
+                <ArticleWrtieBtn
+                    onClickCancleButton={onClickCancleButtonHandler} />
+            )}
 
-            <ArticleWriter
-                inputData={{ subject, content, email, membersVO }}
-                onChangeSubject={onChangeSubjectHandler}
-                onChangeEmail={onChangeEmailHandler}
-                onChangeId={onChangeIdHandler}
-                onChangeContent={onChangeContentHandler}
-                onClickCancleButton={onClickCancleButtonHandler}
-                onClickSaveButton={onClickSaveButtonHandler} />
 
-            <ArticleWrtieBtn />
         </div>
     );
 };

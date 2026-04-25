@@ -1,7 +1,7 @@
 /** @format */
+
 const ArticleWriter = ({ inputData: { subject, content, email, membersVO }, onChangeSubject, onChangeEmail, onChangeId, onChangeContent, onClickSaveButton, onClickCancleButton }) => {
 
-    if()
     return (
         <div>
             <div>제목</div>
