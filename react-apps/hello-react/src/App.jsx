@@ -4,7 +4,8 @@ import CalcMain from "./components/calcuator/CalcMain.jsx";
 
 /** @format */
 export default function App() {
-  // return <TodoMain />;
-  return <ArticleMain />
+  console.log("App");
+  return <TodoMain />;
+  // return <ArticleMain />
   // return <CalcMain />
 }

@@ -1,7 +1,29 @@
 /** @format */
 
+// import { useRef } from "react";
+
 const ArticleWriter = ({ inputData: { subject, content, email, membersVO }, onChangeSubject, onChangeEmail, onChangeId, onChangeContent, onClickSaveButton, onClickCancleButton }) => {
 
+
+    // const subjectRef = useRef();
+    // const nameRef = useRef();
+    // const emailRef = useRef();
+    // const contentRef = useRef();
+
+    // const onSaveButtonClickHandler = () => {
+    //     onClickSaveButton(
+    //         subjectRef.current.value,
+    //         nameRef.current.value,
+    //         emailRef.current.value,
+    //         contentRef.current.value,
+    //     );
+    //     subjectRef.current.value = "";
+    //     nameRef.current.value = "";
+    //     emailRef.current.value = "";
+    //     contentRef.current.value = "";
+    // }
+
+    console.log("ArticleWriter");
     return (
         <div>
             <div>제목</div>
@@ -21,6 +43,7 @@ const ArticleWriter = ({ inputData: { subject, content, email, membersVO }, onCh
             <div>
                 <button type="button" onClick={onClickCancleButton}> 취소하기</button>
             </div>
+
 
         </div>
     )

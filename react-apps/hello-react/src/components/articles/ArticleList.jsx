@@ -1,6 +1,7 @@
 /** @format */
 
 const ArticleList = ({ articleData }) => {
+    console.log("ArticleList");
     return (
         <>
             {articleData.map((article) => (
