@@ -1,21 +1,25 @@
 /** @format */
+import { useContext } from "react";
+import TodoContext from "./context/TodoContext.jsx";
 import TodoItem, { TodoItemForChildren } from "./TodoItem.jsx";
 
-const TodoList = ({ todoDatas, priorities, onDoneChange }) => {
-    console.log(todoDatas);
-    return (
-        <>
-            {todoDatas.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} priorities={priorities} onDoneChange={onDoneChange} />
+const TodoList = ({ children }) => {
+    console.log("TodoList");
+    const { componentName } = useContext(TodoContext);
 
-                // <TodoItemForChildren>
-                //     <input id={todo.id} type="checkbox" />
-                //     <label htmlFor={todo.id}>{todo.todo}</label>
-                //     <span className="due-date">{todo.dueDate}</span>
-                //     <span className="priority">{priorities[todo.priority]}</span>
-                // </TodoItemForChildren>
-            ))}
-        </>
+
+    if (!componentName || componentName !== "TodoGrid") {
+        return <></>;
+    }
+
+    const providerProps = {
+        componentName: "TodoList",
+    }
+
+    return (
+        <TodoContext.Provider value={providerProps}>
+            {children}
+        </TodoContext.Provider>
     );
 };
 

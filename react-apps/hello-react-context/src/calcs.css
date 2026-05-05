@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+/* 메인 화면 (CalcMain) */
+/* 전체 감싸는거  */
+.wrapper{
+    margin-top: 10rem;
+    display: grid;
+    grid-template-columns: 3rem 1fr 2fr 3rem;
+    grid-gap : 1.3rem;
+} 
+/* 전체 끝  */
+.content-box{ 
+    display:grid;
+    grid-template-rows: 1.5rem 1fr; 
+    height: 10rem;
+     
+    align-items: center;
+    
+    border-style:none;
+
+}
+
+.content-header{
+    text-align: center;
+    font-weight: 500;
+    background-color: #0266FF; 
+    color: #eee;
+}
+.shadow-at-box{
+    box-shadow:3px 3px 3px #aaa;    
+}
+
+/* 메인 화면 (CalcMain) 끝 */
+
+/* 카운터 설정 */
+.counter-wrapper{
+    display: grid;
+
+    grid-template-columns: 30% 1fr 30%;
+    align-items: center;
+ 
+    & > .addtion{
+        text-align: left;
+    }
+    & > .redution {
+        text-align: right;
+    }
+    & > .count-num{
+        text-align: center;
+    }
+
+}
+/* 카운터 설정 끝 */
+
+/* 계산기 시작 */
+.calcurator-wrapper{
+    display:grid;
+    gap : 0.625rem;
+    align-items: center;
+    grid-template-columns: 1fr 3rem 1fr 3rem 1fr;
+    height: 100%;
+    & > div > input {
+        width:70%;
+    }
+}
+
+.operators{
+    display:block;
+
+    & > div{
+        width: 2rem;
+        height: 2rem;
+        & > button{
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+}
+
+/* 계산기 끝  */

@@ -210,3 +210,17 @@ button.confirm-cancel {
     background-color: #79d8aa;
   } 
 } 
+
+/** TMDB용 **/
+
+.treand-head-wrapper {
+  display:flex;
+}
+
+.movie-items-wrapper{
+  display: flex;
+}
+
+.display-flex-div{
+  display: flex;
+}

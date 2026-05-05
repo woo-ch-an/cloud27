@@ -1,14 +1,31 @@
 /** @format */
 
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import Alert from "../Modals.jsx";
+import { useImperativeHandle } from "react";
+import { isString } from "../../utils/type.js";
+import { getValidationResult } from "../../utils/exceptionHandler.js";
 
-const ArticleWriter2 = ({ onClickSaveButton, onClickCancleButton }) => {
+const ArticleWriter2 = ({ errorHandleRef, onClickSaveButton, onClickCancleButton }) => {
 
+
+
+    const [addError, setAddError] = useState();
+    useImperativeHandle(errorHandleRef, () => {
+        return {
+            setResponseError(fetchError) {
+                if (isString(fetchError)) {
+                    setAddError(fetchError);
+                }
+                else {
+                    setAddError(getValidationResult(fetchError))
+                }
+            }
+        };
+    });
 
     const subjectRef = useRef();
-    const nameRef = useRef();
-    const emailRef = useRef();
+    const attachFileRef = useRef();
     const contentRef = useRef();
 
     const alertRef = useRef();
@@ -19,39 +36,28 @@ const ArticleWriter2 = ({ onClickSaveButton, onClickCancleButton }) => {
             alertRef.current.showModal("제목을 입력해주세요");
             return;
         };
-        if (!nameRef.current.value) {
-            alertRef.current.showModal("이름을 입력해주세요");
-            return;
-        };
-        if (!emailRef.current.value) {
-            alertRef.current.showModal("이메일을 입력해주세요");
-            return;
-        };
         if (!contentRef.current.value) {
             alertRef.current.showModal("내용을 입력해주세요");
             return;
         };
         onClickSaveButton(
             subjectRef.current.value,
-            nameRef.current.value,
-            emailRef.current.value,
             contentRef.current.value,
+            attachFileRef.current.files,
         );
 
         subjectRef.current.value = "";
-        nameRef.current.value = "";
-        emailRef.current.value = "";
+        attachFileRef.current.value = "";
         contentRef.current.value = "";
     }
 
     return (
         <div>
+            {isString(addError) && <div>{addError} </div>}
             <div>제목</div>
             <input type="text" ref={subjectRef} />
-            <div> 이메일</div>
-            <input type="text" ref={emailRef} />
-            <div> 아이디</div>
-            <input type="text" ref={nameRef} />
+            <div>첨부파일</div>
+            <input type="file" title="첨부파일" ref={attachFileRef} multiple />
             <div> 내용</div>
             <input type="text" ref={contentRef} />
 

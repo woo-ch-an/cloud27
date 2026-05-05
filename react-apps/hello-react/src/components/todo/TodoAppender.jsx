@@ -1,8 +1,15 @@
 /** @format */
 
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import Alert from "../Modals";
-const TodoAppender = ({ onSaveButtonClick }) => {
+import { fetchAddTodo, fetchTodoList } from "../../http/todo/fetchTodo";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { todoAction } from "../../store/toolkit/slices/todoSlice";
+const TodoAppender = memo(() => {
+    console.log("TodoAppender");
+
+    const [isFetching, setIsFetching] = useState(false);
 
     const todoRef = useRef();
     const dateRef = useRef();
@@ -10,7 +17,11 @@ const TodoAppender = ({ onSaveButtonClick }) => {
 
     const alertRef = useRef();
 
-    const onClickSaveButtonForAppend = () => {
+    const reactReduxDispatcher = useDispatch();
+
+    const onClickSaveButtonForAppend = async () => {
+
+
         if (!todoRef.current.value) {
             alertRef.current.showModal("업무를 입력해주세요");
             return;
@@ -24,12 +35,17 @@ const TodoAppender = ({ onSaveButtonClick }) => {
             alertRef.current.showModal("우선순위를 입력해주세요");
             return;
         };
+        setIsFetching(true);
+        const fetchAddTodoResult = await fetchAddTodo(todoRef.current.value, dateRef.current.value, priortyRef.current.value);
 
-        onSaveButtonClick(
-            todoRef.current.value,
-            dateRef.current.value,
-            priortyRef.current.value,
-        )
+        if (fetchAddTodoResult.errors) {
+            alert(fetchAddTodoResult.errors);
+        }
+        setIsFetching(false);
+        const fetchResult = await fetchTodoList();
+        reactReduxDispatcher(todoAction.refresh(fetchResult.body));
+
+
 
         todoRef.current.value = "";
         dateRef.current.value = "";
@@ -47,9 +63,10 @@ const TodoAppender = ({ onSaveButtonClick }) => {
                 <option value="2">보통</option>
                 <option value="3">낮음</option>
             </select>
-            <button type="button" onClick={onClickSaveButtonForAppend}>Save</button>
+            <button type="button" disabled={isFetching} onClick={onClickSaveButtonForAppend}> {isFetching ? ". . Saving . ." : "Save"}</button>
+
         </footer>
     );
-};
+});
 
 export default TodoAppender;

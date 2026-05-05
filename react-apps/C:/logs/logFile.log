@@ -1,0 +1,110 @@
+10:08:51.041 [http-nio-8888-exec-5] INFO  Spring Security Debugger -- 
+
+************************************************************
+
+Request received for GET '/api/v1/task':
+
+org.apache.catalina.connector.RequestFacade@469de661
+
+servletPath:/api/v1/task
+pathInfo:null
+headers: 
+host: localhost:8888
+connection: keep-alive
+sec-ch-ua-platform: "macOS"
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+accept: */*
+origin: http://localhost:3000
+sec-fetch-site: same-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: http://localhost:3000/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextHolderFilter
+  HeaderWriterFilter
+  CorsFilter
+  CsrfFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+10:08:51.280 [http-nio-8888-exec-5] DEBUG o.s.security.web.FilterChainProxy -- Securing GET /api/v1/task
+10:08:51.346 [http-nio-8888-exec-5] DEBUG o.s.security.web.FilterChainProxy -- Secured GET /api/v1/task
+10:08:51.375 [http-nio-8888-exec-5] DEBUG o.s.web.servlet.DispatcherServlet -- GET "/api/v1/task", parameters={}
+10:08:51.392 [http-nio-8888-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped to com.example.demo.todo.api.TodoApi#getTasks()
+10:08:51.523 [http-nio-8888-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor -- Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+10:08:51.533 [http-nio-8888-exec-5] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor -- Writing [com.example.demo.util.AjaxResponse@1e838506]
+10:08:51.567 [http-nio-8888-exec-5] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter -- Set SecurityContextHolder to anonymous SecurityContext
+10:08:51.572 [http-nio-8888-exec-5] DEBUG o.s.web.servlet.DispatcherServlet -- Completed 200 OK
+10:08:51.578 [http-nio-8888-exec-6] INFO  Spring Security Debugger -- 
+
+************************************************************
+
+Request received for GET '/api/v1/task':
+
+org.apache.catalina.connector.RequestFacade@600eafc8
+
+servletPath:/api/v1/task
+pathInfo:null
+headers: 
+host: localhost:8888
+connection: keep-alive
+sec-ch-ua-platform: "macOS"
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+sec-ch-ua: "Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+sec-ch-ua-mobile: ?0
+accept: */*
+origin: http://localhost:3000
+sec-fetch-site: same-site
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: http://localhost:3000/
+accept-encoding: gzip, deflate, br, zstd
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextHolderFilter
+  HeaderWriterFilter
+  CorsFilter
+  CsrfFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+10:08:51.578 [http-nio-8888-exec-6] DEBUG o.s.security.web.FilterChainProxy -- Securing GET /api/v1/task
+10:08:51.581 [http-nio-8888-exec-6] DEBUG o.s.security.web.FilterChainProxy -- Secured GET /api/v1/task
+10:08:51.581 [http-nio-8888-exec-6] DEBUG o.s.web.servlet.DispatcherServlet -- GET "/api/v1/task", parameters={}
+10:08:51.582 [http-nio-8888-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping -- Mapped to com.example.demo.todo.api.TodoApi#getTasks()
+10:08:51.596 [http-nio-8888-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor -- Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+10:08:51.597 [http-nio-8888-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor -- Writing [com.example.demo.util.AjaxResponse@1a622536]
+10:08:51.599 [http-nio-8888-exec-6] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter -- Set SecurityContextHolder to anonymous SecurityContext
+10:08:51.600 [http-nio-8888-exec-6] DEBUG o.s.web.servlet.DispatcherServlet -- Completed 200 OK
